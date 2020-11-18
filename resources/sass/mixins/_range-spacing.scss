@@ -1,0 +1,9 @@
+@mixin grid-offset($offset) {
+  &:not(:empty) {
+    margin-bottom: -$offset;
+  }
+
+  > * {
+    margin-bottom: $offset;
+  }
+}

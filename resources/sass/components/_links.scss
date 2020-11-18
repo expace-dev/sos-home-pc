@@ -1,0 +1,106 @@
+/*
+*
+* Links
+*/
+.link-base {
+
+}
+
+.link-underline {
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.link + p { margin-top: 8px; }
+
+// Link MD
+.link-md {  
+  font-size: 16px;
+  letter-spacing: .1em;
+  
+  @include media-breakpoint-up(md) {
+    font-size: 18px;
+  }
+}
+
+// Link LG
+.link-lg {
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: .1em;
+}
+ 
+@include media-breakpoint-up(md) {
+  .link-lg {
+    font-size: 24px;
+  }
+}
+
+// Link Cart
+.link-cart {
+  position: relative;
+  padding-right: 8px;
+  color: $gray-darker;
+  
+  .icon { font-size: 25px; }
+  
+  &__count {
+    position: absolute;
+    top: -10px;
+    right: 0;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 50%;
+    color: $white;
+    background: $primary;
+  }
+}
+
+// Link Image
+.link-image {
+  display: inline-block;
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  img {
+    opacity: 1;
+    transition: .22s;
+  }
+  
+  &:hover {
+    img {
+      opacity: .8;
+    }
+  }
+}
+
+// Link Banner
+.link-banner {
+  display: block;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  
+  img {
+    width: 100%;
+  }
+  
+}
+
+// Privacy Link
+.privacy-link {
+  display: inline-block;
+  color: $secondary;
+  
+  &:hover {
+    color: $primary;
+  }
+}
+
+* + .privacy-link { margin-top: 30px; }

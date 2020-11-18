@@ -1,0 +1,190 @@
+//
+// Card custom styles
+// 
+
+// Light
+//
+$accordion-corporate-color: $gray-darker;
+$accordion-corporate-background: $white;
+$accordion-corporate-border: #dedede;
+$accordion-corporate-content-color: $body-color;
+$accordion-corporate-arrow-color: $white;
+$accordion-corporate-arrow-background: $secondary;
+$accordion-corporate-shadow: -1px 1px 6px 0px rgba(#444953, 0.12);
+$accordion-corporate-border-radius: 0;
+$accordion-corporate-header-padding: 24px 82px 24px 32px;
+$accordion-corporate-content-padding: 25px 44px 25px nth($accordion-corporate-header-padding, 4);
+
+//
+// Card groups
+//
+.card-group {
+  display: block;
+  margin-bottom: 0;
+
+  .card + .card {
+    margin-top: 0;
+  }
+}
+
+.card-title {
+  margin-bottom: 0;
+}
+
+.card-custom {
+  margin: 0;
+  background: inherit;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  text-align: left;
+
+  a {
+    display: block;
+  }
+
+  // Card heading
+  .card-heading {
+    padding: 0;
+    border-bottom: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  // Card contents
+  .card-body {
+    padding: 0;
+    border: 0;
+  }
+}
+
+* + .card-group-custom {
+  margin-top: 35px;
+}
+
+@include media-breakpoint-up(xl) {
+  * + .card-group-custom {
+    margin-top: 42px;
+  }
+}
+
+.card-group-corporate {
+  .card + .card {
+    margin-top: 30px;
+  }
+}
+
+/* 
+* Card corporate
+*/
+.card-corporate {
+  text-align: left;
+  box-shadow: 0 2px 5px 0 rgba(68, 73, 83, 0.12);
+
+  .card-title a,
+  .card-collapse {
+    background: $accordion-corporate-background;
+  }
+
+  .card-title a {
+    position: relative;
+    z-index: 1;
+    padding: $accordion-corporate-header-padding;
+    font-family: $font-family-montserrat;
+    font-size: 18px;
+    line-height: 1.4;
+    letter-spacing: 0;
+    color: $accordion-corporate-color;
+    transition: 1.3s all ease;
+
+    // Open state
+    .card-arrow {
+      transition: .33s;
+    }
+
+    // Collapsed state
+    &.collapsed {
+      border-bottom-width: 0;
+
+      .card-arrow {
+        &::before { opacity: 1; }
+        &::after { opacity: 0; }
+      }
+    }
+  }
+
+  // Card arrow
+  .card-arrow {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 2;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: $accordion-corporate-arrow-background;
+    color: $accordion-corporate-arrow-color;
+    transition: .33s all ease;
+    text-align: center;
+
+    &::before,
+    &::after {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 4;
+      font-family: 'Material Icons';
+      font-size: 24px;
+      line-height: 1;
+      transition: .22s;
+    }
+
+    &::before {
+      content: '\e145';
+      opacity: 0;
+    }
+
+    &::after {
+      content: '\e15b';
+      opacity: 1;
+    }
+
+    &:hover {
+      background: $primary;
+    }
+  }
+
+  .card-collapse {
+    position: relative;
+    z-index: 1;
+    color: $accordion-corporate-content-color;
+  }
+
+  .card-body {
+    border-top: 1px solid $accordion-corporate-border;
+    padding: $accordion-corporate-content-padding;
+  }
+
+  // Media queries
+  @include media-breakpoint-down(sm) {
+    .card-title a {
+      font-size: 16px;
+    }
+    
+    .card-arrow {
+      top: 19px;
+      width: 30px;
+      height: 30px;
+      
+      &::before,
+      &::after {
+        font-size: 18px;
+      }
+    }
+    .card-title a,
+    .card-body {
+      padding-left: 25px;
+    }
+  }
+}

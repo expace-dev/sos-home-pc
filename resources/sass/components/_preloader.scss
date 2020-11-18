@@ -1,0 +1,77 @@
+/*
+*
+* Page Loaders
+*/
+
+#page-loader {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  float: left;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 20px 8%;
+  z-index: 9999999;
+  opacity: 1;
+  background: $white; 
+  transition: .3s all ease; 
+
+  .page-loader-body {
+    text-align: center;
+  }
+  
+  * + .cssload-wrapper { margin-top: 30px; }
+  
+  &.loaded {
+    display: none;
+    z-index: -10000;
+  }
+}
+
+[data-x-mode='true'] {
+  #page-loader {
+    display: none !important;
+  }
+}
+
+// Custom Styles
+// -------------------------
+.cssload-wrapper {
+  width: 100vw;
+}
+
+.cssload-border {
+  position: relative;
+  width: 100%;
+  padding: 8px;
+}
+
+.cssload-whitespace {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 5px;
+  margin: 0 auto;
+  background: $gray-light;
+}
+
+.cssload-line {
+  position: absolute;
+  width: 100%;
+  height: inherit;
+  background-color: #e02038;
+  animation: cssload-slide 3s ease-in-out infinite both;
+}
+
+@keyframes cssload-slide {
+  0% {
+    left: -100%;
+  }
+
+  100% {
+    left: 100%;
+  }
+}

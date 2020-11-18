@@ -1,0 +1,320 @@
+//
+// Quotes
+// 
+
+// Quote classic
+.quote-classic {
+  text-align: left;
+}
+
+.quote-classic_secondary {
+  .quote-classic__mark {
+    fill: $secondary;
+  }
+
+  .quote-classic__text {
+    font-size: 16px;
+    font-style: italic;
+    letter-spacing: .02em;
+    color: $secondary;
+  }
+  
+  @include media-breakpoint-up(md) {
+    .quote-classic__text {
+      font-size: 18px;
+    }
+  }
+}
+
+.quote-classic__mark {
+  position: relative;
+  top: 6px;
+  display: block;
+  width: 37px;
+  height: 27px;
+  fill: $primary;
+  flex-shrink: 0;
+}
+
+.quote-classic__body {
+  position: relative;
+  padding: 25px 0;
+  border-top: 1px solid $gray-lighter;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    height: 13px;
+    border-style: solid;
+    border-color: $gray-lighter;
+  }
+
+  &::before {
+    left: 0;
+    width: 78px;
+    border-width: 1px 1px 0 0;
+  }
+
+  &::after {
+    right: 0;
+    width: calc(100% - 78px - 5px);
+    border-width: 1px 0 0 1px;
+    transform-origin: (0, 0);
+    transform: skew(-45deg);
+  }
+}
+
+.quote-classic__text {
+  padding-top: 20px;
+}
+
+.quote-classic__cite {
+  font-weight: 400;
+}
+
+.quote-classic__footer {
+  padding-left: 5px;
+}
+
+* + .quote-classic__footer { margin-top: 8px; }
+
+@include media-breakpoint-up(sm) {
+  .quote-classic__body {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    padding: 32px 20px 40px 30px;
+  }
+
+  .quote-classic__text {
+    padding-top: 0;
+    padding-left: 20px;
+  }
+
+  .quote-classic__footer {
+    padding-left: 30px;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  .quote-classic__body {
+    padding-right: 40px;
+  }
+}
+
+/**
+* Quote Creative
+*/
+.quote-creative {
+  position: relative;
+  background: $white;
+  padding: 10px 0;
+  box-shadow: 0 0 29px 0 rgba(0, 0, 0, 0.06);
+  text-align: left;
+}
+
+.quote-creative__header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  @include group(15px);
+  padding: 15px 15px 10px;
+}
+
+.quote-creative__media {
+  max-width: 69px;
+}
+
+.quote-creative__title {
+  font-family: $font-family-montserrat;
+  font-size: 18px;
+  line-height: 1.3;
+  color: $gray-darker;
+  letter-spacing: -.025em;
+}
+
+.quote-creative__subtitle {
+  font-family: $font-family-montserrat;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: -.025em;
+}
+
+.quote-creative__main {
+  padding: 10px 20px 10px 20px;
+  @include group(10px);
+}
+
+.quote-creative__main-text {
+  position: relative;
+  top: -5px;
+  letter-spacing: .05em;
+}
+
+.quote-creative__mark {
+  fill: $primary;
+}
+
+* + .quote-creative__subtitle { margin-top: 8px; }
+* + .quote-creative__title { margin-top: 8px; }
+
+
+@include media-breakpoint-down(sm) {
+  .quote-creative {
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@include media-breakpoint-up(sm) {
+  .quote-creative__header {
+    position: relative;
+    left: -30px;
+    padding-right: 25px;
+    padding-bottom: 15px;
+    padding-left: 0;
+    @include groupX(30px);
+  }
+
+  .quote-creative__main {
+    position: relative;
+    display: flex;
+    @include spacingX(20px);
+    padding-top: 15px;
+  }
+  
+  .quote-creative__media {
+    max-width: 112px;
+  }
+  
+  .quote-creative__title {
+    font-size: 20px;
+  }
+}
+
+@include media-breakpoint-up(xl) {
+  .quote-creative {
+    padding: 10px 0 30px;
+  }
+  
+  .quote-creative__main {
+    padding: 15px 35px 20px 40px;
+    @include spacingX(30px);
+  }
+
+  .quote-creative__title {
+    font-size: 24px;
+  }
+}
+
+/**
+* Quote Modern
+*/
+.quote-modern {
+  padding: 20px 15px;
+  background: $white;
+  text-align: center;
+}
+
+.quote-modern__header {
+  @include group(15px, 8px);
+}
+
+.quote-modern__image {
+  margin-right: 5px;
+  border-radius: 50%;
+  box-shadow: 5px 3px 5px 0 rgba($black, 0.15);
+}
+
+.quote-modern__meta {
+  width: 100%;
+  padding-top: 10px;
+  
+  > * + * { margin-top: 4px; }
+}
+
+.quote-modern__cite {
+  letter-spacing: -.025em;
+}
+
+.quote-modern__subtitle {
+  letter-spacing: .05em;
+  color: $primary;
+}
+
+.quote-modern__text {
+  line-height: 2;
+  letter-spacing: .05em;
+  color: $gray-darker;
+}
+
+* + .quote-modern__text { margin-top: 15px; }
+
+@include media-breakpoint-up(sm) {
+  .quote-modern {
+    text-align: left;
+  }
+  
+  .quote-modern__header {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .quote-modern__image {
+    flex-shrink: 0;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  .quote-modern__header {
+    @include groupX(30px);
+  }
+  .quote-modern__image {
+    max-width: 95px;
+  }
+}
+
+/*
+* Quote Minimal
+*/
+.quote-minimal {
+  max-width: 740px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.quote-minimal__mark {
+  fill: $primary;
+}
+
+.quote-minimal__text {
+  line-height: 2;
+  letter-spacing: .05em;
+  color: $gray-darker;
+}
+
+.quote-minimal__info {
+  > * {
+    display: inline-block;
+    padding: 0 3px;
+  }
+}
+
+.quote-minimal__title {
+  letter-spacing: -.025em;
+  &::after {
+    content: ',';
+  }
+}
+
+.quote-minimal__subtitle {
+  color: $primary;
+}
+
+* + .quote-minimal__text { margin-top: 12px; }
+* + .quote-minimal__info { margin-top: 12px; }

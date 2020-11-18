@@ -1,0 +1,159 @@
+/*
+* Navbar components
+*/
+
+// RD Navbar
+.rd-navbar {
+  display: none;
+  background: $rd-navbar-background;
+}
+
+// RD Navbar Toggle
+.rd-navbar-toggle,
+.rd-navbar-sidebar-toggle {
+  @include make-toggle(
+                  $rd-navbar-toggle-preset,
+                  $rd-navbar-min-line-height,
+                  $rd-navbar-min-font-size,
+                  $rd-navbar-fixed-toggle-color
+  );
+  background-color: transparent;
+  border: none;
+  display: none;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+// RD Navbar Brand
+.rd-navbar-brand {
+  a {
+    display: inline-block;
+  }
+}
+
+
+@mixin search-toggle-interactive() {
+  &::before,
+  &::after {
+    transition: .24s all ease;
+  }
+
+  &::before {
+    transform: scale(1) rotate(0deg);
+  }
+
+  &::after {
+    content: '\e5cd';
+    font-family: 'Material Icons';
+    font-size: 24px;
+    transform: scale(0) rotate(-90deg);
+  }
+
+  // States
+  &.active {
+    &::before {
+      transform: scale(0) rotate(90deg);
+    }
+
+    &::after {
+      transform: scale(1) rotate(0deg);
+    }
+  }
+}
+
+.rd-navbar-search {
+  .form-input,
+  .form-label {
+    font-family: $font-family-sec;
+    font-size: 16px;
+    letter-spacing: .05em;
+  }
+
+  .rd-navbar-search-toggle,
+  .rd-navbar-search-submit {
+    font-size: 23px;
+    color: $gray-darker;
+  }
+
+  .rd-search {
+    margin: 0;
+    > * + * { margin-top: 0; }
+  }
+}
+
+.rd-navbar-search-toggled {
+  .rd-search .form-input {
+    padding-right: 50px;
+    z-index: 1;
+    background: $rd-navbar-background;
+  }
+
+  .rd-navbar-search-toggle,
+  .rd-navbar-search-submit {
+    @include reset-button;
+    display: inline-block;
+    width: $input-height;
+    height: $input-height;
+    line-height: $input-height;
+    @include link($gray-darker, $primary);
+
+    &::before {
+      content: '\e01c';
+      font-family: 'fl-budicons-launch';
+    }
+  }
+
+  .rd-navbar-search-toggle {
+    display: block;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+
+    &::before,
+    &::after {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      width: inherit;
+      height: inherit;
+      line-height: inherit;
+      text-align: center;
+      color: inherit;
+      will-change: transform;
+    }
+  }
+
+  .rd-navbar-search-submit {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    z-index: 10;
+    transform: translateY(-50%);
+    transition: .24s all ease;
+
+    &::before {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font: 400 23px 'fl-budicons-launch';
+      line-height: inherit;
+      text-align: center;
+      color: inherit;
+    }
+  }
+}
+
+
+// RD Navbar Dropdown
+.rd-navbar-dropdown {
+  display: none;
+}

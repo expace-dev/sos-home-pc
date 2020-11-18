@@ -1,0 +1,44 @@
+/*
+*
+* Circle Progress Bars
+* 
+*/
+
+
+.progress-bar-circle {
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  line-height: 1.2;
+
+  canvas {
+    vertical-align: middle;
+  }
+
+  span {
+    position: absolute;
+    top: 50%;
+    left: 51%;
+    font-family: $font-family-montserrat;
+    font-size: 36px;
+    line-height: 36px;
+    transform: translate(-50%, -50%);
+    color: $gray-darker;
+
+    &:after {
+      content: '\0025';
+    }
+  }
+}
+
+.progress-bar-circle-title {
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: $body-color;
+}
+
+* + .progress-bar-circle-title { margin-top: 12px; }
+
+@include media-breakpoint-up(md) {
+  * + .progress-bar-circle-title { margin-top: 17px; } 
+}

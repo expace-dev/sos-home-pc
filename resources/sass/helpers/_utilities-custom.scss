@@ -1,0 +1,226 @@
+//
+// Utilities custom
+// 
+.height-fill {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  > * {
+    flex-grow: 1;
+    flex-shrink: 0;
+  }
+}
+
+// Object inline 
+.object-inline {
+  > * {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  > * + * {
+    margin-left: 4px;
+  }
+}
+
+.oh {
+  position: relative;
+  overflow: hidden;
+}
+
+// Text decorations
+.text-decoration-lines {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  text-align: center;
+
+  &__content {
+    position: relative;
+    display: inline-block;
+    min-width: 170px;
+    font-size: 12px;
+    text-transform: uppercase;
+
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      height: 1px;
+      background: #f5f5f5;
+      top: 50%; 
+      width: 100vw;
+    }
+
+    &:before {
+      left: 0;
+      transform: translate(-100%, -50%);
+    }
+
+    &:after {
+      right: 0;
+      transform: translate(100%, -50%);
+    }
+  }
+}
+
+.text-decoration-1 {
+  position: relative;
+  padding-right: 15px;
+  padding-left: 50px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: $black;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 0;
+    display: inline-block;
+    width: 39px;
+    height: 3px;
+    vertical-align: middle;
+    background: $primary;
+  }
+}
+
+span[class*='box-width'] {
+  display: inline-block;
+}
+
+.box-width-1 { 
+  max-width: 470px;
+}
+
+.box-width-2 { 
+  max-width: 670px;
+}
+
+.box-width-3 {  
+  max-width: 370px; 
+}
+
+.box-width-4 {  
+  max-width: 390px;
+}
+
+.box-width-5 {   
+  max-width: 300px;
+}
+
+.box-centered {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+[style*="z-index: 1000"] {
+  z-index: 1100 !important;
+}
+
+
+/**
+* Dividers
+*/
+.divider {
+  border-bottom: 1px solid $gray-light;
+}
+
+.divider-light {
+  border-bottom: 1px solid $gray-2;
+}
+
+.divider-classy {
+  width: 100%;
+  font-size: 0;
+  line-height: 0;
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 451px;
+    max-width: 100%;
+    height: 1px;
+    background-image: -moz-linear-gradient( 0deg, rgba($gray-light,0) 0%, $gray-lighter 50%, rgba($gray-light,0) 100%);
+    background-image: -webkit-linear-gradient( 0deg, rgba($gray-light,0) 0%, $gray-lighter 50%, rgba($gray-light,0) 100%);
+    background-image: -ms-linear-gradient( 0deg, rgba($gray-light,0) 0%, $gray-lighter 50%, rgba($gray-light,0) 100%);
+  }
+}
+
+* + .divider-classy { margin-top: 20px; }
+.divider-classy + .button { margin-top: 30px; }
+
+%context-dark {
+  .divider-classy::before {
+    background-image: -moz-linear-gradient(0deg, rgba($white, 0) 0%, rgb(217, 217, 217) 50%, rgba($white, 0) 100%);
+    background-image: -webkit-linear-gradient(0deg, rgba($white, 0) 0%, rgb(217, 217, 217) 50%, rgba($white, 0) 100%);
+    background-image: -ms-linear-gradient(0deg, rgba($white, 0) 0%, rgb(217, 217, 217) 50%, rgba($white, 0) 100%);
+  }
+}
+
+@include media-breakpoint-up(md) {
+  * + .divider-classy { margin-top: 40px; }
+  .divider-classy + .button { margin-top: 55px; }
+}
+
+/**
+* Custom Modal
+*/
+.modal-video {
+  width: 100%;
+  min-height: 100vh;
+  
+  .modal-dialog {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 100vh;
+    margin: auto;
+    padding: 30px;
+    pointer-events: none;
+    
+    > * {
+      pointer-events: auto;
+    }
+  }
+
+  .modal-header {
+    position: relative;
+    padding-right: 50px;
+    background: $gray-5;
+    border-bottom: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    
+    * { color: $gray-1; }
+  }
+  
+  .modal-content {
+    width: 100%;
+    border-radius: 0;
+    border: 0;
+  }
+
+  .modal-body {
+    padding: 0;
+  }
+  
+  button.close {
+    position: absolute;
+    top: 50%;
+    transform: translate3d(0, -50%, 0);
+    right: 10px;
+    transition: .33s;
+    cursor: pointer;
+    margin: 0;
+  }
+  
+  @include media-breakpoint-up(md) {
+    .modal-dialog {
+      max-width: 800px;
+    } 
+  }
+}

@@ -1,0 +1,54 @@
+/*
+*
+* Element groups
+* 
+*/
+
+html .page {
+  .group {
+    @include group(15px, 20px);
+  }
+  
+  .group-sm {
+    @include group(13px);
+  }
+  
+  .group-md {
+    @include group(30px, 10px);
+  }
+  
+  .group-xl {
+    @include group(30px, 20px);
+    
+    @include media-breakpoint-up(lg) {
+      @include group-media(45px, 20px);
+    }
+  }
+
+  .group-sm-justify {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    > * {
+      flex-grow: 1;
+      flex-shrink: 0;
+    }
+
+    .button {
+      margin-top: 0;
+      width: auto;
+      min-width: 130px;
+    }
+  }
+  
+  .group-middle {
+    display: inline-table;
+    vertical-align: middle;
+
+    > * {
+      vertical-align: middle;
+    }
+  }
+}

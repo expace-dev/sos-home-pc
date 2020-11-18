@@ -1,0 +1,547 @@
+//
+// Lists
+// 
+
+// Default list
+//
+
+
+.list-0 {
+  > li {
+    line-height: 1.3;
+  }
+
+  > li + li { margin-top: 0; }
+}
+
+.list-xxs > li + li { margin-top: 4px; }
+.list-xs > li + li { margin-top: 13px; }
+.list-md > li + li { margin-top: 22px; }
+.list-lg > li + li { margin-top: 25px; }
+.list-xl > li + li { margin-top: 35px; }
+
+@include media-breakpoint-up(md) {
+  .list-lg > li + li { margin-top: 50px; }
+  .list-xl > li + li { margin-top: 60px; }
+}
+
+@include media-breakpoint-up(xxl) {
+  .list-lg > li + li { margin-top: 50px; }
+  .list-xl > li + li { margin-top: 80px; }
+}
+
+.list_inset {
+  padding-left: 25px;
+}
+
+// Inline list
+.list-inline {
+  margin-left: 0;
+  > li { display: inline-block; }
+}
+
+html {
+  .list-inline-xxs {
+    @include spacing(5px);
+  }
+  
+  .list-inline-xs {
+    @include spacing(10px);
+  }
+
+  .list-inline-sm {
+    @include spacing(14px, 8px);
+  }
+
+  .list-inline-md {
+    @include spacing(18px, 15px);
+  }
+}
+
+.list-comma {
+  > li {
+    display: inline-block;
+    vertical-align: middle;
+    
+    &:not(:last-child) {
+      &::after {
+        content: ',';
+        display: inline-block;
+      }
+    }
+  }
+}
+
+// Terms lists
+.list-terms {
+  dt + dd { margin-top: 10px; }
+  dd + dt { margin-top: 25px; }
+
+  @include media-breakpoint-up(lg) {
+    dt + dd { margin-top: 18px; }
+    dd + dt { margin-top: 50px; }
+  }
+}
+
+.list-terms-inline {
+  color: $gray-darker;
+
+  dt,
+  dd {
+    display: inline-block;
+  }
+
+  dt {
+    color: $gray;
+    &:after { content: ':'; }
+  }
+
+  a {
+    color: inherit;
+
+    &:hover {
+      color: $primary;
+    }
+  }
+  
+  dd {
+    .list-inline { padding-left: 10px; }
+  }
+}
+
+.list-terms-block {
+  color: $gray-darker;
+
+  dt,
+  dd {
+    display: block;
+  }
+
+  dt {
+    color: $gray;
+    &:after { content: ':'; }
+  }
+  
+  dd {
+    padding-top: 4px;
+    letter-spacing: .1em;
+    
+    .list-inline {
+      margin-top: 3px;
+    }
+  }
+
+  a {
+    &:hover {
+      color: $primary;
+    }
+  }
+}
+
+.list-terms-block + .list-terms-block { margin-top: 15px; }
+
+.list-terms-medium {
+  position: relative;
+  padding-left: 30px;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 0;
+    bottom: 2px;
+    width: 4px;
+    background: $primary;
+  }
+  
+  dt {
+    letter-spacing: .1em;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: $gray-darker;
+    
+    &::after {
+      content: ':';
+    }
+  }
+  
+  dd {
+    letter-spacing: .05em;
+  }
+  
+  a {
+    @include link($body-color, $primary);
+  }
+}
+
+.list-terms-medium_secondary {
+  &::before {
+    background: $secondary;
+  }
+
+  a {
+    @include link($body-color, $secondary);
+  }
+}
+
+.list-terms-medium_tertiary {
+  &::before {
+    background: $tertiary;
+  }
+
+  a {
+    @include link($body-color, $tertiary);
+  }
+}
+
+// List separated
+.list-separated {
+  > li {
+    position: relative;
+    padding: 0 6px;
+    &:not(:last-child) {
+      &::after {
+        content: '\007C';
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: -3px; 
+      }
+    }
+  }
+  
+  a {
+    color: inherit;
+    
+    &:hover {
+      color: $secondary;
+    }
+  }
+}
+
+// Index list
+.index-list {
+  counter-reset: li;
+
+  > li {
+    .list-index-counter {
+      &:before {
+        content: counter(li, decimal-leading-zero);
+        counter-increment: li;
+      }
+    }
+  }
+}
+
+// Marked list
+.list-marked {
+  text-align: left;
+  letter-spacing: .075em;
+
+  li {
+    padding-left: 25px;
+    text-indent: -25px;
+    &::before {
+      position: relative;
+      top: -1px;
+      margin-right: 10px;
+      content: '\f105';
+      font: 400 14px/24px 'FontAwesome';
+      color: $gray-1;
+    }
+  }
+ 
+  > li + li {
+    margin-top: 4px;
+  }
+}
+
+.list-marked_primary {
+  > li {
+    &::before {
+      color: $primary;
+    }
+  }
+}
+
+// List ordered
+.list-ordered {
+  counter-reset: li;
+  text-align: left;
+
+  li {
+    position: relative;
+    padding-left: 25px;
+
+    &:before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: inline-block;
+      width: 15px;
+      content: counter(li, decimal) '.';
+      counter-increment: li;
+      color: $gray-1;
+    }
+  }
+
+  li + li {
+    margin-top: 10px;
+  }
+}
+
+// List Bordered
+.list-bordered {
+  > li {
+    position: relative;
+    padding: 0 20px;
+    letter-spacing: .05em;
+    
+    &:first-child { padding-left: 0; }
+    &:last-child { padding-right: 0; }
+    
+    &:not(:last-child) {
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        width: 1px;
+        background: $border-1;
+      }
+    }
+  }
+  
+  @include media-breakpoint-up(xl) {
+    > li {
+      padding: 0 36px;
+    }
+  }
+}
+
+// List Creative
+.list-creative {
+  text-align: left;
+  
+  > li {
+    padding: 20px 0;
+    
+    &:first-child { padding-top: 0; }
+    &:last-child { padding-bottom: 0; }
+  }
+  
+  > li + li {
+    border-top: 1px solid $gray-2;
+  }
+}
+
+* + .list-creative { margin-top: 30px; }
+
+@include media-breakpoint-up(lg) {
+  .list-creative {
+    > li {
+      padding: 30px 0;
+    }
+  }
+  * + .list-creative { margin-top: 40px; }
+}
+
+// List Categories 
+.list-categories {
+  position: relative;
+  font-family: $font-family-sec;
+  font-size: 16px;
+  color: $gray-darker;
+  
+  border-left: 1px solid $gray-2;
+  
+  > li {
+    position: relative;
+    @include clearfix;
+    padding: 3px 0 3px 20px;
+    
+    > *:first-child { float: left; }
+    > *:last-child { float: right; }
+    
+    &::before {
+      content: '';
+      position: absolute;
+      display: inline-block;
+      left: -1px;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: $primary;
+      pointer-events: none;
+      opacity: 0;
+      visibility: hidden;
+    }
+    
+    a {
+      color: inherit;
+      
+      &:hover {
+        color: $primary;
+      }
+    }
+  }
+  
+  > li.active {
+    color: $primary;
+    
+    &::before {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .count {
+      color: $gray-darker;
+    }
+  }
+  
+  .count {
+    color: $body-color;
+  }
+  
+  > li + li { margin-top: 9px; }
+  * + & { margin-top: 40px; }
+  @include media-breakpoint-up(md) {
+    font-size: 18px;
+  }
+}
+
+/**
+* List Domains
+*/
+.list-domains {
+  font-size: 16px;
+  letter-spacing: .05em;
+  color: $gray-darker;
+  @include spacingX(20px); 
+  
+  .text-mark {
+    color: $primary;
+  }
+  
+  > li {
+    display: inline-block;
+  }
+  
+  span + span {
+    margin-left: 3px;
+  }
+  
+  @include media-breakpoint-up(xl) {
+    @include spacingX(46px);
+  }
+}
+
+.list-domains_secondary {
+  .text-mark {
+    color: $secondary;
+  }
+}
+
+/**
+* List 1
+*/
+.list-1 {
+  color: $gray-darker;
+  letter-spacing: .075em;
+  
+  a {
+    color: inherit;
+    
+    &:hover {
+      color: $secondary;
+    }
+  }
+  
+  > li + li { margin-top: 5px; }
+}
+
+/*
+* List Classy
+*/
+.list-classy {
+
+}
+
+.list-classy__item {
+  padding: 13px 0;
+  border-top: 1px solid $gray-9;
+  
+  a {
+    display: flex;
+    align-items: center;
+    padding: 11px 30px 11px 0;
+    color: $body-color;
+    
+    > * + * { margin-left: 20px; }
+    
+    &:hover {
+      padding: 11px 0 11px 30px;
+      color: $body-color;
+      background: $gray-light;
+    }
+  }
+  
+  .icon {
+    min-width: 50px;
+    font-size: 40px;
+    color: $primary;
+    text-align: center;
+  }
+  
+  .fl-bigmug-line-favourites5 { font-size: 48px; }
+  .fl-bigmug-line-hot67 { font-size: 45px; }
+  
+  * + p { margin-top: 5px; }
+}
+
+.list-classy__item_secondary {
+  .icon { color: $secondary; }
+  
+  .list-classy__title {
+    a:hover { color: $secondary; }
+  }
+}
+
+.list-classy__item_tertiary {
+  .icon { color: $tertiary; }
+  
+  .list-classy__title {
+    a:hover { color: $tertiary; }
+  }
+}
+
+* + .list-classy { margin-top: 20px; }
+.list-classy + .button { margin-top: 20px; }
+
+
+/*
+* List Tags
+*/
+.list-tags {
+  @include group(20px, 8px);
+  color: $body-color;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  
+  li {
+    display: inline-block;
+  }
+  
+  a {
+    color: inherit;
+    
+    &:hover {
+      color: $primary;
+    }
+  }
+  
+  @include media-breakpoint-up(md) {
+    @include groupY(16px);
+  }
+}

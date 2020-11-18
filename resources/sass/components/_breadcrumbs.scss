@@ -1,0 +1,141 @@
+//
+// Breadcrumbs
+// 
+$breadcrumb-padding-vertical: 8px;
+$breadcrumb-padding-horizontal: 15px;
+$breadcrumb-color: $secondary;
+$breadcrumb-active-color: $gray-darker;
+$breadcrumb-separator: "\f105"; 
+
+.breadcrumbs-custom {
+  position: relative;
+  text-align: center;
+}
+
+.breadcrumbs-custom + .bg-gray-light {
+  border-top: 1px solid #d8d8d8;
+}
+
+.breadcrumbs-custom__aside {
+  padding: 40px 0;
+  background: $gray-darker;
+  
+  .container {
+    > * {
+      max-width: 760px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}
+
+.breadcrumbs-custom__main {
+  padding: 15px 0 20px;
+}
+
+.breadcrumbs-custom__path {
+  @include spacing(50px, 10px);
+  vertical-align: middle;
+  
+  a {
+    display: inline;
+    vertical-align: middle;
+    font-size: inherit;
+    line-height: inherit;
+    
+    &, 
+    &:active { 
+      color: $primary;
+    }
+
+    &:focus {
+      color: $primary;
+    }
+  }
+
+  li {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 14px;
+    line-height: 1.7;
+
+    &:after {
+      content: $breadcrumb-separator;
+      font-family: 'FontAwesome';
+      position: absolute;
+      top: 55%;
+      right: -2px;
+      display: inline-block;
+      font-style: normal;
+      font-size: 18px;
+      color: $gray;
+      transform: translateY(-50%);
+    }
+  }
+
+  li:first-child {
+    padding-left: 0;
+  }
+  
+  li:last-child {
+    position: relative;
+    top: 2px;
+    padding-right: 0;
+    &:after {
+      display: none;
+    }
+  }
+
+  a:hover,
+  li.active {
+    color: $breadcrumb-active-color;
+  }
+}
+
+* + .breadcrumbs-custom__path { margin-top: 14px; }
+
+@include media-breakpoint-down(sm) {
+  .breadcrumbs-custom__title {
+    font-size: 26px;
+  }
+}
+
+@include media-breakpoint-up(sm) {
+  .breadcrumbs-custom {
+  
+  }
+
+  * + .breadcrumbs-custom__path { margin-top: 18px; }
+}
+
+@include media-breakpoint-up(md) {
+  .breadcrumbs-custom {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .breadcrumbs-custom__aside {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 0;
+    min-height: 12.5vw;
+  }
+  
+  .ie-10,
+  .ie-11 {
+    .breadcrumbs-custom__aside {
+      .container {
+        margin-left: 0;
+        margin-right: 0;
+      }
+    }
+  }
+
+  .breadcrumbs-custom__path {
+    li {
+      font-size: 15px;
+    }
+  }
+}

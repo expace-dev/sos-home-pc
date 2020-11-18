@@ -1,0 +1,227 @@
+/*
+* Creative Layout
+*/
+
+.rd-navbar-static.rd-navbar-creative {
+  display: block;
+  
+  .rd-navbar-main-outer,
+  .rd-navbar-aside-outer {
+    padding-left: $grid-gutter-width / 2;
+    padding-right: $grid-gutter-width / 2;
+  }
+  
+  .rd-navbar-aside-outer {
+    border-bottom: 1px solid $gray-2;
+  }
+  
+  .rd-navbar-main,
+  .rd-navbar-aside {
+    max-width: map-get($container-max-widths, xl) - $grid-gutter-width;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .rd-navbar-main {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px 0 20px;
+  }
+  
+  .rd-navbar-content__list {
+    display: table;
+    vertical-align: middle;
+    width: 100%;
+    
+    > li {
+      display: table-cell;
+      vertical-align: middle;
+      text-align: center;
+      padding: 12px;
+      border-left: 1px solid $gray-2;
+      
+      &:last-child {
+        border-right: 1px solid $gray-2;
+      }
+      
+      > * {
+        display: inline-block;
+        vertical-align: middle;
+      }
+      
+      > * + * {
+        padding-left: 10px;
+      }
+    }
+  }
+  
+  .list-terms-inline {
+    dd {
+      padding-left: 10px;
+    }
+  }
+  
+  .rd-navbar-panel {
+    a { display: block; }
+  }
+  
+  .rd-navbar-brand {
+    position: relative;
+    top: -5px;
+  }
+  
+  .rd-navbar-nav-wrap {
+    position: relative;
+  }
+  
+  .rd-navbar-nav {
+    margin-right: -20px;
+    @include group(8px);
+    
+    > li > .rd-navbar-dropdown,
+    > li > .rd-navbar-megamenu {
+      margin-top: 25px;
+    }
+    
+    > li > a {
+      padding: 15px 20px;
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        border: 2px solid $gray-light;
+        opacity: 0;
+        transition: .33s;
+        pointer-events: none;
+        transform: scale3d(.9, .9, .9);
+      }
+    }
+    
+    > li.focus > a,
+    > li.active > a,
+    > li > a:hover {
+      &::before {
+        opacity: 1;
+        transform: scale3d(1, 1, 1);
+      }
+    }
+  
+    > .rd-navbar-submenu {
+      margin-right: 8px;
+      > a {
+        padding-right: 5px;
+      
+        &::before {
+          right: -20px;
+        }
+      }
+      
+      > .rd-navbar-submenu-toggle {
+        position: relative;
+        z-index: 10;
+        margin-left: -4px;
+      }
+    }
+  }
+  
+  .rd-navbar-megamenu {
+    right: 0;
+    left: auto;
+  }
+  
+  @include media-breakpoint-up(xl) {
+    .rd-navbar-main {
+      padding-top: 55px;
+    }
+  }
+  
+  &.rd-navbar--is-stuck,
+  &.rd-navbar--is-clone {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    border-bottom: 1px solid $gray-light;
+    
+    .rd-navbar-aside-outer {
+      display: none;
+    }
+    
+    .rd-navbar-main {
+      padding: 10px 0;
+    }
+    
+    .rd-navbar-brand {
+      img {
+        width: auto;
+        max-height: 55px;
+      }
+    }
+    
+    .rd-navbar-nav-wrap {
+      border-top-color: transparent;
+    }
+    
+    .rd-navbar-nav > li {
+      > .rd-navbar-dropdown,
+      > .rd-navbar-megamenu {
+        margin-top: 15px;
+      }
+    }
+  }
+}
+
+.rd-navbar-static-linked {
+  %context-dark {
+    // RD Navbar Nav
+    .rd-navbar-nav {
+      > li > a {
+        color: $white;
+      }
+      
+      > li > .rd-navbar-submenu-toggle {
+        color: $white;
+      }
+      
+      > li.focus > a,
+      > li.active > a,
+      > li > a:hover {
+        color: $primary;
+      }
+      
+      > li.focus > .rd-navbar-submenu-toggle,
+      > li.active > .rd-navbar-submenu-toggle {
+        color: $primary;
+      }
+    }
+    
+    // RD Navbar Search
+    .rd-navbar-search {
+      .form-label,
+      .form-input {
+        color: $white;
+      }
+      
+      .form-input {
+        background-color: $gray-10;
+      }
+    }
+    
+    .rd-navbar-search-submit,
+    .rd-navbar-search-toggle {
+      color: $white;
+    }
+    
+    // Links
+    .link-cart {
+      &:hover {
+        color: $primary;
+      }
+    }
+  }
+}

@@ -1,0 +1,71 @@
+//
+// Utilities
+// 
+
+// Grid related values
+//
+@mixin make-grid-parameter($parameter, $offset, $container, $col) {
+  @if $offset > 0 {
+    #{$parameter}: calc(50% - #{$container} / 2 + #{$offset} + (#{$container} / #{$cell-count}) * #{$col});
+  } @else if ($offset < 0) {
+    #{$parameter}: calc(50% - #{$container} / 2 - #{-$offset} + (#{$container} / #{$cell-count}) * #{$col});
+  } @else {
+    #{$parameter}: calc(50% - #{$container} / 2 + (#{$container} / #{$cell-count}) * #{$col});
+  }
+}
+
+// Spacing
+//
+@mixin spacing($x, $y : $x) {
+  margin-bottom: -$y;
+  margin-left: - round($x / 2);
+  margin-right: - round($x / 2);
+
+  > * {
+    margin-bottom: $y;
+    padding-left: round($x / 2);
+    padding-right: round($x / 2);
+  }
+}
+
+@mixin spacingX($x) {
+  margin-left: - round($x / 2);
+  margin-right: - round($x / 2);
+
+  > * {
+    padding-left: round($x / 2);
+    padding-right: round($x / 2);
+  }
+}
+
+@mixin spacingY($y) {
+  margin-bottom: -$y;
+
+  > * {
+    margin-bottom: $y;
+  }
+}
+
+// Link
+//
+@mixin link($default-clr, $hover-color) {
+  &,
+  &:active,
+  &:focus {
+    color: $default-clr;
+  }
+
+  &:hover {
+    color: $hover-color;
+  }
+}
+
+@mixin responsive-block {
+  @include media-breakpoint-down(sm) {
+    & {
+      max-width: 370px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}

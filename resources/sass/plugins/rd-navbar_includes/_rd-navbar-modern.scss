@@ -1,0 +1,217 @@
+/*
+* Modern Layout
+*/
+
+.rd-navbar-static.rd-navbar-modern {
+  display: block;
+
+  .rd-navbar-main-outer,
+  .rd-navbar-aside-outer {
+    padding-left: $grid-gutter-width / 2;
+    padding-right: $grid-gutter-width / 2;
+  }
+  
+  .rd-navbar-main,
+  .rd-navbar-aside {
+    max-width: map-get($container-max-widths, xl) - $grid-gutter-width;
+    margin-left: auto;
+    margin-right: auto;
+    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    > * + * { padding-left: 30px; }
+  }
+  
+
+  .rd-navbar-aside {
+    padding: 15px 0;
+  }
+  
+  .rd-navbar-main-outer {
+    background: $gray-10;
+  }
+  
+  .rd-navbar-aside,
+  .rd-navbar-nav-wrap,
+  .rd-navbar-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  .rd-navbar-panel {
+    align-self: stretch;
+  }
+
+  .rd-navbar-content {
+    @include spacing(60px);
+  }
+
+  .rd-navbar-nav-wrap {
+    position: relative;
+    flex-direction: row-reverse;
+    width: 100%;
+    padding: 16px 0 20px;
+  }
+  
+  .rd-navbar-nav {
+    padding-left: 5px;
+    padding-right: 5px;
+    @include spacing(30px, 5px);
+  }
+  
+  .rd-navbar-megamenu {
+    left: 0;
+  }
+
+  .rd-navbar-element {
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    margin: 0 -20px -5px;
+
+    > * {
+      padding: 0 5px;
+    }
+  }
+  
+  // RD Navbar Search
+  .rd-navbar-search {
+    .rd-search {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+    }
+   
+    .form-wrap {
+      display: flex;
+      width: 100%;
+    }
+    
+    .form-label {
+      top: 50%;
+      left: 0;
+      padding-left: 0;
+    }
+    
+    .form-input {
+      border: 0;
+      padding-left: 0;
+    }
+
+    .search-title {
+      color: $headings-color; 
+    }
+  }
+  
+  .rd-navbar-search-toggle {
+    margin-top: -3px;
+    width: 35px;
+    height: 35px;
+    font-size: 19px;
+    line-height: 35px;
+  }
+
+  @include media-breakpoint-up(xl) {
+    .rd-navbar-aside {
+      padding: 28px 0;
+    }
+    
+    .rd-navbar-nav {
+      @include spacingX(49px);
+    }
+    
+    
+    .list-bordered {
+     @include spacing(96px);
+    }
+  }
+  
+  &.rd-navbar--is-stuck,
+  &.rd-navbar--is-clone {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    
+    .rd-navbar-aside {
+      display: none;
+    }
+    
+    .rd-navbar-brand {
+      img {
+        width: auto;
+        max-height: 55px;
+      }
+    }
+    
+    .rd-navbar-nav-wrap {
+      border-top-color: transparent;
+    }
+    
+    .rd-navbar-main-outer {
+      border-bottom: 1px solid darken($gray-10, 5%);
+    }
+  }
+}
+
+.rd-navbar-static-linked {
+  %context-dark {
+    // RD Navbar Nav
+    .rd-navbar-nav {
+      > li > a {
+        color: $white;
+      }
+      
+      > li > .rd-navbar-submenu-toggle {
+        color: $white;
+      }
+      
+      > li.focus > a,
+      > li.active > a,
+      > li > a:hover {
+        color: $primary;
+      }
+
+      > li.focus > .rd-navbar-submenu-toggle,
+      > li.active > .rd-navbar-submenu-toggle {
+        color: $primary;
+      }
+    }
+
+    // RD Navbar Search
+    .rd-navbar-search {
+      .form-label,
+      .form-input {
+        color: $white;
+      }
+
+      .form-input {
+        background-color: $gray-10;
+      }
+    }
+
+    .rd-navbar-search-submit,
+    .rd-navbar-search-toggle {
+      color: $white;
+      
+      &:hover {
+        color: $primary;
+      }
+    }
+
+    // Links
+    .link-cart {
+      &:hover {
+        color: $primary;
+      }
+    }
+  }
+}

@@ -1,0 +1,262 @@
+/*
+*
+* Offsets
+* 
+*/
+
+// Element offset
+* + p {
+  margin-top: 12px;
+}
+
+p + p {
+  margin-top: 20px;
+}
+
+// Headings
+
+// Tags + Tags 
+img + p { margin-top: 20px; }
+
+// Tags + Classes
+h5 + img,
+.heading-5 + img {
+  margin-top: 30px;
+}
+
+
+// Classes
+* + .big { margin-top: 25px; }
+* + .button { margin-top: 30px; }
+* + .row { margin-top: 30px; }
+* + .divider-light { margin-top: 30px; }
+* + .rights { margin-top: 25px; }
+* + .text-block { margin-top: 30px; }
+* + .text-style-2 { margin-top: 20px; }
+* + .text-decoration-lines { margin-top: 30px; }
+* + .group { margin-top: 30px; }
+* + .group-xl { margin-top: 30px; }
+* + .list-inline { margin-top: 22px; }
+* + .list-md { margin-top: 30px; }
+* + .list-terms { margin-top: 25px; }
+* + .list-ordered { margin-top: 15px; }
+* + .list-marked { margin-top: 15px; }
+* + .list-terms-inline { margin-top: 0; }
+* + .privacy-link { margin-top: 30px; }
+* + .figure-light { margin-top: 25px; }
+* + .group { margin-top: 30px; }
+* + .group-sm { margin-top: 30px; }
+* + .rd-mailform { margin-top: 30px; }
+* + .rd-mailform.rd-mailform_label-centered { margin-top: 22px; }
+* + .rd-mailform.form_sm { margin-top: 15px; }
+* + .quote-classic { margin-top: 15px; }
+* + .quote-minimal { margin-top: 12px; }
+* + .quote-line { margin-top: 30px; }
+* + .quote-big { margin-top: 25px; }
+* + .box-info { margin-top: 23px; }
+* + .owl-carousel { margin-top: 30px; }
+
+.divider + * { margin-top: 20px; }
+
+// Classes + Tags
+.divider-small + p { margin-top: 30px; }
+.box-info + p { margin-top: 15px; }
+
+// Classes + Classes
+.custom-heading-1 + .divider { margin-top: 12px; }
+.group-md + .rd-mailform { margin-top: 25px; }
+
+* + h2,
+* + .heading-2 {
+  margin-top: 16px;
+}
+
+* + h4,
+* + .heading-4 {
+  margin-top: 22px;
+}
+
+h3 + p,
+.heading-3 + p {
+  margin-top: 25px;
+}
+
+h2 + p,
+.heading-2 + p {
+  margin-top: 14px;
+}
+
+h2 + .row,
+.heading-2 + .row {
+  margin-top: 30px;
+}
+
+h1 + .group,
+.heading-1 + .group {
+  margin-top: 20px;
+}
+
+h2 + h4,
+.heading-2 + h4,
+h2 + .heading-4,
+.heading-2 + .heading-4 {
+  margin-top: 10px;
+}
+
+h2 + h1,
+.heading-2 + h1,
+h2 + .heading-1,
+.heading-2 + .heading-1 {
+  margin-top: 20px;
+}
+
+h4 + h5,
+.heading-4 + h5,
+h4 + .heading-5,
+.heading-4 + .heading-5 {
+  margin-top: 0;
+}
+
+h4 + h1,
+.heading-4 + h1,
+h4 + .heading-1,
+.heading-4 + .heading-1 {
+  margin-top: 15px;
+}
+
+h5 + .rd-mailform,
+.heading-5 + .rd-mailform { margin-top: 20px; }
+
+// Classes + Classes
+.heading-8 + .row { margin-top: 35px; }
+.row + .row { margin-top: 40px; }
+.container + .container { margin-top: 45px; }
+.container-wide + .container-fluid { margin-top: 40px; }
+.container + .owl-carousel { margin-top: 30px; }
+.countdown-wrap + h5,
+.countdown-wrap + .heading-5 { margin-top: 25px; }
+
+.page {
+  * + .offset-top-1 { margin-top: 40px; }
+}
+
+// Media offsets
+@include media-breakpoint-up(md) {
+  * + .button { margin-top: 35px; }
+  * + .text-style-2 { margin-top: 30px; }
+  * + .list-terms { margin-top: 40px; }
+  * + .list-decorated { margin-top: 40px; }
+  * + .quote-line { margin-top: 45px; }
+  * + .quote-big { margin-top: 35px; }
+  * + .group { margin-top: 40px; }
+  * + .group-sm { margin-top: 45px; }
+  * + .group-lg { margin-top: 40px; }
+  * + .rd-mailform { margin-top: 45px; }
+  * + .object-decorated { margin-top: 30px; }
+  * + .owl-carousel { margin-top: 40px; }
+  * + .divider-light { margin-top: 50px; }
+
+  .quote-line + * { margin-top: 45px; }
+  html .divider + * { margin-top: 35px; }
+
+  .box-info + p { margin-top: 32px; }
+  .quote-classic + p { margin-top: 37px; }
+  
+  h2 + p,
+  .heading-2 + p {
+    margin-top: 20px;
+  }
+
+  h2 + .row,
+  .heading-2 + .row {
+    margin-top: 55px;
+  }
+
+  h1 + .group,
+  .heading-1 + .group {
+    margin-top: 20px;
+  }
+
+  * + h4,
+  * + .heading-4 { 
+    margin-top: 32px;
+  }
+  
+  
+  .heading-8 + .row { margin-top: 45px; }
+  .heading-8 + .comment-group { margin-top: 45px; }
+  .container + .container { margin-top: 50px; }
+  .row + .row { margin-top: 55px; }
+
+  .page {
+    * + .offset-top-0 { margin-top: 0; }
+    * + .offset-top-1 { margin-top: 60px; }
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  * + .button { margin-top: 42px; }
+  * + .figure-light { margin-top: 40px; }
+
+}
+
+@include media-breakpoint-up(xl) {
+  * + p { margin-top: 16px; }
+  * + .row { margin-top: 50px; }
+  * + .quote-line { margin-top: 65px; }
+
+  * + h4,
+  * + .heading-4 {
+    margin-top: 50px;
+  }
+
+  .page {
+  }
+}
+
+
+// Range spacing
+// -------------------------------
+.row-5 {
+  @include grid-offset(5px);
+}
+
+.row-20 {
+  @include grid-offset(20px);
+}
+
+.row-30 { 
+  @include grid-offset(30px);
+}
+
+.row-50 {
+  @include grid-offset(50px);
+}
+
+.row-90 {
+  @include grid-offset(45px);
+}
+
+@include media-breakpoint-up(md) {
+  .row-90 {
+    @include grid-offset(75px);
+  }
+  
+  .row-md-70 {
+    @include grid-offset(70px);
+  }
+}
+
+@include media-breakpoint-up(lg) {
+
+}
+
+@include media-breakpoint-up(xl) {
+  .row-90 {
+    @include grid-offset(90px);
+  }
+}
+
+.offset-top-60{
+  margin-top: 60px;
+}

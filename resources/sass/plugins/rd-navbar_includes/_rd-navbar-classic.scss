@@ -1,0 +1,157 @@
+/*
+* Classic Layout
+*/
+
+.rd-navbar-static.rd-navbar-classic {
+  display: block;
+  border-bottom: 1px solid $gray-lighter;
+
+  // RD Navbar Inner
+  .rd-navbar-inner {
+    max-width: map-get($container-max-widths, xl);
+    padding-left: $grid-gutter-width / 2;
+    padding-right: $grid-gutter-width / 2;
+    margin-left: auto;
+    margin-right: auto;
+    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    > * + * { padding-left: 30px; }
+  }
+  
+
+  .rd-navbar-aside {
+    padding: 10px 0;
+    @include group(10px);
+  }
+  
+  .rd-navbar-aside,
+  .rd-navbar-nav-wrap { 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  .rd-navbar-panel {
+    align-self: center;
+  }
+  
+  .rd-navbar-body {
+    flex-grow: 1;
+  }
+
+  .rd-navbar-nav-wrap {
+    position: relative;
+    flex-direction: row-reverse;
+		padding: 16px 0 20px;
+    border-top: 1px solid $gray-lighter;
+  }
+  
+  .rd-navbar-nav { 
+    @include spacing(30px, 5px);
+  }
+  
+  .rd-navbar-megamenu {
+    right: 0;
+    left: auto;
+  }
+  
+  @include media-breakpoint-down(lg) {
+    .rd-navbar-megamenu {
+      left: -165px;
+      width: auto;
+    }
+  }
+
+  .rd-navbar-element {
+    display: flex;
+    align-items: center;
+		padding: 0 15px;
+		margin: 0 -20px -5px;
+		
+		 > * {
+			 padding: 0 5px;
+		 }
+  }
+  
+  // RD Navbar Search
+  .rd-navbar-search {
+    .rd-search {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+    }
+    
+    .form-wrap {
+      display: flex;
+      width: 100%;
+    }
+    
+    .form-label {
+      top: 50%;
+      left: 0;
+      padding-left: 0; 
+    }
+    
+    .form-input {
+      border: 0;
+      padding-left: 0;
+    }
+  }
+  
+  
+  .rd-navbar-search-toggle {
+    margin-top: -3px;
+    width: 35px;
+    height: 35px;
+		font-size: 19px;
+    line-height: 35px;
+  }
+
+  @include media-breakpoint-up(xl) {
+    .rd-navbar-inner {
+      > * + * { padding-left: 60px; }
+    }
+
+    .rd-navbar-brand .brand {
+      width: auto;
+      margin-right: 40px;
+    }
+    
+    .rd-navbar-nav {
+      @include spacingX(49px);
+    }
+  }
+  
+  &.rd-navbar--is-stuck,
+  &.rd-navbar--is-clone {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    border-bottom-color: $gray-light;
+    
+    .rd-navbar-aside {
+      display: none;
+    }
+    
+    .rd-navbar-brand {
+      img {
+        width: auto;
+        max-height: 50px;
+      }
+    }
+    
+    .rd-navbar-nav-wrap {
+      border-top-color: transparent;
+    }
+  }
+}
+

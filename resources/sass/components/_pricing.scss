@@ -1,0 +1,733 @@
+
+/*
+*
+* Pricing
+* 
+*/
+
+
+/**
+* Style: Classic
+*/
+
+.pricing-table-classic {
+
+}
+
+.pricing-table-classic__item {
+  max-width: 390px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 30px;
+  text-align: center;
+  background: $white;
+  box-shadow: 0 0 27px 0 rgba($black, 0.09);
+
+  &.pricing-table-classic__item_prefered {
+    .pricing-table__item-price-value {
+      color: $primary;
+    }
+
+    .pricing-table__item-price-aside {
+      .top { color: $primary; }
+    }
+  }
+
+  // Header
+  .pricing-table__item-header {
+    @include group(15px, 10px);
+    > * {
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+
+  // Title
+  .pricing-table__item-title {
+    font-weight: 700;
+    letter-spacing: .075em;
+    text-transform: uppercase;
+    color: $gray-darker;
+  }
+
+  // Label
+  .pricing-table__item-label {
+    position: relative;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: $gray-darker;
+    background: $accent-yellow;
+    font-size: 12px;
+    line-height: 22px;
+    white-space: nowrap;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .075em;
+
+  }
+
+  // Price
+  .pricing-table__item-price {
+    font-family: $font-family-montserrat;
+    color: $gray-darker;
+    display: flex;
+    justify-content: center;
+    > * {
+      display: inline-block;
+    }
+  }
+
+  .pricing-table__item-price-currency {
+    position: relative;
+    top: -2px;
+    left: -2px;
+    font-size: 24px;
+    vertical-align: top;
+  }
+
+  .pricing-table__item-price-value {
+    font-size: 60px;
+    line-height: 1;
+  }
+
+  .pricing-table__item-price-aside {
+    position: relative;
+    top: 4px;
+    > * {
+      display: block;
+      margin-bottom: 3px;
+      line-height: 1;
+    }
+
+    .top {
+      font-size: 24px;
+    }
+
+    .bottom {
+      font-size: 16px;
+    }
+  }
+
+  // Features
+  .pricing-table__item-features {
+    letter-spacing: .05em;
+    .text-marked {
+      padding-left: 3px;
+      padding-right: 3px;
+      font-weight: 700;
+      color: $gray-darker;
+    }
+
+    > li + li {
+      margin-top: 4px;
+    }
+  }
+
+  * + .pricing-table__item-price { margin-top: 15px; }
+  * + .pricing-table__item-features { margin-top: 20px; }
+  * + .pricing-table__item-control { margin-top: 20px; }
+}
+
+* + .pricing-table-classic { margin-top: 30px; }
+* + .pricing-table-classic__item { margin-top: 30px; }
+
+@include media-breakpoint-up(md) {
+  .pricing-table-classic {
+    display: flex;
+    flex-wrap: wrap;
+    box-shadow: 0 0 27px 0 rgba($black, 0.09);
+
+    .pricing-table-classic__item {
+      position: relative;
+      flex-grow: 1;
+      flex-basis: (100% / 3);
+      box-shadow: none;
+
+      &::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 1px;
+        height: 68.5%;
+        background: $gray-lighter;
+      }
+
+      &:nth-child(3n) {
+        &::after { display: none; }
+      }
+    }
+  }
+
+  .pricing-table-classic__item {
+    padding: 30px 25px 40px;
+    
+    * + .pricing-table__item-price { margin-top: 22px; }
+    * + .pricing-table__item-features { margin-top: 28px; }
+    * + .pricing-table__item-control { margin-top: 40px; }
+  }
+
+  * + .pricing-table-classic__item { margin-top: 0; }
+
+  @include media-breakpoint-down(md) {
+    .pricing-table-classic__item {
+      .pricing-table__item-title {
+        font-size: 13px;
+      }
+
+      .pricing-table__item-label {
+        font-size: 11px;
+      }
+
+      .pricing-table__item-features {
+        font-size: 13px;
+      }
+    }
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .pricing-table-classic__item {
+    padding: 50px 30px 70px;
+  }
+
+  * + .pricing-table-classic { margin-top: 50px; }
+}
+
+/**
+* Style: Modern
+*/
+
+.pricing-table-modern {
+
+}
+
+.pricing-table-modern__item {
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  background: $white;
+  border: 3px solid $gray-2;
+  
+  @include media-breakpoint-down(sm) {
+    max-width: 390px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  &.pricing-table-modern__item_prefered {
+    .pricing-table__item-price-value {
+      color: $primary;
+    }
+
+    .pricing-table__item-price-aside {
+      .top { color: $primary; }
+    }
+
+    .pricing-table__item-header {
+      &::before,
+      &::after {
+        border-color: transparent transparent $secondary transparent;
+      }
+    }
+    
+    .pricing-table__item-header-bg-inner::before {
+      background: $primary;
+    }
+  }
+
+  // Header
+  .pricing-table__item-header {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    top: -12px;
+    margin-bottom: -12px;
+    text-align: center;
+    color: $white;
+    padding: 9px 40px;
+    min-width: 200px;
+    width: auto;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    
+    > * {
+      margin-top: 0;
+    }
+    
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 6px 12px 6px;
+      border-color: transparent transparent #5b5b5b transparent;
+      z-index: 2;
+    }
+    
+    &::before { left: -6px; }
+    &::after { right: -6px; }
+  }
+  
+  $angle: 27deg;
+
+  .pricing-table__item-header-bg {
+    position: absolute;
+    overflow: hidden;
+    z-index: 1;
+    top: 0;
+    bottom: 0;
+    left: -1px;
+    right: -1px;
+    transform-origin: top;
+    transform: skew(-$angle); 
+  }
+ 
+  .pricing-table__item-header-bg-inner {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform: skew($angle);
+    transform-origin: top;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      transform: skew($angle);
+      transform-origin: top;
+      background: $footer-color;
+    }
+  }
+  
+  // Main
+  .pricing-table__item-main {
+    padding: 30px;
+  }
+
+  // Title
+  .pricing-table__item-title {
+    position: relative;
+    z-index: 2;
+    font-weight: 700;
+    letter-spacing: .075em;
+    text-transform: uppercase;
+  }
+
+  // Label
+  .pricing-table__item-label {
+    position: relative;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: $white;
+    background: $primary;
+    font-size: 12px;
+    line-height: 22px;
+    white-space: nowrap;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .075em;
+
+    &::after {
+      content: '';
+      position: absolute;
+      right: -7px;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 11px 0 11px 7px;
+      border-color: transparent transparent transparent $primary;
+    }
+  }
+
+  // Price
+  .pricing-table__item-price {
+    font-family: $font-family-montserrat;
+    color: $gray-darker;
+    display: flex;
+    justify-content: center;
+    > * {
+      display: inline-block;
+    }
+  }
+
+  .pricing-table__item-price-currency {
+    position: relative;
+    top: -2px;
+    left: -2px;
+    font-size: 24px;
+    vertical-align: top;
+  }
+
+  .pricing-table__item-price-value {
+    font-size: 60px;
+    line-height: 1;
+  }
+
+  .pricing-table__item-price-aside {
+    position: relative;
+    > * {
+      display: block;
+      line-height: 1;
+    }
+
+    .top {
+      font-size: 24px;
+    }
+
+    .bottom {
+      font-size: 16px;
+    }
+  }
+  
+  // Divider
+  .pricing-table__item-divider {
+    font-size: 0;
+    line-height: 0;
+    &::before {
+      content: '';
+      display: inline-block;
+      height: 1px;
+      width: 166px;
+      background: $gray-lighter;
+    }
+  }
+
+  // Features
+  .pricing-table__item-features {
+    letter-spacing: .05em;
+    .text-marked {
+      padding-left: 3px;
+      padding-right: 3px;
+      font-weight: 700;
+      color: $gray-darker;
+    }
+
+    > li + li {
+      margin-top: 4px;
+    }
+  }
+
+  * + .pricing-table__item-divider { margin-top: 20px; } 
+  * + .pricing-table__item-header { margin-top: 20px;}
+  * + .pricing-table__item-price { margin-top: 15px; }
+  * + .pricing-table__item-features { margin-top: 25px; }
+  * + .pricing-table__item-control { margin-top: 20px; }
+}
+
+// Context styling
+.bg-gray-light {
+  .pricing-table-modern__item {
+    border: 0;
+    box-shadow: 0 0 27px 0 rgba($black, 0.09);
+  }
+}
+
+* + .pricing-table-modern { margin-top: 30px; }
+* + .pricing-table-modern__item { margin-top: 30px; }
+
+@include media-breakpoint-up(md) {
+  .pricing-table-modern {
+    display: flex;
+    flex-wrap: wrap;
+    box-shadow: 0 0 27px 0 rgba($black, 0.09);
+
+    .pricing-table-modern__item {
+      position: relative;
+      flex-grow: 1;
+      flex-basis: 33.33%;
+      
+      box-shadow: none;
+
+      &::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 1px;
+        height: 68.5%;
+        background: $gray-lighter;
+      }
+
+      &:nth-child(3n) {
+        &::after { display: none; }
+      }
+    }
+  }
+
+  .pricing-table-modern__item {
+    .pricing-table__item-main {
+      padding: 30px 25px 40px;
+    }
+    
+    * + .pricing-table__item-price { margin-top: 22px; }
+    * + .pricing-table__item-features { margin-top: 30px; }
+    * + .pricing-table__item-control { margin-top: 35px; }
+  }
+
+  * + .pricing-table-modern__item { margin-top: 0; }
+
+  @include media-breakpoint-down(md) {
+    .pricing-table-modern__item {
+      .pricing-table__item-title {
+        font-size: 13px;
+      }
+
+      .pricing-table__item-label {
+        font-size: 11px;
+      }
+
+      .pricing-table__item-features {
+        font-size: 13px;
+      }
+    }
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .pricing-table-modern__item {
+    .pricing-table__item-header {
+      min-width: 218px;
+    }
+    .pricing-table__item-main {
+      padding: 42px 30px 60px;
+    }
+  }
+}
+
+/**
+* Style: Creative
+*/
+
+.pricing-table-creative {
+
+}
+
+.pricing-table-creative__item {
+  max-width: 390px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  background: $white;
+  box-shadow: 0 0 27px 0 rgba($black, 0.09);
+  border-top: 3px solid $secondary;
+
+  &.pricing-table-creative__item_prefered {
+    color: $white;
+
+    .pricing-table__item-title,
+    .pricing-table__item-price { 
+      color: inherit;
+    }
+
+    .pricing-table__item-features {
+      .text-marked {
+        color: inherit;
+      }
+    }
+
+    .pricing-table__item-control {
+      .button-wrap {
+        &::before,
+        &::after {
+          background: $secondary-darken;
+        }
+      }
+    }
+  }
+
+  .pricing-table__item-inner {
+    position: relative;
+    overflow: hidden;
+    padding: 30px;
+  }
+
+  // Title
+  .pricing-table__item-title {
+    font-family: $font-family-sec;
+    font-size: 20px;
+    line-height: 1.4;
+    color: $gray-darker;
+  }
+
+  // Price
+  .pricing-table__item-price {
+    color: $gray-darker;
+  }
+
+  .pricing-table__item-price-value {
+    display: block;
+    font-family: $font-family-montserrat;
+    font-size: 48px;
+    line-height: 1;
+    
+    span {
+      display: inline;
+    }
+    
+    .small {
+      position: relative;
+      top: -2px;
+      left: -2px;
+      font-size: 24px;
+      vertical-align: top;
+    }
+  }
+
+  .pricing-table__item-price-details {
+    line-height: 1.2;
+  }
+
+  // Control 
+  .pricing-table__item-control {
+    .button-wrap {
+      position: relative;
+      display: inline-block;
+      overflow: visible;
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        width: 100vw;
+        height: 1px;
+        background: $gray-2;
+      }
+      
+      &::before {
+        left: 0;
+        transform: translate(-100%, 0);
+      }
+      
+      &::after {
+        right: 0;
+        transform: translate(100%, 0);
+      }
+    }
+  }
+  
+  // Features
+  .pricing-table__item-features {
+    letter-spacing: .05em;
+    .text-marked {
+      padding-left: 3px;
+      padding-right: 3px;
+      font-weight: 700;
+      color: $gray-darker;
+    }
+
+    > li + li {
+      margin-top: 4px;
+    }
+  }
+
+  * + .pricing-table__item-price-details { margin-top: 5px; }
+  * + .pricing-table__item-price { margin-top: 8px; }
+  * + .pricing-table__item-features { margin-top: 20px; }
+  * + .pricing-table__item-control { margin-top: 20px; }
+}
+
+* + .pricing-table-creative { margin-top: 30px; }
+* + .pricing-table-creative__item { margin-top: 30px; }
+
+@include media-breakpoint-up(md) {
+  .pricing-table-creative {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+
+    .pricing-table-creative__item {
+      position: relative;
+      flex-grow: 1;
+      flex-shrink: 1;
+      flex-basis: 33.33%;
+
+      &.pricing-table-creative__item_prefered {
+        z-index: 2;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        &::before {
+          content: '';
+          position: absolute;
+          top: -20px;
+          right: -20px;
+          bottom: -20px;
+          left: -20px;
+          background: inherit;
+          z-index: 0;
+          pointer-events: none;
+        }
+        
+        > * {
+          position: relative;
+          z-index: 2;
+        }
+
+        .pricing-table__item-inner {
+          margin-left: -20px;
+          margin-right: -20px;
+        }
+      }
+    }
+  }
+
+  .pricing-table-creative__item {
+
+    .pricing-table__item-inner {
+      padding: 30px 25px 40px;
+    }
+    
+    * + .pricing-table__item-features { margin-top: 28px; }
+    * + .pricing-table__item-control { margin-top: 35px; }
+  }
+
+  * + .pricing-table-creative { margin-top: 40px; } 
+  * + .pricing-table-creative__item { margin-top: 0; }
+
+  @include media-breakpoint-down(md) {
+    .pricing-table-creative__item {
+      .pricing-table__item-title {
+        font-size: 18px;
+      }
+      
+      .pricing-table__item-price-value {
+        font-size: 38px;
+      }
+      
+      .pricing-table__item-label {
+        font-size: 11px;
+      }
+
+      .pricing-table__item-features {
+        font-size: 13px;
+      }
+    }
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .pricing-table-creative__item {
+    .pricing-table-creative__item-inner {
+      padding: 45px 30px 70px;
+    }
+
+    .pricing-table__item-title {
+      font-size: 24px;
+    }
+  }
+
+  * + .pricing-table-creative { margin-top: 55px; }
+}

@@ -1,0 +1,205 @@
+/*
+*
+* Icons
+* 
+*/
+
+// Base styles
+// 
+
+.icon {
+  display: inline-block;
+  font-size: 16px;
+  line-height: 1;
+
+  &::before {
+    position: relative;
+    display: inline-block;
+    font-weight: 400;
+    font-style: normal;
+    speak: none;
+    text-transform: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+// Alternate icons
+// 
+
+.icon-default {
+
+}
+
+.icon-gray-dark {
+  color: $gray-dark;
+}
+
+.icon-primary {
+  color: $primary;
+}
+
+.icon-secondary {
+  color: $secondary;
+}
+
+.icon-tertiary {
+  color: $tertiary;
+}
+
+.icon-darker {
+  color: $gray-8;
+}
+
+// Icon Shapes
+// 
+
+.icon-circle {
+  border-radius: 50%;
+}
+
+// Icon Sizes
+// 
+
+html {
+
+  .icon-xxs {
+    font-size: 12px;
+  }
+  
+  .icon-xs {
+    font-size: 15px;
+  }
+  
+  .icon-xs-2 {
+    font-size: 18px;
+
+    &.icon-outline {
+      width: 46px;
+      height: 46px;
+      line-height: 46px;
+    }
+  }
+  
+  .icon-xs-3 {
+    font-size: 20px;
+  }
+
+  .icon-sm {
+    font-size: 26px;
+    
+    &.icon-outline {
+      width: 46px;
+      height: 46px;
+      line-height: 46px;
+    }
+  }
+  
+  .icon-md {
+    font-size: 36px;
+  }
+
+  .icon-lg {
+
+  }
+  
+  .icon-filled {
+    height: 2em;
+    width: 2em;
+    line-height: 2em;
+    text-align: center;
+  }
+  
+  .icon-outline {
+    height: 1.77em;
+    width: 1.77em;
+    line-height: 1.77em;
+    text-align: center;
+    border: 1px solid $gray-2;
+  }
+}
+
+.icon-style-brand {
+  &[class*='facebook'] {
+    &:hover {
+      color: $facebook;
+    }    
+  }
+  &[class*='twitter'] {
+    &:hover {
+      color: $twitter;
+    }    
+  }
+  &[class*='google'] {
+    &:hover {
+      color: $google;
+    }    
+  }
+  &[class*='pinterest'] {
+    &:hover {
+      color: $pinterest;
+    }    
+  }
+}
+
+.icon-filled_brand {
+  margin-top: 2px;
+  position: relative;
+  color: $white;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    padding: 2px;
+    box-shadow: 0 0 0 2px rgba($primary, .78);
+    transition: transform 0.2s, opacity 0.2s;
+    transform: scale(.8);
+    opacity: 0;
+    border-radius: inherit;
+  }
+  
+  &[class*='facebook'] {
+    background: $facebook-light;
+    &::after {
+      box-shadow: 0 0 0 2px rgba($facebook-light, .9);
+    }
+  }
+  &[class*='twitter'] {
+    background: $twitter-light;
+    &::after {
+      box-shadow: 0 0 0 2px rgba($twitter-light, .9);
+    }
+  }
+  &[class*='google'] {
+    background: $google-light;
+    &::after {
+      box-shadow: 0 0 0 2px rgba($google-light, .9);
+    }
+  }
+  &[class*='instagram'] {
+    background: $instagram-light;
+    &::after {
+      box-shadow: 0 0 0 2px rgba($instagram-light, .9);
+    }
+  }
+}
+
+html .page a.icon-filled_brand {
+  &:active,
+  &:focus,
+  &:hover {
+    color: $white;
+  }
+  
+  &:hover {
+    &::after {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+}
+

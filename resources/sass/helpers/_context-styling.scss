@@ -1,0 +1,307 @@
+/*
+*
+* Contexts
+* 
+*/
+
+
+%context-dark {
+  color: $white;
+  #{headings()} {
+    color: $white;
+  }
+  
+  // Links
+  .link {
+    color: $white;
+    
+    &:hover {
+      color: $secondary;
+    }
+  }
+  
+  // Icons
+  .icon-gray-dark {
+    color: $white;
+
+    &[class*='facebook'] {
+      &:hover {
+        color: lighten($facebook, 10%);
+      }
+    }
+
+    &[class*='pinterest'] {
+      &:hover {
+        color: lighten($pinterest, 10%);
+      }
+    }
+  }
+
+  .icon-style-brand {
+    
+  }
+  
+  // Buttons
+  .button-default {
+    @include btn-variant($gray-darker, $white, $white, $white, $primary, $primary);
+  }
+  
+  // Lists
+  .list-marked { }
+  .list-marked_primary {
+    color: $gray-7; 
+    
+    a {
+      color: inherit;
+      
+      &:hover {
+        color: $primary;
+      }
+    }
+  }
+  
+  // Forms
+  .form_outline {
+    .form-input,
+    .form-label {
+      color: $white;
+    }
+  }
+  
+  // Dividers
+  .divider {
+    border-bottom-color: $gray-6;
+  }
+  
+  // Posts
+  .post-small {
+    
+  }
+  
+  .post-small__title {
+    color: $white;
+  }
+  
+  .post-small__time {
+    color: $gray-7;
+  }
+  
+  // Boxes
+  .box-counter {
+    color: $white;
+  }
+  
+  // Timecircles
+  .time_circles > div > span {
+    color: $white;
+  }
+}
+
+%context-light {
+  color: $body-color;
+ #{headings()} {
+    color: $headings-color;
+  }
+}
+
+/**
+* Dark
+*/
+.context-dark {
+  @extend %context-dark;
+}
+
+.bg-secondary {
+  @extend %context-dark;
+  @include bg-behaviour($primary);
+
+  // Buttons
+  .button-secondary {
+    @include btn-variant($gray-darker, $white, $white, $white, $secondary, $secondary);
+    font-weight: 700;
+  }
+}
+
+.bg-gray-darker { 
+  @extend %context-dark;
+  @include bg-behaviour($gray-darker);
+}
+
+.bg-gray-3 {
+  @extend %context-dark;
+  @include bg-behaviour($gray-3);
+}
+
+.bg-gray-4 {
+  @extend %context-dark;
+  @include bg-behaviour($gray-4);
+}
+
+.bg-gray-5 {
+  @extend %context-dark;
+  @include bg-behaviour($accent-black);
+}
+.bg-black-1{
+  @extend %context-dark;
+  @include bg-behaviour($footer-color)
+}
+.bg-gray-3,
+.bg-gray-4,
+.bg-gray-5 {
+  .rights {
+    color: #5e5e5e;
+    
+    a {
+      color: inherit;
+      
+      &:hover {
+        color: $secondary;
+      }
+    }
+  }
+
+  .list-1,
+  .list-separated,
+  .list-tags {
+    color: $gray-7;
+  }
+  
+  .list-terms-block {
+    dt {
+      letter-spacing: .05em;
+      color: $gray-7;
+    }
+    
+    a {
+      color: $white;
+      
+      &:hover {
+        color: $secondary;
+      }
+    }
+  }
+  
+  .list-tags {
+    a {
+      &:hover {
+        color: $secondary;
+      }
+    }
+  }
+  
+  hr {
+    border-color: $gray-12;
+  }
+}
+
+
+/**
+* Light
+*/
+.context-light {
+  @extend %context-light;
+}
+
+.bg-white {
+  @include bg-behaviour($white);
+}
+ 
+.bg-gray-light {
+  @include bg-behaviour($gray-lighter);
+  
+  .form-input,
+  .select2-container .select2-choice {
+    background: $white;
+  }
+  
+  // Tabs
+  .tabs-creative {
+    .nav-tabs {
+      background: $white;
+    }
+  }
+  
+  // Cards
+  .card-creative {
+    background: $white;
+  }
+}
+
+.bg-gray-lighter{
+  @include bg-behaviour($gray-lighter)
+}
+
+.bg-gray-lighter {
+  @include bg-behaviour($gray-lighter);
+}
+
+/*
+* Primary
+*/
+.bg-primary {
+  @include bg-behaviour($primary);
+  
+  &, #{headings()} {
+    color: $white;
+  }
+  
+  a {
+    &:hover {
+      color: $primary-darken-2;
+    }
+  }
+}
+
+
+/**
+* Background Image
+*/
+.bg-image {
+  background-position: center center;
+}
+
+.bg-image-dark {
+  @extend %context-dark;
+  background-color: $gray-darker;
+  // Forms
+  .form-input,
+  .form-label,
+  .form-label-outside,
+  .form-validation {
+    color: $white;
+  }
+  
+  .form-input {
+    background: rgba($white, .47);
+    border-color: rgba($white, 0);
+    box-shadow: 0 9px 21px 0 rgba(30, 30, 30, 0.1786);
+  }
+
+  .form-wrap.has-error .form-input {
+    border-color: rgba($white, 0);
+  }
+}
+
+[class*='bg-'] {
+  background-size: cover;
+}
+
+html:not(.tablet):not(.mobile) {
+  .bg-fixed {
+    @include media-breakpoint-up(lg) {
+      background-attachment: fixed;
+    }
+  }
+}
+
+.text-primary-darken-2 {
+  &, .link {
+    color: $primary-darken-2;
+  }
+  
+  .link {
+    &:hover {
+      color: $gray-darker;
+    }
+  }
+}

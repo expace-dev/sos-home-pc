@@ -1,0 +1,236 @@
+//
+// Variables Custom
+// 
+
+// Colors
+//
+
+$black:                   #292929;
+$white:                   #ffffff;
+
+$gray-darker:             #151515;
+$gray-dark:               #333333;
+$gray:                    #9b9b9b;
+$gray-light:              #f2f3f8;
+$gray-lighter:            #f6f6f6;
+
+$gray-1:                  #b7b7b7;
+$gray-2:                  #e8e8e8;
+$gray-3:                  #323c47; 
+$gray-4:                  #3e4b5a;
+$gray-5:                  #2e3741;
+$gray-6:                  #4f5c6e;
+$gray-7:                  #6a7688;
+$gray-8:                  #434345;
+$gray-9:                  #d1d1d1;
+$gray-10:                 #2c3640;
+$gray-11:                 #e1e9ef;
+$gray-12:                 #485460;
+$footer-color:            #181818;
+$accent-black:            #242424;
+$primary:                 #e02038;
+$secondary:               #fa3a52;
+$tertiary:                #ff7f4c;
+$accent-yellow:           #fff79b;
+$primary-darken:          #a3ac54;
+$primary-darken-2:        #838c3c;
+$secondary-darken:        #579bb1;
+$secondary-lighten:       #ace5f8;
+
+$theme-colors: ();
+
+
+//
+// Page
+//
+$body-bg:               $white;
+$body-color:            $gray;
+
+// link
+$link-color:            $secondary;
+$link-hover-color:      $primary;
+$link-press-color:      darken($primary, 10%);
+$link-hover-decoration: none;
+
+// Heading color
+$headings-color:        $gray-darker; //
+
+
+$facebook:                #4d70a8;
+$facebook-light:          #748abc;
+$facebook-darken:         darken($facebook, 5%);
+
+$twitter:                 #02bcf3;
+$twitter-light:           #81cbdb;
+$twitter-darken:          darken($twitter, 5%);
+
+$google:                  #e2411e;
+$google-light:            #de7272;
+$google-darken:           darken($google, 5%);
+
+$pinterest:               #bd081c;
+$google-darken:           darken($pinterest, 5%);
+
+$instagram-light:         #5f828a; 
+
+
+$tertiary:                #ff7f4c;
+
+
+$error-color: #d64a4a;
+$success-color: #92c55c;
+
+
+$border-1: $gray-lighter;
+
+// Typography
+// Font, line-height, and color for body text, headings, and more.
+
+// Import fonts
+
+
+$font-family-sans-serif:  'Lato', sans-serif;
+$font-family-serif:       Georgia, "Times New Roman", Times, serif;
+// Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
+$font-family-monospace:   "Space Mono", Menlo, Monaco, Consolas, "Courier New", monospace;
+$font-family-montserrat:   'Montserrat', sans-serif;
+
+
+$font-family-base:        $font-family-sans-serif;
+$font-family-sec:         $font-family-monospace;
+$layout-boxed-width:      1600px;
+
+
+// Base FZ & LH (w/o units)
+$base-text-size:          14;
+$base-lh-size:            24;
+
+$font-size-base:       $base-text-size * 1px;
+$font-size-lg:         18px; 
+$font-size-sm:         12px; 
+
+$font-weight-base:     400;
+
+//PSD FZ headers /FOR EDIT (w/o units)
+$Size-h1:                 60;
+$Size-h2:                 48;
+$Size-h3:                 36;
+$Size-h4:                 24;
+$Size-h5:                 18;
+$Size-h6:                 16;
+
+//PSD LH headers /FOR EDIT (w/o units)
+$Lh-h1:                   72;
+$Lh-h2:                   70;
+$Lh-h3:                   48;
+$Lh-h4:                   30;
+$Lh-h5:                   26;
+$Lh-h6:                   24;
+
+
+//Calculating FZ headers
+$h1-font-size:            $Size-h1*1px;
+$h2-font-size:            $Size-h2*1px;
+$h3-font-size:            $Size-h3*1px;
+$h4-font-size:            $Size-h4*1px;
+$h5-font-size:            $Size-h5*1px;
+$h6-font-size:            $Size-h6*1px;
+
+
+// line-height for headers /FOR EDIT
+// $font-lh-h_: floor((PSD l-h / $h1-font-size));
+
+$h1-line-height:              ($Lh-h1 / $Size-h1);
+$h2-line-height:              ($Lh-h2 / $Size-h2);
+$h3-line-height:              ($Lh-h3 / $Size-h3);
+$h4-line-height:              ($Lh-h4 / $Size-h4);
+$h5-line-height:              ($Lh-h5 / $Size-h5);
+$h6-line-height:              ($Lh-h6 / $Size-h6);
+
+// Unit-less `line-height` for use in components like buttons.
+$line-height-base:        ($base-lh-size / $base-text-size); // l-h/fz-base
+// Computed "line-height" (`font-size` * `line-height`) for use with `margin`, `padding`, etc.
+$line-height-computed:    floor(($font-size-base * $line-height-base)); // ~20px
+
+// By default, this inherits from the `<body>`.
+$headings-font-family:    $font-family-montserrat;
+$headings-font-weight:    400;
+$headings-line-height:    1.2;
+$headings-color:          $gray-darker;
+
+
+//
+// Grid breakpoints
+//
+// Define the minimum dimensions at which your layout will change,
+// adapting to different screen sizes, for use in media queries.
+$grid-breakpoints: (
+	xs:   0,
+	sm:   576px,
+	md:   768px,
+	lg:   992px,
+	xl:   1200px,
+	xxl:  1600px
+);
+
+@include _assert-ascending($grid-breakpoints, "$grid-breakpoints");
+@include _assert-starts-at-zero($grid-breakpoints);
+
+
+$screen-fullhd: 1600px;
+
+
+// Grid containers
+//
+// Define the maximum width of `.container` for different screen sizes.
+
+$container-max-widths: (
+	sm:   540px,
+	md:   720px,
+	lg:   960px,
+	xl:   1200px
+);
+@include _assert-ascending($container-max-widths, "$container-max-widths");
+
+$screen-height-desktop: 800px;
+$screen-height-desktop-1: 880px;
+
+//
+// Grid columns
+//
+// Set the number of columns and specify the width of the gutters.
+$grid-columns: 12;
+$grid-gutter-width: 30px;
+$grid-gutter-width-narrow: 20px;
+
+
+// Shadows
+//
+
+$shadow-area-ambient: 0px 0px 1px 0 rgba(0, 0, 0, 0.15); 
+$shadow-area-xxs: 1px 1px 1px rgba(0, 0, 0, 0.15);
+$shadow-area-xs: 0 1px 4px 0 rgba(0, 0, 0, 0.15);
+$shadow-area-sm: 0 1px 10px 0 rgba(0, 0, 0, 0.15);
+$shadow-area-md: 0 3px 11px 0 rgba(0, 0, 0, 0.15);
+$shadow-area-lg: 0 5px 23px 0 rgba(0, 0, 0, 0.15);
+$shadow-area-xl: 0 12px 36px 0 rgba(0, 0, 0,.15);
+
+
+// Buttons variables
+//
+$btn-font-family:         $font-family-base;
+$btn-font-size:           12px;
+$btn-font-weight:         700;
+$btn-lh-size:             24px;
+
+
+// Other
+$border-radius: 0;
+
+
+//
+// jScrollPane
+//
+$scroll-width: 5px;
+
+$popover-arrow-color: $secondary;

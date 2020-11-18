@@ -1,0 +1,76 @@
+/*
+*
+* Custom Modal Styles
+* 
+*/
+.custom-modal {
+  .modal-content {
+    padding: 30px 0;
+    border-radius: 0;
+  }
+}
+
+
+.custom-modal-login {
+  .modal-inner {
+    position: relative;
+  }
+
+  .modal-content {
+    padding-left: 15px; 
+    padding-right: 15px;
+  }
+
+  .modal-content__inner {
+    max-width: 550px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  button.close {
+    position: absolute;
+    right: 1px;
+    top: 1px;
+    z-index: 2;
+    height: 30px;
+    width: 30px;
+    line-height: 30px;
+    text-align: center;
+    opacity: 1;
+    color: $white;
+    background: $secondary;
+    transition: .22s;
+    
+    .icon {
+      position: relative;
+      right: -1px;
+    }
+    
+    &:hover {
+      background: $gray-darker;
+    }
+  }
+
+  @include media-breakpoint-down(sm) {
+    .button-icon {
+      font-size: 0;
+      padding-left: 10px;
+      padding-right: 10px;
+      min-width: 50px;
+      .icon {
+        padding-left: 0;
+        padding-right: 0;
+        font-size: 18px;
+        line-height: 18px;
+      }
+    }
+  }
+
+  @include media-breakpoint-up(md) {
+    button.close {
+      height: 45px;
+      width: 45px;
+      line-height: 45px;
+    }
+  }
+}
