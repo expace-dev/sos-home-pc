@@ -323,3 +323,7 @@ Dépannage informatique
 
 
 @endsection
+
+@section('script')
+<script src="js/global.js"></script>
+@endsection

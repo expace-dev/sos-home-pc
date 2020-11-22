@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="wide wow-animation" lang="en">
+<html class="wide wow-animation" lang="fr">
   <head>
     <!-- Site Title-->
     <title>Sos Home PC - @yield('titre')</title>
@@ -11,17 +11,19 @@
     <!-- Stylesheets-->
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato:400,700%7CMontserrat:300,400,700%7CLato:300,400,700">
     
-<link rel="stylesheet" href="css/bootstrap.css">
-<link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/fonts.css">
+<!--
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @yield('css')
+-->
 		<!--[if lt IE 10]>
     <div style="background: #212121; padding: 10px 0; box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3); clear: both; text-align:center; position: relative; z-index:1;"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
     <script src="js/html5shiv.min.js"></script>
         <![endif]-->
-    <link rel="stylesheet" href="css/style.css">    
+    <link rel="stylesheet" href="css/app.css">    
   </head>
-  <body>
+  <body id="resultat">
     <!-- Page Loader-->
     <div id="page-loader">
       <div class="page-loader-body"><img src="images/logo.png" alt="" width="200" height="108"/>
@@ -82,9 +84,20 @@
                       </div>
                     </div>
                     @if (Auth::guest())
-                    <div class="rd-navbar-panel__button"><a class="button button-xs button-icon button-icon-left button-default button-ujarak" href="login.html"><span class="icon mdi mdi-account"></span>Espace client</a></div>
+                    <div class="rd-navbar-panel__button"><a class="button button-xs button-icon button-icon-left button-default button-ujarak" href="{{ route('login') }}"><span class="icon mdi mdi-account"></span>Espace client</a></div>
                     @else
-                    <div class="rd-navbar-panel__button"><a class="button button-xs button-icon button-icon-left button-default button-ujarak" href="login.html"><span class="icon mdi mdi-logout"></span>Déconnexion</a></div>
+                    <div class="rd-navbar-panel__button">
+                      <a class="button button-xs button-icon button-icon-left button-default button-ujarak" href="{{ route('logout') }}" 
+                        onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();
+                      ">
+                        <span class="icon mdi mdi-logout"></span>
+                        Déconnexion
+                      </a>
+                      <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                      </form>
+                    </div>
                     @endif  
                 </div>
                   <!-- RD Navbar Nav Wrap-->
@@ -232,8 +245,10 @@
     <div class="snackbars" id="form-output-global"></div>
     <!-- Javascript-->
     <script src="js/core.min.js"></script>
-    <script src="js/script.js"></script>
+    <!--
     <script src="{{ asset('js/app.js') }}"></script>
+    
+-->
     @yield('script')
   </body>
 </html>

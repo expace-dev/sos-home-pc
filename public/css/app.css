@@ -18780,7 +18780,7 @@ disabled look for disabled choices in the results dropdown
 @font-face {
   font-family: lg;
   src: url(/fonts/lg.eot?ecff11700aad0000cf3503f537d1df17);
-  src: url(/fonts/lg.eot?ecff11700aad0000cf3503f537d1df17) format("embedded-opentype"), url(/fonts/lg.woff?5fd4c338c1a1b1eeeb2c7b0a0967773d) format("woff"), url(/fonts/lg.ttf?4fe6f9caff8b287170d51d3d71d5e5c6) format("truetype"), url(/fonts/lg.svg?98d62b1e5f5b556facf319b19c6c7cba) format("svg");
+  src: url(/fonts/lg.eot?ecff11700aad0000cf3503f537d1df17) format("embedded-opentype"), url(/fonts/lg.woff?5fd4c338c1a1b1eeeb2c7b0a0967773d) format("woff"), url(/fonts/lg.ttf?4fe6f9caff8b287170d51d3d71d5e5c6) format("truetype"), url(/fonts/lg.svg?0cb1b8af9950584b5cc8e8250e045508) format("svg");
   font-weight: 400;
   font-style: normal;
 }
@@ -19769,7 +19769,7 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item.lg-complete .lg-object 
 @font-face {
   font-family: lg;
   src: url(/fonts/lg.eot?ecff11700aad0000cf3503f537d1df17);
-  src: url(/fonts/lg.eot?ecff11700aad0000cf3503f537d1df17) format("embedded-opentype"), url(/fonts/lg.woff?5fd4c338c1a1b1eeeb2c7b0a0967773d) format("woff"), url(/fonts/lg.ttf?4fe6f9caff8b287170d51d3d71d5e5c6) format("truetype"), url(/fonts/lg.svg?98d62b1e5f5b556facf319b19c6c7cba) format("svg");
+  src: url(/fonts/lg.eot?ecff11700aad0000cf3503f537d1df17) format("embedded-opentype"), url(/fonts/lg.woff?5fd4c338c1a1b1eeeb2c7b0a0967773d) format("woff"), url(/fonts/lg.ttf?4fe6f9caff8b287170d51d3d71d5e5c6) format("truetype"), url(/fonts/lg.svg?0cb1b8af9950584b5cc8e8250e045508) format("svg");
   font-weight: 400;
   font-style: normal;
 }
@@ -20759,22 +20759,4 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item.lg-complete .lg-object 
 }
 
 /*rtl:end:ignore*/
-
-.rd-navbar-static.rd-navbar-classic.rd-navbar--is-stuck .rd-navbar-brand img,
-.rd-navbar-static.rd-navbar-classic.rd-navbar--is-clone .rd-navbar-brand img {
-  width: auto;
-  max-height: 50px;
-  display: none;
-}
-
-.rd-navbar-fixed .rd-navbar-brand .brand img {
-  margin-top: -3px;
-  height: 37px;
-  width: auto;
-  display: none;
-}
-
-.box-alice {
-  min-height: 250px;
-}
 

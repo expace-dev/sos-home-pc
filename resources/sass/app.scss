@@ -73,18 +73,3 @@
 @import "plugins/lightgallery";
 @import "plugins/material-parallax";
 /*rtl:end:ignore*/
-
-.rd-navbar-static.rd-navbar-classic.rd-navbar--is-stuck .rd-navbar-brand img, .rd-navbar-static.rd-navbar-classic.rd-navbar--is-clone .rd-navbar-brand img {
-    width: auto;
-    max-height: 50px;
-    display: none;
-}
-.rd-navbar-fixed .rd-navbar-brand .brand img {
-    margin-top: -3px;
-    height: 37px;
-    width: auto;
-    display: none;
-}
-.box-alice {
-    min-height: 250px;
-}

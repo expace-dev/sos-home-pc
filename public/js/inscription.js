@@ -490,7 +490,7 @@
 			// Custom validator - phone number
 			regula.custom({
 				name: 'PhoneNumber',
-				defaultMessage: 'Invalid phone number format',
+				defaultMessage: 'Numéro de téléphone invalide',
 				validator: function () {
 					if (this.value === '') return true;
 					else return /^(\+\d)?[0-9\-\(\) ]{5,}$/i.test(this.value);
@@ -522,19 +522,19 @@
 			var regularConstraintsMessages = [
 				{
 					type: regula.Constraint.Required,
-					newMessage: "The text field is required."
+					newMessage: "Veuillez remplir ce champs."
 				},
 				{
 					type: regula.Constraint.Email,
-					newMessage: "The email is not a valid email."
+					newMessage: "Ceci n'est pas un e-mail valide."
 				},
 				{
 					type: regula.Constraint.Numeric,
-					newMessage: "Only numbers are required"
+					newMessage: "Seul les chiffres sont accepté"
 				},
 				{
 					type: regula.Constraint.Selected,
-					newMessage: "Please choose an option."
+					newMessage: "Veuillez choisir une option."
 				}
 			];
 
@@ -1493,7 +1493,13 @@
 						}
 					},
 					error: function (result) {
-						$('#erreur').html(result.responseJSON.errors.email);
+                        
+                        
+
+
+                        $('#erreur_email').html(result.responseJSON.errors.email);
+                        $('#erreur_password').html(result.responseJSON.errors.password[0]);
+                        $('#erreur_confirm').html(result.responseJSON.errors.password[1]);
 						if (isNoviBuilder)
 							return;
 
