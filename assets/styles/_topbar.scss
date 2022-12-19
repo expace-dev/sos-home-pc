@@ -1,0 +1,134 @@
+.contact-info li{
+    padding-right: 20px;
+
+    &:after {
+        height: 30px;
+        width: 1px;
+        background: #f6f6f6;;
+        content: "";
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 20px;
+    }
+}
+.logo {
+    height: 60px;
+}
+@media (max-width: 799px) { 
+    .large {
+      display: none;
+    }
+    .mobile {
+      display: block;
+    }
+}
+@media (min-width: 800px) {
+    .mobile {
+        display: none;
+    }
+}
+.btn-small {
+    text-decoration: none;
+    transition: .3s;
+    font-weight: bold;
+  
+    &:hover {
+        color: #fff;
+        text-decoration: none;
+        outline: none;
+        background-color: #e71a33 !important;
+    }
+    &:focus {
+        color: #fff;
+        text-decoration: none;
+        outline: none;
+    }
+}
+.navbar a, .navbar a:focus {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0 10px 30px;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    color: #545454;
+    white-space: nowrap;
+    transition: 0.3s;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.navbar a i, .navbar a:focus i {
+    font-size: 12px;
+    line-height: 0;
+    margin-left: 5px;
+}
+.navbar a:hover, .navbar .active, .navbar .active:focus, .navbar li:hover > a {
+    color: #e71a33;
+}
+.fa-mobile-alt {
+    color: #e71a33;
+}
+.fa-envelope {
+    color: #e71a33;
+} 
+
+#nav-mobile {
+    position: absolute;
+    top: 95px;
+    z-index: 9999;
+    background-color: #fff;
+    height: 100vh;
+    width: 280px;
+    display: none;
+}
+#nav-mobile a {
+    padding-left: 20px;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    color: #545454;
+    transition: 0.3s;
+    text-transform: uppercase;
+    font-weight: bold;
+    
+}
+#nav-mobile a:hover {
+    color: #e71a33 !important;
+}
+#nav-mobile li {
+    margin-top: 10px;
+    list-style-type: none;
+}
+
+#info-mobile {
+    position: absolute;
+    top: 95px;
+    right: 0px;
+    z-index: 9999;
+    background-color: #fff;
+    width: 280px;
+    display: none;
+    padding: 10px 10px 10px 10px;
+}
+#info-mobile a {
+    font-family: "Poppins", sans-serif;
+    color: #545454;
+    transition: 0.3s;
+    font-size: .8em;
+    
+}
+#info-mobile a:hover {
+    color: #e71a33 !important;
+    
+}
+.social-icon {
+    margin-left: 25px;
+    margin-top: -20px;
+}
+#info-mobile li {
+    margin-top: 10px;
+    list-style-type: none;
+}
+.nav {
+	--bs-nav-link-color: #e71a33;
+	--bs-nav-link-hover-color: #e71a33;
+}
