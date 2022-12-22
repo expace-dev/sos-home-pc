@@ -1,10 +1,6 @@
 @import '~bootstrap/scss/bootstrap';
 
 
-//@import "../components/bootstrap/scss/bootstrap";
-
-
-//@import "../components/glightbox/css/glightbox.css";
 
 
 
@@ -18,8 +14,14 @@
 
 @import "general";
 @import "./general-section";
+@import "./auth";
 @import "topbar";
 @import "./carousel";
+@import "./forms";
+@import "./breadcrumbs";
 @import "./featured";
+@import "./testimonials";
 @import "./pricing";
+@import "./contact";
 @import "footer";
+
