@@ -1,0 +1,51 @@
+<div class="blog-comments">
+    <h4 class="comments-count">{{ article.comments|length }} Commentaires</h4>
+
+    {% for comment in article.comments %}
+        <div id="comment-{{ comment.id }}" class="comment">
+            {% if comment.parent == null %}
+                <div class="d-flex">
+                    {% if comment.auteur.avatar %}
+                        <div class="comment-img"><img src="{{ comment.auteur.avatar }}" alt=""></div>
+                    {% else %}
+                        <div class="comment-img"><img src="/images/no-avatar.png" alt=""></div>
+                    {% endif %}
+                    <div>
+                        <h5><a href="#ajout-commentaire" data-reply data-id="{{comment.id}}">{{ comment.auteur.username }}</a> <a href="#ajout-commentaire" data-reply data-id="{{comment.id}}" class="reply"><i class="bi bi-reply-fill"></i> Répondre</a></h5>
+                        <time datetime="{{ comment.createdAt|date("Y-m-d") }}">{{ comment.createdAt|date("j F Y") }}</time>
+                        <p>{{ comment.content }}</p>
+                    </div>
+                </div>
+                {% for reply in comment.replies %}        
+                    <div id="comment-reply-{{ comment.id }}" class="comment comment-reply">
+                        <div class="d-flex">
+                            {% if reply.auteur.avatar %}
+                                <div class="comment-img"><img src="{{ reply.auteur.avatar }}" alt=""></div>
+                            {% else %}
+                                <div class="comment-img"><img src="/images/no-avatar.png" alt=""></div>
+                            {% endif %}
+                            <div>
+                                <h5><a href="#">{{ reply.auteur.username }}</a> </h5>
+                                <time datetime="{{ reply.createdAt|date("Y-m-d") }}">{{ reply.createdAt|date("j F Y") }}</time>
+                                <p>{{ reply.content }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div><!-- End comment #2-->
+    {% endfor %}
+    {{ include('articles/_form.html.twig') }}
+    
+</div>
+
+<script>
+	window.onload = () => {
+	    // On met un écouteur d'évènements sur tous les boutons répondre
+		document.querySelectorAll("[data-reply]").forEach(element => {
+		    element.addEventListener("click", function(){
+			    document.querySelector("#comment_parentid").value = this.dataset.id;
+			});
+		});
+	}
+</script>

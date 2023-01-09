@@ -12,6 +12,7 @@ window.bootstrap = require('bootstrap/dist/js/bootstrap.bundle.js');
 
 import bsCustomFileInput from 'bs-custom-file-input';
 import './navbar-mobile';
+import '@grafikart/drop-files-element';
 // start the Stimulus application
 import './bootstrap';
 bsCustomFileInput.init();

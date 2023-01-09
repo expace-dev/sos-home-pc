@@ -25,6 +25,7 @@
         "build": "encore production --progress"
     },
     "dependencies": {
+        "@grafikart/drop-files-element": "^1.0.9",
         "places.js": "^1.19.0"
     }
 }

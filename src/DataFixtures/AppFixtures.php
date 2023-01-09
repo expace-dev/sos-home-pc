@@ -4,6 +4,8 @@ namespace App\DataFixtures;
 
 use Faker\Factory;
 use App\Entity\Users;
+use App\Entity\Articles;
+use App\Entity\Categories;
 use App\Entity\Temoignages;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -39,7 +41,8 @@ class AppFixtures extends Fixture
                  ->setVille($faker->city)
                  ->setPays($faker->country)
                  ->setSociete($faker->company)
-                 ->setTelephone($faker->phoneNumber);
+                 ->setTelephone($faker->phoneNumber)
+                 ->setUsername($faker->userName());
 
         $manager->persist($adminUser);
 
@@ -70,7 +73,8 @@ class AppFixtures extends Fixture
                  ->setVille($faker->city)
                  ->setPays($faker->country)
                  ->setSociete($faker->company)
-                 ->setTelephone($faker->phoneNumber);
+                 ->setTelephone($faker->phoneNumber)
+                 ->setUsername($faker->userName());
 
             $manager->persist($user);
             $users[] = $user;        
@@ -94,6 +98,38 @@ class AppFixtures extends Fixture
 
             $manager->persist($temoignage);
             $temoignages[] = $temoignage;
+        }
+
+        $categories = [];
+
+        for ($i=1; $i<=10; $i++) {
+
+            $categorie = new Categories;
+
+            $mots = rand(1,3);
+
+            $categorie->setName($faker->words($mots, true));
+
+            $manager->persist($categorie);
+            $categories[] = $categorie;
+
+
+        }
+
+        $articles = [];
+        for ($i=1; $i<=500; $i++) {
+
+            $article = new Articles();
+
+            $article->setDate($faker->dateTime('now'))
+                    ->setContent($faker->paragraph(5))
+                    ->setTitle($faker->text(50))
+                    ->setImg($faker->imageUrl(1024, 768))
+                    ->setCategories($faker->randomElement($categories))
+                    ->setAuteur($faker->randomElement($users));
+
+            $manager->persist($article);
+            $articles[] = $article;
         }
         // $product = new Product();
         // $manager->persist($product);
