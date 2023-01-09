@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Repository\ArticlesRepository;
 use App\Repository\UsersRepository;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
@@ -9,6 +10,7 @@ class UploadService {
 
     private $params;
     private $userRepo;
+    private $articleRepo;
 
     /**
      * Ont donne accès à getParameter
@@ -19,10 +21,11 @@ class UploadService {
      * 
      * Ont récupère aussi UserRepository
      */
-    public function __construct(ParameterBagInterface $params, UsersRepository $userRepo)
+    public function __construct(ParameterBagInterface $params, UsersRepository $userRepo, ArticlesRepository $articleRepo)
     {
         $this->params = $params;
         $this->userRepo = $userRepo;
+        $this->articleRepo = $articleRepo;
     }
 
     /**
@@ -67,6 +70,59 @@ class UploadService {
             // Ont sauvegarde l'avatar en BDD
             $user->setAvatar($nom);
             $this->userRepo->save($user, true);
+
+            // Ont initialise la statut success
+            $result = [
+                'statut' => 'success',
+            ];
+        }
+
+        /**
+         * Si le format n'est pas valid
+         * Ont initialise le statut error
+         */
+        else {
+            $result = [
+                'statut' => 'error'
+            ];
+        }
+        // Et ont retourne la réponse
+        return $result;
+    }
+
+    public function sendimgBlog($fichier, $validExt, $directory, $article) {
+
+        // Ont initialise le nombre d'erreur à zéro
+        $errorFormat = 0;
+
+        // Ont vérifie que le type de fichier est valide
+        if (!in_array($fichier->getMimetype(), $validExt)) {
+            $errorFormat++;
+        }
+
+        // Si le format de l'image est valide
+        if ($errorFormat === 0) {
+
+            // Ont crée un nom de fichier unique
+            $nom = md5(uniqid()) . '.' . $fichier->guessExtension();
+
+            /**
+             * Si ont a déjà un avatar
+             * On supprime l'ancien
+             */
+            if($article->getImg()) {
+                unlink($this->params->get($directory).'/'.$article->getImg());
+            }
+
+            // Ont copie ensuite l'avatar
+            $fichier->move(
+                $this->params->get($directory),
+                $nom
+            );
+
+            // Ont sauvegarde l'avatar en BDD
+            $article->setimg($nom);
+            $this->articleRepo->save($article, true);
 
             // Ont initialise la statut success
             $result = [

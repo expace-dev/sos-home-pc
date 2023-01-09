@@ -16,7 +16,7 @@
                         <div class="sidebar-item categories">
                             <ul>
                             {% for categorie in categories %}
-                                <li><a href="{{ path('app_articles_categories', {'slug': categorie.slug}) }}">{{ categorie.name }} <span>({{ categorie.articles|length }})</span></a></li>
+                                <li><a href="{{ path('app_blog_categories', {'slug': categorie.slug}) }}">{{ categorie.name }} <span>({{ categorie.articles|length }})</span></a></li>
                             {% endfor %}
                             </ul>
                         </div>
@@ -25,7 +25,7 @@
                             {% for derniersArticle in derniersArticles %}
                                 <div class="post-item clearfix">
                                     <img src="{{ derniersArticle.img }}" alt="">
-                                    <h4><a href="{{ path('app_articles_show', {'slug': derniersArticle.slug}) }}">{{ derniersArticle.title }}</a></h4>
+                                    <h4><a href="{{ path('app_blog_show', {'slug': derniersArticle.slug}) }}">{{ derniersArticle.title }}</a></h4>
                                     <time datetime="{{ derniersArticle.date|date("Y-m-d") }}">{{ derniersArticle.date|date("j F Y") }}</time>
                                 </div>
                             {% endfor %}

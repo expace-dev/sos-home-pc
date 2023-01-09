@@ -22,12 +22,8 @@
             -->
             <li><a href="{{ path('app_admin_booking_calendar') }}">Planning</a></li>
             <li><a href="{{ path('app_admin_booking_index') }}">Interventions</a></li>
-            <li class="dropdown"><a href="#"><span>Clients</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                    <li><a href="{{ path('app_admin_users_index') }}">Mes clients</a></li>
-                    <li><a href="{{ path('app_admin_users_new') }}">Nouveau</a></li>
-                </ul>
-            </li>
+            <li><a href="{{ path('app_admin_users_index') }}">Clients</a></li>
+            <li><a href="{{ path('app_admin_blog_index') }}">Articles</a></li>
             <li><a href="{{ path('app_logout') }}">Déconnection</a></li>
             {% endif %}
         </ul>

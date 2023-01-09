@@ -30,7 +30,7 @@
                             </ul>
                         </div>
                         <div class="entry-content">
-                            <p>{{ article.content }}</p>
+                            <p>{{ article.content|raw }}</p>
                         </div>
                     </article>
                     <div class="blog-author d-flex align-items-center">
@@ -47,9 +47,9 @@
                             </p>
                         </div>
                     </div>
-                    {% include "partials/blog/commentaires.html.twig" %}
+                    {% include "blog/commentaires.html.twig" %}
                 </div>
-                {% include "partials/blog/menu.html.twig" %}
+                {% include "blog/menu.html.twig" %}
             </div>
         </div>
     </section>
