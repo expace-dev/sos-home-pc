@@ -21,10 +21,17 @@ class ProfilController extends AbstractController
     {
         $user = $this->getUser();
 
+        
+
         $form = $this->createForm(ProfilType::class, $user);
         $form->handleRequest($request);
 
+        
+
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $user->setFullName($user->getNom(). " " .$user->getPrenom());
+
             $usersRepository->save($user, true);
 
             $this->addFlash('primary', 'Votre profil a bien été modifié');

@@ -76,12 +76,19 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'auteur', targetEntity: Articles::class, orphanRemoval: true)]
     private Collection $articles;
 
+    #[ORM\OneToMany(mappedBy: 'client', targetEntity: Factures::class)]
+    private Collection $factures;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $fullName = null;
+
     public function __construct()
     {
         $this->temoignages = new ArrayCollection();
         $this->bookings = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->articles = new ArrayCollection();
+        $this->factures = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -402,6 +409,49 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
                 $article->setAuteur(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Factures>
+     */
+    public function getFactures(): Collection
+    {
+        return $this->factures;
+    }
+
+    public function addFacture(Factures $facture): self
+    {
+        if (!$this->factures->contains($facture)) {
+            $this->factures->add($facture);
+            $facture->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFacture(Factures $facture): self
+    {
+        if ($this->factures->removeElement($facture)) {
+            // set the owning side to null (unless already changed)
+            if ($facture->getClient() === $this) {
+                $facture->setClient(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getFullName(): ?string
+    {
+        return $this->fullName;
+    }
+
+     
+    public function setFullName(?string $fullName): self
+    {
+        $this->fullName = $fullName;
 
         return $this;
     }
