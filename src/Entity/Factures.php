@@ -39,6 +39,12 @@ class Factures
     #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $payment_intent = null;
+
+    #[ORM\OneToOne(mappedBy: 'facture', cascade: ['persist', 'remove'])]
+    private ?Paiements $paiements = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -136,6 +142,35 @@ class Factures
     public function setContent(string $content): self
     {
         $this->content = $content;
+
+        return $this;
+    }
+
+    public function getPaymentIntent(): ?string
+    {
+        return $this->payment_intent;
+    }
+
+    public function setPaymentIntent(?string $payment_intent): self
+    {
+        $this->payment_intent = $payment_intent;
+
+        return $this;
+    }
+
+    public function getPaiements(): ?Paiements
+    {
+        return $this->paiements;
+    }
+
+    public function setPaiements(Paiements $paiements): self
+    {
+        // set the owning side of the relation if necessary
+        if ($paiements->getFacture() !== $this) {
+            $paiements->setFacture($this);
+        }
+
+        $this->paiements = $paiements;
 
         return $this;
     }
