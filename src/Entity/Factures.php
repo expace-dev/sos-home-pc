@@ -45,6 +45,9 @@ class Factures
     #[ORM\OneToOne(mappedBy: 'facture', cascade: ['persist', 'remove'])]
     private ?Paiements $paiements = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $slug = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -171,6 +174,18 @@ class Factures
         }
 
         $this->paiements = $paiements;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

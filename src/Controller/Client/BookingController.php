@@ -4,7 +4,7 @@ namespace App\Controller\Client;
 
 use App\Entity\Booking;
 use DateTime;
-use App\Form\BookingType;
+use App\Form\Booking\Client\BookingType;
 use App\Repository\BookingRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,8 +25,15 @@ class BookingController extends AbstractController
     {
         $booking = new Booking();
         $form = $this->createForm(BookingType::class, $booking);
+
+        $this->addFlash(
+            'info', 
+            '<h3><i class="fa-solid fa-circle-info"></i> Fonctionnement du calendrier</h3>
+            <p>Veuillez cliquer sur une plage horraire du calendrier<br>
+            Comptez un maximum de 4 heures pour cette intervention</p>'
+        );
         
-        return $this->render('client/booking/calendar.html.twig', [
+        return $this->render('booking/client/calendar.html.twig', [
             'form' => $form,
         ]);
     }
@@ -40,7 +47,7 @@ class BookingController extends AbstractController
     #[Route('/', name: 'app_booking_index', methods: ['GET'])]
     public function index(BookingRepository $bookingRepository): Response
     {
-        return $this->render('client/booking/index.html.twig', [
+        return $this->render('booking/client/index.html.twig', [
             'bookings' => $bookingRepository->findAll(),
         ]);
     }
@@ -59,10 +66,10 @@ class BookingController extends AbstractController
 
         $this->addFlash(
             'danger', 
-            'Cette plage horraire est déjà prise, veuillez modifier votre saisie !!'
+            '<i class="fa-solid fa-circle-exclamation"></i> Cette plage horraire est déjà prise, veuillez modifier votre saisie !!'
         );
 
-        return $this->render('client/booking/calendar.html.twig', [
+        return $this->render('booking/client/calendar.html.twig', [
             'form' => $form,
         ]);
     }
@@ -82,10 +89,10 @@ class BookingController extends AbstractController
 
         $this->addFlash(
             'danger', 
-            'Nos services sont fermé à cette heure, veuillez modifier votre saisie !'
+            '<i class="fa-solid fa-circle-exclamation"></i> Nos services sont fermé à cette heure, veuillez modifier votre saisie !'
         );
 
-        return $this->render('client/booking/calendar.html.twig', [
+        return $this->render('booking/client/calendar.html.twig', [
             'form' => $form,
         ]);
     }
@@ -105,10 +112,10 @@ class BookingController extends AbstractController
 
         $this->addFlash(
             'success', 
-            'Votre demande d\'intervention est validée'
+            '<i class="fa-solid fa-circle-check"></i> Votre demande d\'intervention est validée'
         );
 
-        return $this->render('client/booking/calendar.html.twig', [
+        return $this->render('booking/client/calendar.html.twig', [
             'form' => $form,
         ]);
     }
@@ -179,48 +186,12 @@ class BookingController extends AbstractController
 
 
     /**
-     * Permet d'afficher un RDV en particulier
-     */
-    #[Route('/{id}', name: 'app_booking_show', methods: ['GET'])]
-    public function show(Booking $booking): Response
-    {
-        return $this->render('client/booking/show.html.twig', [
-            'booking' => $booking,
-        ]);
-    }
-
-
-    /**
-     * Permet d'éditer un RDV
-     */
-    #[Route('/{id}/edit', name: 'app_booking_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Booking $booking, BookingRepository $bookingRepository): Response
-    {
-        $form = $this->createForm(BookingType::class, $booking);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $bookingRepository->save($booking, true);
-
-            return $this->redirectToRoute('app_booking_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('client/booking/edit.html.twig', [
-            'booking' => $booking,
-            'form' => $form,
-        ]);
-    }
-
-
-    /**
      * Permet de supprimer un RDV
      */
-    #[Route('/{id}', name: 'app_booking_delete', methods: ['POST'])]
+    #[Route('/delete/{id}', name: 'app_booking_delete', methods: ['GET'])]
     public function delete(Request $request, Booking $booking, BookingRepository $bookingRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$booking->getId(), $request->request->get('_token'))) {
-            $bookingRepository->remove($booking, true);
-        }
+        $bookingRepository->remove($booking, true);
 
         return $this->redirectToRoute('app_booking_index', [], Response::HTTP_SEE_OTHER);
     }

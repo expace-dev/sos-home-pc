@@ -3,7 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Users;
-use App\Form\Admin\UsersType;
+use App\Form\Users\Admin\UsersType;
 use App\Repository\UsersRepository;
 use App\Services\UploadService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,7 +24,7 @@ class UsersController extends AbstractController
     #[Route('/', name: 'app_admin_users_index', methods: ['GET'])]
     public function index(UsersRepository $usersRepository): Response
     {
-        return $this->render('admin/users/index.html.twig', [
+        return $this->render('profil/admin/index.html.twig', [
             'users' => $usersRepository->findAll(),
         ]);
     }
@@ -61,7 +61,7 @@ class UsersController extends AbstractController
             return $this->redirectToRoute('app_admin_users_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('admin/users/new.html.twig', [
+        return $this->render('profil/admin/new.html.twig', [
             'user' => $user,
             'form' => $form,
         ]);
@@ -130,7 +130,7 @@ class UsersController extends AbstractController
         }
 
 
-        return $this->render('admin/users/edit.html.twig', [
+        return $this->render('profil/admin/edit.html.twig', [
             'user' => $user,
             'form' => $form,
         ]);

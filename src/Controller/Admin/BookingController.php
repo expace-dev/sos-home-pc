@@ -4,8 +4,9 @@ namespace App\Controller\Admin;
 
 use DateTime;
 use App\Entity\Booking;
-use App\Form\Admin\BookingType;
+use App\Form\Booking\Admin\BookingType;
 use App\Form\Admin\BookingTextType;
+use App\Form\Booking\Admin\EditType;
 use App\Repository\UsersRepository;
 use App\Repository\BookingRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -29,7 +30,7 @@ class BookingController extends AbstractController
         $booking = new Booking();
         $form = $this->createForm(BookingType::class, $booking);
         
-        return $this->render('admin/booking/calendar.html.twig', [
+        return $this->render('booking/admin/calendar.html.twig', [
             'form' => $form,
         ]);
     }
@@ -44,7 +45,7 @@ class BookingController extends AbstractController
     #[Route('/', name: 'app_admin_booking_index', methods: ['GET'])]
     public function index(BookingRepository $bookingRepository): Response
     {
-        return $this->render('admin/booking/index.html.twig', [
+        return $this->render('booking/admin/index.html.twig', [
             'bookings' => $bookingRepository->findAll(),
         ]);
     }
@@ -135,7 +136,7 @@ class BookingController extends AbstractController
             'Cette plage horraire est déjà prise, veuillez modifier votre saisie !!'
         );
 
-        return $this->render('admin/booking/calendar.html.twig', [
+        return $this->render('booking/admin/calendar.html.twig', [
             'form' => $form,
         ]);
     }
@@ -157,7 +158,7 @@ class BookingController extends AbstractController
             'Nos services sont fermé à cette heure, veuillez modifier votre saisie !'
         );
 
-        return $this->render('admin/booking/calendar.html.twig', [
+        return $this->render('booking/admin/calendar.html.twig', [
             'form' => $form,
         ]);
     }
@@ -180,22 +181,11 @@ class BookingController extends AbstractController
             'Votre demande d\'intervention est validée'
         );
 
-        return $this->render('admin/booking/calendar.html.twig', [
+        return $this->render('booking/admin/calendar.html.twig', [
             'form' => $form,
         ]);
     }
 
-
-    /**
-     * Permet d'afficher un rendez-vous
-     */
-    #[Route('/{id}', name: 'app_admin_booking_show', methods: ['GET'])]
-    public function show(Booking $booking): Response
-    {
-        return $this->render('admin/booking/show.html.twig', [
-            'booking' => $booking,
-        ]);
-    }
 
     /**
      * Permet d'éditer un RDV
@@ -222,7 +212,7 @@ class BookingController extends AbstractController
     public function edition(Request $request, Booking $booking, EntityManagerInterface $manager): Response
     {
 
-        $form = $this->createForm(BookingTextType::class, $booking);
+        $form = $this->createForm(EditType::class, $booking);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
@@ -238,7 +228,7 @@ class BookingController extends AbstractController
         }
 
 
-        return $this->render('admin/booking/edit.html.twig', [
+        return $this->render('booking/admin/edit.html.twig', [
             'booking' => $booking,
             'form' => $form,
         ]);

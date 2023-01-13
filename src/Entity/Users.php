@@ -19,6 +19,8 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
+    public $ancienPassword;
+
     #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
 
