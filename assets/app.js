@@ -15,4 +15,3 @@ import './navbar-mobile';
 import '@grafikart/drop-files-element';
 // start the Stimulus application
 import './bootstrap';
-bsCustomFileInput.init();

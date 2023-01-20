@@ -39,7 +39,7 @@ class DashboardController extends AbstractController
 
         
         //$factures = $facturesRepository->findBy(['client' => $this->getUser()]);
-        return $this->render('dashboard/index.html.twig', [
+        return $this->render('dashboard/admin/index.html.twig', [
             'clients' => $usersRepository->count([]),
             'factures' => $facturesRepository->count([]),
             'chart' => $chart,

@@ -10,6 +10,8 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class FacturesType extends AbstractType
 {
@@ -20,7 +22,10 @@ class FacturesType extends AbstractType
                 'class' => Users::class,
                 'choice_label' => 'fullName',
                 'label' => 'Client',
-                'placeholder' => 'Sélectionnez un client'
+                'placeholder' => 'Sélectionnez un client',
+                'constraints' => [
+                    new NotBlank(['message' => 'Sélectionnez un client'])
+                ]
             ])
             ->add('title', ChoiceType::class, [
                 'choices' => [
@@ -29,6 +34,9 @@ class FacturesType extends AbstractType
                 ],
                 'label' => 'Type d\'intervention',
                 'placeholder' => 'Sélectionnez une catégorie',
+                'constraints' => [
+                    new NotBlank(['message' => 'Sélectionnez le type d\'intervention'])
+                ]
             ])
             ->add('content', TextareaType::class, [
                 'required' => true,
@@ -36,7 +44,17 @@ class FacturesType extends AbstractType
                     'placeholder' => 'Description',
                     'rows' => '6'
                 ],
-                'label' => 'Description'
+                'label' => 'Description',
+                'constraints' => [
+                    new NotBlank(['message' => 'Donnez des détails']),
+                    new Length([
+                        'min' => 20,
+                        'minMessage' => 'Trop court, minimum {{ limit }} caractères',
+                        'max' => 255,
+                        'maxMessage' => 'Trop long, maximum {{ limit }} caractères'
+
+                    ])
+                ]
             ])
             
         ;

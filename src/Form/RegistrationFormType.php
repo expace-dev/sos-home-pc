@@ -34,6 +34,7 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
+            ->add('plainPassword')
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'required' => true,
@@ -54,7 +55,7 @@ class RegistrationFormType extends AbstractType
                     'label' => 'Mot de passe',
                     'attr' => [
                         'placeholder' => 'Mot de passe',
-                        'autocomplete' => 'off',
+                        'autocomplete' => false,
                     ]
                 ],
                 'second_options' => [

@@ -18,7 +18,22 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/blog')]
 class BlogController extends AbstractController
 {
-    
+
+    #[Route('/test', name: 'app_blog_test', methods: ['GET', 'POST'])]
+    public function test(Request $request, ArticlesRepository $articlesRepository, CategoriesRepository $categoriesRepository): Response
+    {
+        return $this->render('blog/client/test.html.twig', [
+        ]);
+
+    }
+
+    #[Route('/cherche', name: 'app_blog_cherche', methods: ['GET', 'POST'])]
+    public function cherche(Request $request, ArticlesRepository $articlesRepository, CategoriesRepository $categoriesRepository): Response
+    {
+        return $this->render('blog/client/cherche.html.twig', [
+        ]);
+
+    }
 
     
     /**
@@ -32,38 +47,11 @@ class BlogController extends AbstractController
     #[Route('/', name: 'app_blog_index', methods: ['GET', 'POST'])]
     public function index(Request $request, ArticlesRepository $articlesRepository, CategoriesRepository $categoriesRepository): Response
     {
-        $formCherche = $this->createForm(ChercheType::class);
         
-        $cherche = $formCherche->handleRequest($request);
-
-        $page = $request->query->getInt('page', 1);
-
-        $donnees = $articlesRepository->findArticles($page, 5);
-
-        //dd($donnees);
-
-        if($formCherche->isSubmitted() && $formCherche->isValid()) {
-
-            $page = $request->query->getInt('page', 1);
-            $articles = $articlesRepository->cherche($cherche->get('mots')->getData(), $page, 5);
-
-            $formCherche = $this->createForm(ChercheType::class);
-
-            return $this->render('blog/client/index.html.twig', [
-                'articles' => $articles,
-                'categories' => $categoriesRepository->findAll(),
-                'formCherche' => $formCherche,
-                'derniersArticles' => $articlesRepository->findBy([], ['date' => 'DESC'], 5)
-            ]);
-
-        }
 
 
         return $this->render('blog/client/index.html.twig', [
-            'articles' => $donnees,
-            'categories' => $categoriesRepository->findAll(),
-            'formCherche' => $formCherche,
-            'derniersArticles' => $articlesRepository->findBy([], ['date' => 'DESC'], 5)
+            
         ]);
     }
 

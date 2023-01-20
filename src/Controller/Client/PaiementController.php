@@ -29,7 +29,7 @@ class PaiementController extends AbstractController
         ]);
     }
 
-    #[Route('/webhook/', name: 'app_paiement_webhook', methods:['POST', 'GET'])]
+    #[Route('/webhook', name: 'app_paiement_webhook', methods:['POST', 'GET'])]
     public function webhook(Request $request, FacturesRepository $facturesRepository, PaiementsRepository $paiementsRepository)
     {
 

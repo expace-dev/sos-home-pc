@@ -6,7 +6,7 @@ use DateTime;
 use App\Entity\Articles;
 use App\Entity\Comments;
 use App\Entity\Categories;
-use App\Form\Admin\ArticleType;
+use App\Form\Blog\Admin\ArticleType;
 use App\Form\Blog\Admin\CommentsType;
 use App\Form\CategoriesBlogType;
 use App\Repository\ArticlesRepository;
@@ -218,7 +218,7 @@ class BlogController extends AbstractController
         ]);
     }
 
-    #[Route('/delete/{id}', name: 'app_admin_categories_blog_delete', methods: ['GET'])]
+    #[Route('/categories/delete/{id}', name: 'app_admin_categories_blog_delete', methods: ['GET'])]
     public function CategoriesDelete(Request $request, Categories $category, CategoriesRepository $categoriesRepository): Response
     {
         $categoriesRepository->remove($category, true);

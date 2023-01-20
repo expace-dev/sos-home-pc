@@ -26,29 +26,10 @@
                             <div class="text-decoration-lines mb-5">
                                 <span class="text-decoration-lines__content">ou</span>
                             </div>
-                            {{ form_start(registrationForm, {
-                                attr: 
-                                {
-                                    id: 'register'
-                                }
+                            {{ component('registration_form', {
+                                user: user.id ? user: null,
+                                form: form
                             }) }}
-                                <div class="input-field mb-4">
-                                    {{ form_widget(registrationForm.email) }}
-                                    <span class="error_email helper-text" data-error="Veuillez renseigner un email" aria-live="polite"></span>
-                                </div>
-                                <div class="input-field mb-4">
-                                    {{ form_widget(registrationForm.plainPassword.first) }}
-                                    <span class="error_password helper-text" data-error="Veuillez renseigner un mot de passe" aria-live="polite"></span>
-                                </div>
-                                <div class="input-field mb-4">
-                                    {{ form_widget(registrationForm.plainPassword.second) }}
-                                    <span class="error_confirm helper-text" data-error="Veuillez confirmer le mot de passe" aria-live="polite"></span>
-                                </div>
-                                <div class="input-field mb-4">
-                                    {{ form_widget(registrationForm.agreeTerms) }}
-                                </div>
-                                <button type="submit" class="btn capital col-12 mb-3">Créer mon compte</button>
-                            {{ form_end(registrationForm) }}
                             <div class="input-field mb-4 text-center">
                                 <a href="{{ path('app_login') }}">Je dispose d'un compte</a> | <a href="{{ path('app_forgot_password_request') }}">Mot de passe oublié</a>
                             </div>

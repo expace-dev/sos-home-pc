@@ -18,7 +18,10 @@
                     <div class="info-box mb-4">
                         <div class="container mt-3">
                             <h3 class="mb-4">Créer un client</h3>
-                            {{ include('admin/profil/_form.html.twig') }}
+                            {{ component('update_user_form', {
+                                user: user.id ? user: null,
+                                form: form
+                            }) }}
                         </div>
                     </div>
                 </div>

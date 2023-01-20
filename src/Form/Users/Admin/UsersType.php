@@ -5,6 +5,8 @@ namespace App\Form\Users\Admin;
 use App\Entity\Users;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -12,6 +14,9 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\NotNull;
+use Symfony\Component\Validator\Constraints\Regex;
 
 class UsersType extends AbstractType
 {
@@ -22,7 +27,11 @@ class UsersType extends AbstractType
                 'attr' => [
                     'placeholder' => 'Email'
                 ],
-                'label' => 'Email'
+                'label' => 'Email',
+                'constraints' => [
+                    new Email(['message' => 'Entrez un Email valide']),
+                    new NotNull(['message' => 'Entrez un Email'])
+                ]
             ])
             ->add('isVerified', CheckboxType::class, [
                 'label' => 'Activer le compte',
@@ -44,19 +53,64 @@ class UsersType extends AbstractType
                 'attr' => [
                     'placeholder' => 'Nom'
                 ],
-                'label' => 'Nom'
+                'label' => 'Nom',
+                'constraints' => [
+                    new NotNull([
+                        'message' => 'Entrez un Nom'
+                    ]),
+                    
+                    new Length([
+                        'min' => 3,
+                        'minMessage' => 'Trop court, minimum {{ limit }} caractères',
+                        'max' => 30,
+                        'maxMessage' => 'Trop long, maximum {{ limit }} caractères'
+
+                    ]),
+                    new Regex([
+                        'pattern' => '/^([a-zA-Z]+)$/',
+                        'message' => 'Uniquement des lettres'
+                    ])
+                ]
             ])
             ->add('prenom', TextType::class, [
                 'attr' => [
                     'placeholder' => 'Prénom'
                 ],
-                'label' => 'Prénom'
+                'label' => 'Prénom',
+                'constraints' => [
+                    new NotNull([
+                        'message' => 'Entrez un Prénom'
+                    ]),
+                    new Length([
+                        'min' => 3,
+                        'minMessage' => 'Trop court, minimum {{ limit }} caractères',
+                        'max' => 30,
+                        'maxMessage' => 'Trop long, maximum {{ limit }} caractères'
+
+                    ]),
+                    new Regex([
+                        'pattern' => '/^([a-zA-Z]+)$/',
+                        'message' => 'Uniquement des lettres'
+                    ])
+                ]
             ])
             ->add('adresse', TextType::class, [
                 'attr' => [
                     'placeholder' => 'Adresse'
                 ],
-                'label' => 'Adresse'
+                'label' => 'Adresse',
+                'constraints' => [
+                    new NotNull([
+                        'message' => 'Entrez ue adresse'
+                    ]),
+                    new Length([
+                        'min' => 10,
+                        'minMessage' => 'Trop court, minimum {{ limit }} caractères',
+                        'max' => 200,
+                        'maxMessage' => 'Trop long, maximum {{ limit }} caractères'
+
+                    ])
+                ]
             ])
             ->add('codePostal', HiddenType::class)
             ->add('ville', HiddenType::class)
@@ -65,13 +119,18 @@ class UsersType extends AbstractType
                 'attr' => [
                     'placeholder' => 'Société'
                 ],
-                'label' => 'Société'
+                'label' => 'Société',
+                'required' => false
             ])
             ->add('telephone', TelType::class, [
                 'attr' => [
                     'placeholder' => 'Téléphone'
                 ],
-                'label' => 'Téléphone'
+                'label' => 'Téléphone',
+                'constraints' => [
+                    new NotBlank(['message' => 'Entrez un téléphone'])
+                ]
+                
             ])
         ;
     }

@@ -1073,6 +1073,12 @@
   version "1.1.0"
   resolved "file:vendor/symfony/ux-chartjs/assets"
 
+"@symfony/ux-live-component@file:vendor/symfony/ux-live-component/assets":
+  version "1.0.0"
+  resolved "file:vendor/symfony/ux-live-component/assets"
+  dependencies:
+    morphdom "^2.6.1"
+
 "@symfony/webpack-encore@^4.0.0":
   version "4.2.0"
   resolved "https://registry.npmjs.org/@symfony/webpack-encore/-/webpack-encore-4.2.0.tgz"
@@ -3701,6 +3707,11 @@ mkdirp@^1.0.3, mkdirp@^1.0.4:
   version "1.0.4"
   resolved "https://registry.npmjs.org/mkdirp/-/mkdirp-1.0.4.tgz"
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
+
+morphdom@^2.6.1:
+  version "2.6.1"
+  resolved "https://registry.npmjs.org/morphdom/-/morphdom-2.6.1.tgz"
+  integrity sha512-Y8YRbAEP3eKykroIBWrjcfMw7mmwJfjhqdpSvoqinu8Y702nAwikpXcNFDiIkyvfCLxLM9Wu95RZqo4a9jFBaA==
 
 ms@^2.0.0, ms@2.1.2:
   version "2.1.2"

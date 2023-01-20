@@ -11,6 +11,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Validator\Constraints\NotNull;
 
 class ArticleType extends AbstractType
 {
@@ -21,7 +22,10 @@ class ArticleType extends AbstractType
                 'class' => Categories::class,
                 'choice_label' => 'name',
                 'placeholder' => 'Sélectionnez une catégorie',
-                'label' => 'Catégorie'
+                'label' => 'Catégorie',
+                'constraints' => [
+                    new NotNull(['message' => 'Choisissez une catégorie'])
+                ]
             ])
             ->add('title', TextType::class, [
                 'label' => 'Titre',
