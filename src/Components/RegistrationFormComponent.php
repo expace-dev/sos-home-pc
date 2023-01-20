@@ -20,11 +20,12 @@ class RegistrationFormComponent extends AbstractController {
     use DefaultActionTrait;
     use ComponentWithFormTrait;
 
+    
     #[LiveProp(fieldName: 'data')]
     public ?Users $user = null;
 
     protected function instantiateForm(): FormInterface
     {
-        return $this->createForm(UsersType::class, $this->user);
+        return $this->createForm(RegistrationFormType::class, $this->user);
     }
 }

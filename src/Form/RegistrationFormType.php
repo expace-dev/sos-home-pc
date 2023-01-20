@@ -34,40 +34,16 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('plainPassword')
-            ->add('plainPassword', RepeatedType::class, [
-                'type' => PasswordType::class,
-                'required' => true,
-                'first_options' => [
-                    'constraints' => [
-                        new NotBlank([
-                            'message' => 'Veuillez choisir un mot de passe'
-                        ]),
-                        new Length([
-                            'min' => 8,
-                            'minMessage' => 'Mot de passe trop court, minimum {{ limit }} caractères',
-                            'max' => 30,
-                            'maxMessage' => 'Mot de passe trop long, maximum {{ limit }} caractères'
-
-                        ])
-                    ],
-                    'required' => 'true',
-                    'label' => 'Mot de passe',
-                    'attr' => [
-                        'placeholder' => 'Mot de passe',
-                        'autocomplete' => false,
-                    ]
+            ->add('password', PasswordType::class, [
+                'constraints' => [
+                    new Length([
+                        'min' => 3,
+                        'minMessage' => 'au moins 3 caractères'
+                    ])
                 ],
-                'second_options' => [
-                    'required' => 'true',
-                    'label' => 'Confirmation',
-                    'attr' => [
-                        'autocomplete' => 'off',
-                        'placeholder' => 'Confirmation'
-                    ]
-                ],
-                'invalid_message' => 'Les mot de passe ne correspondent pas',
-                'mapped' => false
+                'attr' => [
+                    'autocomplete' => 'off',
+                ]
             ])
         ;
     }
