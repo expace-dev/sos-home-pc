@@ -13,6 +13,8 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Validator\Constraints\Regex;
 
 class RegistrationFormType extends AbstractType
 {
@@ -23,6 +25,12 @@ class RegistrationFormType extends AbstractType
                 'required' => true,
                 'attr' => [
                     'placeholder' => 'Email'
+                ]
+            ])
+            ->add('username', TextType::class, [
+                'required' => true,
+                'attr' => [
+                    'placeholder' => 'Pseudo'
                 ]
             ])
             ->add('agreeTerms', CheckboxType::class, [
@@ -36,11 +44,12 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('password', PasswordType::class, [
                 'constraints' => [
-                    new Length([
-                        'min' => 3,
-                        'minMessage' => 'au moins 3 caractères'
+                    new Regex([
+                        'pattern' => '"^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{12,}$"',
+                        'message' => 'Le mot de passe est invalide'
                     ])
                 ],
+                'help' => 'Minimum huit caractères, au moins une lettre, un chiffre et un caractère spécial',
                 'attr' => [
                     'autocomplete' => 'off',
                 ]
