@@ -42,7 +42,7 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('password', PasswordType::class, [
+            ->add('plainPassword', PasswordType::class, [
                 'constraints' => [
                     new Regex([
                         'pattern' => '"^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{12,}$"',
@@ -52,7 +52,11 @@ class RegistrationFormType extends AbstractType
                 'help' => 'Minimum huit caractères, au moins une lettre, un chiffre et un caractère spécial',
                 'attr' => [
                     'autocomplete' => 'off',
-                ]
+                ],
+                'attr' => [
+                    'placeholder' => 'Mot de passe'
+                ],
+                'mapped' => false
             ])
         ;
     }

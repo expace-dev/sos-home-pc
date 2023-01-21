@@ -18,7 +18,7 @@ class MailerService {
         $template = '', 
         $subject = '', 
         $content = '', 
-        $to = 'contact@sos-home-pc.fr'
+        $to = 'contact@sos-home-pc.eu'
         ):void {
 
         $email = (new TemplatedEmail())

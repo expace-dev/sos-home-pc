@@ -67,10 +67,7 @@ class ResetPasswordController extends AbstractController
 
         
 
-        $this->addFlash(
-            'primary', 
-            'Si un compte correspondant à cette adresse e-mail existe nous vous enverrons un lien pour réinitialiser votre mot de passe.'
-        );
+        
 
         return $this->redirectToRoute('app_login');
 
@@ -149,24 +146,30 @@ class ResetPasswordController extends AbstractController
 
         try {
             $resetToken = $this->resetPasswordHelper->generateResetToken($user);
+
+            $this->addFlash(
+                'primary', 
+                'Si un compte correspondant à cette adresse e-mail existe nous vous enverrons un lien pour réinitialiser votre mot de passe.'
+            );
+
         } catch (ResetPasswordExceptionInterface $e) {
             // If you want to tell the user why a reset email was not sent, uncomment
             // the lines below and change the redirect to 'app_forgot_password_request'.
             // Caution: This may reveal if a user is registered or not.
             //
-            // $this->addFlash('reset_password_error', sprintf(
-            //     '%s - %s',
-            //     $translator->trans(ResetPasswordExceptionInterface::MESSAGE_PROBLEM_HANDLE, [], 'ResetPasswordBundle'),
-            //     $translator->trans($e->getReason(), [], 'ResetPasswordBundle')
-            // ));
+             $this->addFlash('danger', sprintf(
+                 '%s - %s',
+                 $translator->trans(ResetPasswordExceptionInterface::MESSAGE_PROBLEM_HANDLE, [], 'ResetPasswordBundle'),
+                 $translator->trans($e->getReason(), [], 'ResetPasswordBundle')
+             ));
 
             return $this->redirectToRoute('app_check_email');
         }
 
         $email = (new TemplatedEmail())
-            ->from(new Address('noreply@sos-home-pc.fr', 'Sos Home PC'))
+            ->from(new Address('noreply@sos-home-pc.eu', 'Sos Home PC'))
             ->to($user->getEmail())
-            ->subject('Your password reset request')
+            ->subject('Mot de passe oublié')
             ->htmlTemplate('reset_password/email.html.twig')
             ->context([
                 'resetToken' => $resetToken,
