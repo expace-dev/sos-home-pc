@@ -88,6 +88,12 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'client', targetEntity: Paiements::class, orphanRemoval: true)]
     private Collection $paiements;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $facebookId = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $googleId = null;
+
     public function __construct()
     {
         $this->temoignages = new ArrayCollection();
@@ -489,6 +495,30 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
                 $paiement->setClient(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getFacebookId(): ?string
+    {
+        return $this->facebookId;
+    }
+
+    public function setFacebookId(?string $facebookId): self
+    {
+        $this->facebookId = $facebookId;
+
+        return $this;
+    }
+
+    public function getGoogleId(): ?string
+    {
+        return $this->googleId;
+    }
+
+    public function setGoogleId(?string $googleId): self
+    {
+        $this->googleId = $googleId;
 
         return $this;
     }
