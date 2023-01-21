@@ -100,7 +100,7 @@ class FacebookAuthenticator extends OAuth2Authenticator
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
         // change "app_homepage" to some route in your app
-        $targetUrl = $this->router->generate('home');
+        $targetUrl = $this->router->generate('app_home');
 
 
         return new RedirectResponse($targetUrl);
