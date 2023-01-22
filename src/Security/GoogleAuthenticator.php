@@ -67,7 +67,7 @@ class GoogleAuthenticator extends OAuth2Authenticator
 
                         $username = $googleUser->getFirstName() . $googleUser->getLastName();
 
-                        $user->setAvatar('/img/no_avatar.png');
+                        $user->setAvatar($googleUser->getPictureUrl());
                         $user->setUsername($username);
                         $user->setPassword($accessToken->getToken());
                         $user->setEmail($googleUser->getEmail());
@@ -75,6 +75,7 @@ class GoogleAuthenticator extends OAuth2Authenticator
                         $user->setNom($googleUser->getLastName());
                         $user->setPrenom($googleUser->getFirstName());
                         $user->setGoogleId($googleUser->getId());
+                        $user->setFullName($googleUser->getLastName. " " .$googleUser->getFirstName());
 
                     }
                     else {
@@ -99,7 +100,7 @@ class GoogleAuthenticator extends OAuth2Authenticator
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
         // change "app_homepage" to some route in your app
-        $targetUrl = $this->router->generate('home');
+        $targetUrl = $this->router->generate('app_home');
 
 
         return new RedirectResponse($targetUrl);
