@@ -5,6 +5,10 @@ namespace App\Form\Users\Client;
 use App\Entity\Users;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\Regex;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotNull;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
@@ -12,6 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class ProfilType extends AbstractType
 {
@@ -19,69 +24,13 @@ class ProfilType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class, [
-                'required' => true,
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Veuillez renseigner votre Email'
-                    ])
-                ],
                 'attr' => [
                     'placeholder' => 'Email'
-                ]
-
-            ])
-            ->add('nom', TextType::class, [
-                'required' => true,
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Veuillez renseigner votre Nom'
-                    ])
                 ],
-                'attr' => [
-                    'placeholder' => 'Nom'
-                ]
-            ])
-            ->add('prenom', TextType::class, [
-                'required' => true,
+                'label' => 'Email',
                 'constraints' => [
-                    new NotBlank([
-                        'message' => 'Veuillez renseigner votre prénom'
-                    ])
-                ],
-                'attr' => [
-                    'placeholder' => 'Prénom'
-                ]
-            ])
-            ->add('adresse', TextType::class, [
-                'required' => true,
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Veuillez renseigner votre adresse'
-                    ])
-                ],
-                'attr' => [
-                    'placeholder' => 'Adresse'
-                ]
-            ])
-            ->add('codePostal', HiddenType::class, [
-                'required' => true
-            ])
-            ->add('ville', HiddenType::class, [
-                'required' => true
-            ])
-            ->add('pays', HiddenType::class, [
-                'required' => true
-            ])
-            ->add('societe', TextType::class, [
-                'required' => false,
-                'attr' => [
-                    'placeholder' => 'Société'
-                ]
-            ])
-            ->add('telephone', TelType::class, [
-                'required' => false,
-                'attr' => [
-                    'placeholder' => 'Téléphone'
+                    new Email(['message' => 'Entrez un Email valide']),
+                    new NotNull(['message' => 'Entrez un Email'])
                 ]
             ])
             ->add('avatar', FileType::class, [
@@ -95,6 +44,89 @@ class ProfilType extends AbstractType
                 'data_class' => null,
                 'mapped' => false,
                 'required' => false,
+            ])
+            ->add('nom', TextType::class, [
+                'attr' => [
+                    'placeholder' => 'Nom'
+                ],
+                'label' => 'Nom',
+                'constraints' => [
+                    new NotNull([
+                        'message' => 'Entrez un Nom'
+                    ]),
+                    
+                    new Length([
+                        'min' => 3,
+                        'minMessage' => 'Trop court, minimum {{ limit }} caractères',
+                        'max' => 30,
+                        'maxMessage' => 'Trop long, maximum {{ limit }} caractères'
+
+                    ]),
+                    new Regex([
+                        'pattern' => '/^([a-zA-Z]+)$/',
+                        'message' => 'Uniquement des lettres'
+                    ])
+                ]
+            ])
+            ->add('prenom', TextType::class, [
+                'attr' => [
+                    'placeholder' => 'Prénom'
+                ],
+                'label' => 'Prénom',
+                'constraints' => [
+                    new NotNull([
+                        'message' => 'Entrez un Prénom'
+                    ]),
+                    new Length([
+                        'min' => 3,
+                        'minMessage' => 'Trop court, minimum {{ limit }} caractères',
+                        'max' => 30,
+                        'maxMessage' => 'Trop long, maximum {{ limit }} caractères'
+
+                    ]),
+                    new Regex([
+                        'pattern' => '/^([a-zA-Z]+)$/',
+                        'message' => 'Uniquement des lettres'
+                    ])
+                ]
+            ])
+            ->add('adresse', TextType::class, [
+                'attr' => [
+                    'placeholder' => 'Adresse'
+                ],
+                'label' => 'Adresse',
+                'constraints' => [
+                    new NotNull([
+                        'message' => 'Entrez ue adresse'
+                    ]),
+                    new Length([
+                        'min' => 10,
+                        'minMessage' => 'Trop court, minimum {{ limit }} caractères',
+                        'max' => 200,
+                        'maxMessage' => 'Trop long, maximum {{ limit }} caractères'
+
+                    ])
+                ]
+            ])
+            ->add('codePostal', HiddenType::class)
+            ->add('ville', HiddenType::class)
+            ->add('pays', HiddenType::class)
+            ->add('societe', TextType::class, [
+                'attr' => [
+                    'placeholder' => 'Société'
+                ],
+                'label' => 'Société',
+                'required' => false
+            ])
+            ->add('telephone', TelType::class, [
+                'attr' => [
+                    'placeholder' => 'Téléphone'
+                ],
+                'label' => 'Téléphone',
+                'constraints' => [
+                    new NotBlank(['message' => 'Entrez un téléphone'])
+                ]
+                
             ])
         ;
     }

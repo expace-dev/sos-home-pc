@@ -26,6 +26,15 @@ class BookingController extends AbstractController
         $booking = new Booking();
         $form = $this->createForm(BookingType::class, $booking);
 
+        $user = $this->getUser();
+
+        if (!$user->getNom() OR !$user->getPrenom() OR !$user->getAdresse() OR !$user->getCodePostal() OR !$user->getVille() OR !$user->getPays()) {
+                    
+            $this->addFlash('warning', 'Vous devez renseigner vos infos personnelles avant de prendre un rendez-vous');
+
+            return $this->redirectToRoute('app_profil_edit');
+        }
+
         $this->addFlash(
             'info', 
             '<h3><i class="fa-solid fa-circle-info"></i> Fonctionnement du calendrier</h3>
