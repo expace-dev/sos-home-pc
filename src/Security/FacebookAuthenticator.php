@@ -65,7 +65,6 @@ class FacebookAuthenticator extends OAuth2Authenticator
 
                         $username = $facebookUser->getFirstName() . $facebookUser->getLastName();
 
-                        dd($facebookUser);
 
                         $user->setAvatar($facebookUser->getPictureUrl());
 
