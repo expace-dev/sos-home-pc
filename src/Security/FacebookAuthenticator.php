@@ -76,7 +76,7 @@ class FacebookAuthenticator extends OAuth2Authenticator
                         $user->setNom($facebookUser->getLastName());
                         $user->setPrenom($facebookUser->getFirstName());
                         $user->setFacebookId($facebookUser->getId());
-                        $user->setFullName($facebookUser->getFirstName(). " " .$facebookUser->getLastName());
+                        $user->setFullName($facebookUser->getLastName(). " " .$facebookUser->getFirstName());
                         
                     }
                     else {

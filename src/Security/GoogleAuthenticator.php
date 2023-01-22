@@ -63,6 +63,8 @@ class GoogleAuthenticator extends OAuth2Authenticator
                     if (!$user) {
                         $user = new Users();
 
+                        dd($googleUser);
+
                         $username = $googleUser->getFirstName() . $googleUser->getLastName();
 
                         $user->setAvatar('/img/no_avatar.png');
