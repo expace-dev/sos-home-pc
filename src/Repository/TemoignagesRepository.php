@@ -39,6 +39,19 @@ class TemoignagesRepository extends ServiceEntityRepository
         }
     }
 
+    public function NombreTemoignageMensuel($year, $month) {
+
+        return $this->createQueryBuilder('p')
+                    ->select('COUNT(p)')
+                    ->Where('YEAR(p.createdAt) = :year')
+                    ->setParameter('year', $year)
+                    ->andWhere('MONTH(p.createdAt) = :month')
+                    ->setParameter('month', $month)
+                    ->getQuery()
+                    ->getSingleScalarResult(); 
+    
+    }
+
 //    /**
 //     * @return Temoignages[] Returns an array of Temoignages objects
 //     */

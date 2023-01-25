@@ -47,6 +47,20 @@ class FacturesRepository extends ServiceEntityRepository
                     ->getSingleScalarResult(); 
     }
 
+    function countNumberFacturesPerMonth($year, $month) {
+
+        return $this->createQueryBuilder('p')
+                    ->select('SUM(p.amount)')
+                    ->Where('YEAR(p.date) = :year')
+                    ->setParameter('year', $year)
+                    ->andWhere('MONTH(p.date) = :month')
+                    ->setParameter('month', $month)
+                    ->getQuery()
+                    ->getSingleScalarResult(); 
+    
+    }
+
+
 //    /**
 //     * @return Factures[] Returns an array of Factures objects
 //     */

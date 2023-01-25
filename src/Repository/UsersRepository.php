@@ -56,6 +56,19 @@ class UsersRepository extends ServiceEntityRepository implements PasswordUpgrade
         $this->save($user, true);
     }
 
+    public function nombreInscriptionMensuel($year, $month) {
+
+        return $this->createQueryBuilder('p')
+                    ->select('COUNT(p)')
+                    ->Where('YEAR(p.createdAt) = :year')
+                    ->setParameter('year', $year)
+                    ->andWhere('MONTH(p.createdAt) = :month')
+                    ->setParameter('month', $month)
+                    ->getQuery()
+                    ->getSingleScalarResult(); 
+    
+    }
+
 //    /**
 //     * @return Users[] Returns an array of Users objects
 //     */

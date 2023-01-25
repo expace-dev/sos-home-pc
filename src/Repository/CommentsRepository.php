@@ -39,6 +39,19 @@ class CommentsRepository extends ServiceEntityRepository
         }
     }
 
+    public function nombreCommentairesMensuel($year, $month) {
+
+        return $this->createQueryBuilder('p')
+                    ->select('COUNT(p)')
+                    ->Where('YEAR(p.createdAt) = :year')
+                    ->setParameter('year', $year)
+                    ->andWhere('MONTH(p.createdAt) = :month')
+                    ->setParameter('month', $month)
+                    ->getQuery()
+                    ->getSingleScalarResult(); 
+    
+    }
+
 //    /**
 //     * @return Comments[] Returns an array of Comments objects
 //     */

@@ -39,6 +39,19 @@ class PaiementsRepository extends ServiceEntityRepository
         }
     }
 
+    public function nombrePaiementMensuel($year, $month) {
+
+        return $this->createQueryBuilder('p')
+                    ->select('SUM(p.montant)')
+                    ->Where('YEAR(p.date) = :year')
+                    ->setParameter('year', $year)
+                    ->andWhere('MONTH(p.date) = :month')
+                    ->setParameter('month', $month)
+                    ->getQuery()
+                    ->getSingleScalarResult(); 
+    
+    }
+
 //    /**
 //     * @return Paiements[] Returns an array of Paiements objects
 //     */

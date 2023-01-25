@@ -5,7 +5,11 @@ namespace App\DataFixtures;
 use Faker\Factory;
 use App\Entity\Users;
 use App\Entity\Articles;
+use App\Entity\Booking;
 use App\Entity\Categories;
+use App\Entity\Comments;
+use App\Entity\Factures;
+use App\Entity\Paiements;
 use App\Entity\Temoignages;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -42,6 +46,7 @@ class AppFixtures extends Fixture
                  ->setPays($faker->country)
                  ->setSociete($faker->company)
                  ->setTelephone($faker->phoneNumber)
+                 ->setCreatedAt($faker->dateTime())
                  ->setUsername($faker->userName());
 
         $manager->persist($adminUser);
@@ -51,7 +56,7 @@ class AppFixtures extends Fixture
         $users = [];
         $genres = ['male', 'female'];
 
-        for ($i=1; $i<=10; $i++) {
+        for ($i=1; $i<=500; $i++) {
 
             $user = new Users;
 
@@ -74,6 +79,7 @@ class AppFixtures extends Fixture
                  ->setPays($faker->country)
                  ->setSociete($faker->company)
                  ->setTelephone($faker->phoneNumber)
+                 ->setCreatedAt($faker->dateTime())
                  ->setUsername($faker->userName());
 
             $manager->persist($user);
@@ -86,7 +92,7 @@ class AppFixtures extends Fixture
         $temoignages = [];
         $note = ['0', '0.5', '1', '1.5', '2', '2.5', '3', '3.5', '4', '4.5', '5'];
 
-        for ($i=1; $i<=5; $i++) {
+        for ($i=1; $i<=500; $i++) {
 
             $temoignage = new Temoignages();
 
@@ -116,6 +122,60 @@ class AppFixtures extends Fixture
 
         }
 
+        $interventions = [];
+
+        for ($i=1; $i<=500; $i++) {
+
+            $intervention = new Booking;
+
+            $debut = $faker->dateTime('now');
+            $fin = $debut->modify('+ 4 hour');
+
+            $intervention->setUser($faker->randomElement($users))
+                         ->setBeginAt($debut)
+                         ->setEndAt($fin)
+                         ->setTitle('Dépannage a distance')
+                         ->setDescription('Une message de teste');
+
+            $manager->persist($intervention);
+            $interventions[] = $intervention;
+
+
+        }
+
+        $factures = [];
+
+        for ($i=1; $i<=500; $i++) {
+
+            $facture = new Factures;
+
+
+            $facture->setClient($faker->randomElement($users))
+                    ->setStatut('en_attente')
+                    ->setUrl('http://www.google.fr')
+                    ->setCreatedAt('123456789')
+                    ->setTitle('Dépannage a distance')
+                    ->setDate($faker->dateTime('now'))
+                    ->setAmount($faker->randomNumber(5, false))
+                    ->setSlug('mafacture')
+                    ->setContent($faker->text('255'));
+
+            $manager->persist($facture);
+            $factures[] = $facture;
+
+            $paiement = new Paiements;
+
+            $paiement->setFacture($facture)
+                    ->setMontant($faker->randomNumber(5, false))
+                    ->setStatut('complete')
+                    ->setDate($faker->dateTime('now'))
+                    ->setClient($faker->randomElement($users));
+
+            $manager->persist($paiement);
+
+        }
+
+        
         $articles = [];
         for ($i=1; $i<=500; $i++) {
 
@@ -130,6 +190,21 @@ class AppFixtures extends Fixture
 
             $manager->persist($article);
             $articles[] = $article;
+        }
+
+        $commentaires = [];
+        for ($i=1; $i<=500; $i++) {
+
+            $commentaire = new Comments();
+
+            $commentaire->setArticles($faker->randomElement($articles))
+                        ->setAuteur($faker->randomElement($users))
+                        ->setContent($faker->paragraph(1))
+                        ->setActive(true)
+                        ->setCreatedAt($faker->dateTime('now'));
+
+            $manager->persist($commentaire);
+            $commentaires[] = $commentaire;
         }
         // $product = new Product();
         // $manager->persist($product);

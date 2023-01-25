@@ -39,6 +39,19 @@ class CategoriesRepository extends ServiceEntityRepository
         }
     }
 
+    public function nombreCommentairesMensuel($year, $month) {
+
+        return $this->createQueryBuilder('p')
+                    ->select('COUNT(p)')
+                    ->Where('YEAR(p.date) = :year')
+                    ->setParameter('year', $year)
+                    ->andWhere('MONTH(p.date) = :month')
+                    ->setParameter('month', $month)
+                    ->getQuery()
+                    ->getSingleScalarResult(); 
+    
+    }
+
 //    /**
 //     * @return Categories[] Returns an array of Categories objects
 //     */

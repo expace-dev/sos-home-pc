@@ -139,6 +139,7 @@ class BookingController extends AbstractController
 
         return $this->render('booking/admin/calendar.html.twig', [
             'form' => $form,
+            'booking' => $booking
         ]);
     }
 
@@ -161,6 +162,7 @@ class BookingController extends AbstractController
 
         return $this->render('booking/admin/calendar.html.twig', [
             'form' => $form,
+            'booking' => $booking
         ]);
     }
 
@@ -184,6 +186,7 @@ class BookingController extends AbstractController
 
         return $this->render('booking/admin/calendar.html.twig', [
             'form' => $form,
+            'booking' => $booking
         ]);
     }
 

@@ -39,6 +39,19 @@ class BookingRepository extends ServiceEntityRepository
         }
     }
 
+    public function nombreInterventionMensuel($year, $month) {
+
+        return $this->createQueryBuilder('p')
+                    ->select('COUNT(p)')
+                    ->Where('YEAR(p.beginAt) = :year')
+                    ->setParameter('year', $year)
+                    ->andWhere('MONTH(p.beginAt) = :month')
+                    ->setParameter('month', $month)
+                    ->getQuery()
+                    ->getSingleScalarResult(); 
+    
+    }
+
     
 
 
