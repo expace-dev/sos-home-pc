@@ -44,10 +44,6 @@
                                             <a class="btn btn-remove" href="{{ path('app_admin_blog_delete', {'id': article.id}) }}"><i class="fas fas fa-trash pr-3"></i></a>
                                         </td>
                                     </tr>
-                                {% else %}
-                                    <tr>
-                                        <td colspan="7">no records found</td>
-                                    </tr>
                                 {% endfor %}
                                 </tbody>
                             </table>

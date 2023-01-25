@@ -22,10 +22,11 @@ class FacturesType extends AbstractType
                 'class' => Users::class,
                 'choice_label' => 'fullName',
                 'label' => 'Client',
-                'placeholder' => 'Sélectionnez un client',
+                'placeholder' => 'Choisissez un client',
                 'constraints' => [
-                    new NotBlank(['message' => 'Sélectionnez un client'])
-                ]
+                    new NotBlank(['message' => 'Choisissez un client'])
+                ],
+                'autocomplete' => true,
             ])
             ->add('title', ChoiceType::class, [
                 'choices' => [

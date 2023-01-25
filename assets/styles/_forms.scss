@@ -42,3 +42,11 @@ textarea.form-control {
     border-color: #e71a33;
   }
 }
+.ts-wrapper.single .ts-control, .ts-wrapper.single .ts-control input {
+  cursor: pointer;
+  background: #fff !important;
+  border: 0px !important;
+  color: #000 !important;
+  padding: 1px !important;
+  font-size: 14px;
+}

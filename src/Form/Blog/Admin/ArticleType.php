@@ -35,7 +35,7 @@ class ArticleType extends AbstractType
             ])
             ->add('content', CKEditorType::class, [
                 'label' => 'Contenu',
-                'config_name' => 'default',
+                'config_name' => 'main_config',
             ])
             ->add('img', FileType::class, [
                 'attr' => [

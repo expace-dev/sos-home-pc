@@ -47,7 +47,8 @@ class AppFixtures extends Fixture
                  ->setSociete($faker->company)
                  ->setTelephone($faker->phoneNumber)
                  ->setCreatedAt($faker->dateTime())
-                 ->setUsername($faker->userName());
+                 ->setUsername($faker->userName())
+                 ->setFullName('Husson Frederic');
 
         $manager->persist($adminUser);
 
@@ -67,12 +68,15 @@ class AppFixtures extends Fixture
 
             $hash = $this->encoder->hashPassword($user, 'password');
 
+            $nom = $faker->lastName($genre);
+            $prenom = $faker->firstName($genre);
+
             $user->setEmail($faker->email)
                  ->setPassword($hash)
                  ->setIsVerified(1)
                  ->setAvatar($picture)
-                 ->setNom($faker->lastName($genre))
-                 ->setPrenom($faker->firstName($genre))
+                 ->setNom($nom)
+                 ->setPrenom($prenom)
                  ->setAdresse($faker->streetAddress)
                  ->setCodePostal($faker->postcode)
                  ->setVille($faker->city)
@@ -80,7 +84,8 @@ class AppFixtures extends Fixture
                  ->setSociete($faker->company)
                  ->setTelephone($faker->phoneNumber)
                  ->setCreatedAt($faker->dateTime())
-                 ->setUsername($faker->userName());
+                 ->setUsername($faker->userName())
+                 ->setFullName($nom. ' '. $prenom);
 
             $manager->persist($user);
             $users[] = $user;        
