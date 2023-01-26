@@ -7,8 +7,8 @@ use App\Repository\CategoriesRepository;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
-#[AsTwigComponent('blog_post_recent')]
-class BlogPostRecentComponent {
+#[AsTwigComponent('recent_blogpost')]
+class RecentBlogpostComponent {
 
     private $articlesRepository;
 

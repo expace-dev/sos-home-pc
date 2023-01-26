@@ -13,7 +13,7 @@
     
         <ul>
             {% if is_granted("ROLE_ADMIN") %}
-            <li><a href="{{ path('app_admin_dashboard') }}">Statistiques</a></li>
+            <li><a href="{{ path('app_admin_dashboard') }}">Dashboard</a></li>
             <li class="dropdown"><a href="#"><span>Activité</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
                     <li><a href="{{ path('app_admin_booking_calendar') }}">Planning</a></li>

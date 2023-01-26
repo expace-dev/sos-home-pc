@@ -1,5 +1,5 @@
 {% for article in this.allBlogpost.data %}
-    {{ component('blog_post', {'id': article.id}) }}
+    {{ component('blogpost', {'id': article.id}) }}
 {% endfor %}
 {% set pages = this.allBlogpost.pages %}
 {% set currentPage = this.allBlogpost.page %}

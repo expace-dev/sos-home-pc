@@ -4,7 +4,6 @@ namespace App\Form\Compta\Admin;
 
 use App\Entity\Users;
 use App\Entity\Factures;
-use App\Form\UserAutocompleteField;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -19,10 +18,15 @@ class FacturesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('client', UserAutocompleteField::class, [
+            ->add('client', EntityType::class, [
+                'class' => Users::class,
+                'choice_label' => 'fullName',
+                'label' => 'Client',
+                'placeholder' => 'Choisissez un client',
                 'constraints' => [
                     new NotBlank(['message' => 'Choisissez un client'])
                 ],
+                'autocomplete' => true,
             ])
             ->add('title', ChoiceType::class, [
                 'choices' => [
