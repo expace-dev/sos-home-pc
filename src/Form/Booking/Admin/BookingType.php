@@ -32,7 +32,7 @@ class BookingType extends AbstractType
                     'Dépannage à distance' => 'Dépannage à distance',
                     'Dépannage à domicile' => 'Dépannage à domicile'
                 ],
-                'placeholder' => 'Choisir un client',
+                'placeholder' => 'Sélectionnez le type d\'intervention',
                 'constraints' => [
                     new NotNull(['message' => 'Choisissez le type d\'intervention'])
                 ]
