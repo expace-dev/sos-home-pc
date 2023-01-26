@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent('blog_post_all')]
-class BlogpostAllComponent {
+class BlogPostAllComponent {
 
     private $articlesRepository;
     protected $requestStack;

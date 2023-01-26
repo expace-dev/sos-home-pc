@@ -7,8 +7,8 @@ use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 
-#[AsLiveComponent('search_blog')]
-class SearchBlogComponent {
+#[AsLiveComponent('blog_search')]
+class BlogSearchComponent {
 
     use DefaultActionTrait;
 

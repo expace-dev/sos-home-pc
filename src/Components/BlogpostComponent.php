@@ -6,8 +6,8 @@ use App\Entity\Articles;
 use App\Repository\ArticlesRepository;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
-#[AsTwigComponent('blogpost')]
-class BlogpostComponent {
+#[AsTwigComponent('blog_post')]
+class BlogPostComponent {
     
     public int $id;
 

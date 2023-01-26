@@ -7,7 +7,7 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[AsTwigComponent('blog_comment')]
-class BlogcommentComponent extends AbstractController {
+class BlogCommentComponent extends AbstractController {
     
     public int $id;
 

@@ -6,8 +6,8 @@ use App\Repository\CategoriesRepository;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
-#[AsTwigComponent('categories_blog')]
-class CategoriesBlogComponent {
+#[AsTwigComponent('blog_categories')]
+class BlogCategoriesComponent {
 
     private $categoriesRepository;
     protected $requestStack;
