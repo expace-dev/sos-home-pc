@@ -69,7 +69,7 @@ class BlogController extends AbstractController
                 );
 
                 // Ont sauvegarde l'avatar en BDD
-                $article->setimg($nom);
+                $article->setimg('https://www.sos-home-pc.eu/images/blog/'. $nom);
                 $articlesRepository->save($article, true);
             }
             

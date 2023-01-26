@@ -8,15 +8,15 @@
   </h2>
   <div class="entry-meta">
     <ul>
-      <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="{{ path('app_blog_show', {'slug': article.slug}) }}">{{ article.auteur.username }}</a></li>
-      <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="{{ path('app_blog_show', {'slug': article.slug}) }}"><time datetime="2020-01-01">{{ article.date|date("j F Y") }}</time></a></li>
-      <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="{{ path('app_blog_show', {'slug': article.slug}) }}">{{ article.comments|length }} Comments</a></li>
+      <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="{{ path('app_blog_show', {'id': article.id}) }}">{{ article.auteur.username }}</a></li>
+      <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="{{ path('app_blog_show', {'id': article.id}) }}"><time datetime="2020-01-01">{{ article.date|date("j F Y") }}</time></a></li>
+      <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="{{ path('app_blog_show', {'id': article.id}) }}">{{ article.comments|length }} Comments</a></li>
     </ul>
   </div>
   <div class="entry-content">
     <p>{{ article.content|raw }}</p>
     <div class="read-more">
-      <a href="{{ path('app_blog_show', {'slug': article.slug}) }}">Lire la suite</a>
+      <a href="{{ path('app_blog_show', {'id': article.id}) }}">Lire la suite</a>
     </div>
   </div>
 </article>

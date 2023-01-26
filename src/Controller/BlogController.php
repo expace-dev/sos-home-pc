@@ -6,7 +6,6 @@ use DateTime;
 use App\Entity\Articles;
 use App\Entity\Comments;
 use App\Form\Blog\Client\CommentType;
-use App\Form\Blog\Client\ChercheType;
 use App\Repository\ArticlesRepository;
 use App\Repository\CategoriesRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -19,21 +18,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class BlogController extends AbstractController
 {
 
-    #[Route('/test', name: 'app_blog_test', methods: ['GET', 'POST'])]
-    public function test(Request $request, ArticlesRepository $articlesRepository, CategoriesRepository $categoriesRepository): Response
-    {
-        return $this->render('blog/client/test.html.twig', [
-        ]);
-
-    }
-
-    #[Route('/cherche', name: 'app_blog_cherche', methods: ['GET', 'POST'])]
-    public function cherche(Request $request, ArticlesRepository $articlesRepository, CategoriesRepository $categoriesRepository): Response
-    {
-        return $this->render('blog/client/cherche.html.twig', [
-        ]);
-
-    }
 
     
     /**
@@ -45,80 +29,30 @@ class BlogController extends AbstractController
      * @return Response
      */
     #[Route('/', name: 'app_blog_index', methods: ['GET', 'POST'])]
-    public function index(Request $request, ArticlesRepository $articlesRepository, CategoriesRepository $categoriesRepository): Response
+    public function index(): Response
     {
-        
-
-
-        return $this->render('blog/client/index.html.twig', [
-            
-        ]);
+        return $this->render('blog/client/index.html.twig');
     }
 
     /**
      * Permet de lister les articles d'une catégorie
      */
     #[Route('/{slug}', name: 'app_blog_categories', methods: ['GET', 'POST'])]
-    public function categoriesAnnonce(Request $request, $slug, ArticlesRepository $articlesRepository, CategoriesRepository $categoriesRepository): Response
+    public function categoriesAnnonce(): Response
     {
-        $formCherche = $this->createForm(ChercheType::class);
-        $cherche = $formCherche->handleRequest($request);
-
-        $page = $request->query->getInt('page', 1);
-
-        $donnees = $articlesRepository->findArticles($page, 5);
-
-        if($formCherche->isSubmitted() && $formCherche->isValid()) {
-
-            $page = $request->query->getInt('page', 1);
-            $articles = $articlesRepository->cherche($cherche->get('mots')->getData(), $page, 5);
-
-            $formCherche = $this->createForm(ChercheType::class);
-
-            return $this->render('blog/client/index.html.twig', [
-                'articles' => $articles,
-                'categories' => $categoriesRepository->findAll(),
-                'formCherche' => $formCherche,
-                'derniersArticles' => $articlesRepository->findBy([], ['date' => 'DESC'], 5)
-            ]);
-
-        }
-        //$categorie = 
-        //dd($categoriesRepository->findOneBy(['slug' => $slug])->getArticles());
-        return $this->render('blog/client/index.html.twig', [
-            'articles' => $donnees,
-            'categories' => $categoriesRepository->findAll(),
-            'formCherche' => $formCherche,
-            'derniersArticles' => $articlesRepository->findBy([], ['date' => 'DESC'], 5)
-        ]);
+        
+        return $this->render('blog/client/index.html.twig');
     }
 
 
     /**
      * Permet d'afficher un article en particulier
      */
-    #[Route('/details/{slug}', name: 'app_blog_show', methods: ['GET', 'POST'])]
-    public function show($slug, CategoriesRepository $categoriesRepository, ArticlesRepository $articlesRepository, Request $request, Articles $article, EntityManagerInterface $manager): Response
+    #[Route('/details/{id}', name: 'app_blog_show', methods: ['GET', 'POST'])]
+    public function show($id, CategoriesRepository $categoriesRepository, ArticlesRepository $articlesRepository, Request $request, Articles $article, EntityManagerInterface $manager): Response
     {
 
-        $formCherche = $this->createForm(ChercheType::class);
-        $cherche = $formCherche->handleRequest($request);
-
-        if($formCherche->isSubmitted() && $formCherche->isValid()) {
-
-            $page = $request->query->getInt('page', 1);
-            $articles = $articlesRepository->cherche($cherche->get('mots')->getData(), $page, 5);
-
-            $formCherche = $this->createForm(ChercheArticlesType::class);
-
-            return $this->render('blog/client/index.html.twig', [
-                'articles' => $articles,
-                'categories' => $categoriesRepository->findAll(),
-                'formCherche' => $formCherche,
-                'derniersArticles' => $articlesRepository->findBy([], ['date' => 'DESC'], 5)
-            ]);
-
-        }
+        
 
         $commentaires = new Comments();
         $form = $this->createForm(CommentType::class, $commentaires);
@@ -154,10 +88,7 @@ class BlogController extends AbstractController
 
         return $this->render('blog/client/show.html.twig', [
             'article' => $article,
-            'categories' => $categoriesRepository->findAll(),
             'form' => $form,
-            'formCherche' => $formCherche,
-            'derniersArticles' => $articlesRepository->findBy([], ['date' => 'DESC'], 5)
         ]);
     }
 
