@@ -507,4 +507,10 @@
     color: #ededed;
     font-size: 14px;
   }
+  .truncate {
+    width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
   

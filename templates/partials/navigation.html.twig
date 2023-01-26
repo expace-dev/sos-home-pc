@@ -14,14 +14,27 @@
         <ul>
             {% if is_granted("ROLE_ADMIN") %}
             <li><a href="{{ path('app_admin_dashboard') }}">Dashboard</a></li>
-            <li><a href="{{ path('app_admin_booking_calendar') }}">Planning</a></li>
-            <li><a href="{{ path('app_admin_booking_index') }}">Interventions</a></li>
+            <li class="dropdown"><a href="#"><span>Activité</span> <i class="bi bi-chevron-right"></i></a>
+                <ul>
+                    <li><a href="{{ path('app_admin_booking_calendar') }}">Planning</a></li>
+                    <li><a href="{{ path('app_admin_booking_index') }}">Interventions</a></li>      
+                </ul>
+            </li>
             <li><a href="{{ path('app_admin_users_index') }}">Clients</a></li>
-            <li><a href="{{ path('app_admin_blog_index') }}">Articles</a></li>
-            <li><a href="{{ path('app_admin_categories_blog_index') }}">Catégories</a></li>
-            <li><a href="{{ path('app_admin_comments_blog_index') }}">Commentaires</a></li>
-            <li><a href="{{ path('app_admin_factures_index') }}">Factures</a></li>
-            <li><a href="{{ path('app_admin_paiement_index') }}">paiements</a></li>
+            <li class="dropdown"><a href="#"><span>Gestion du blog</span> <i class="bi bi-chevron-right"></i></a>
+                <ul>
+                    <li><a href="{{ path('app_admin_blog_index') }}">Articles</a></li>
+                    <li><a href="{{ path('app_admin_categories_blog_index') }}">Catégories</a></li>
+                    <li><a href="{{ path('app_admin_comments_blog_index') }}">Commentaires</a></li>  
+                </ul>
+            </li>
+            <li class="dropdown"><a href="#"><span>Comptabilité</span> <i class="bi bi-chevron-right"></i></a>
+                <ul>
+                    <li><a href="{{ path('app_admin_factures_index') }}">Factures</a></li>
+                    <li><a href="{{ path('app_admin_paiement_index') }}">paiements</a></li>  
+                </ul>
+            </li>
+            <li><a href="{{ path('app_profil_edit') }}">Modifier mon profil</a></li>
             <li><a href="{{ path('app_logout') }}">Déconnection</a></li>
             {% else %}
             <li><a href="{{ path('app_booking_calendar') }}">Demande d'intervention</a></li>

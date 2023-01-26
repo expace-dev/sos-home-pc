@@ -20,7 +20,7 @@
                             <a href="{{ path('app_admin_comments_blog_delete', {'id': comment.id}) }}" class="reply btn-remove"><i class="bi bi-trash-fill"></i> Supprimmer</a>
                             {% endif %}
                         </h5>
-                        <time datetime="{{ comment.createdAt|date("Y-m-d") }}">{{ comment.createdAt|date("j F Y") }}</time>
+                        <time datetime="{{ comment.createdAt|format_datetime(locale='fr',pattern="dd MMMM YYYY") }}">{{ comment.createdAt|format_datetime(locale='fr',pattern="dd MMMM YYYY") }}</time>
                         <p>{{ comment.content }}</p>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
                                     <a href="{{ path('app_admin_comments_blog_delete', {'id': comment.id}) }}" class="reply btn-remove"><i class="bi bi-trash-fill"></i> Supprimmer</a>
                                     {% endif %}
                                 </h5>
-                                <time datetime="{{ reply.createdAt|date("Y-m-d") }}">{{ reply.createdAt|date("j F Y") }}</time>
+                                <time datetime="{{ reply.createdAt|format_datetime(locale='fr',pattern="dd MMMM YYYY") }}">{{ reply.createdAt|format_datetime(locale='fr',pattern="dd MMMM YYYY") }}</time>
                                 <p>{{ reply.content }}</p>
                             </div>
                         </div>
