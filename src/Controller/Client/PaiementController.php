@@ -29,13 +29,13 @@ class PaiementController extends AbstractController
         ]);
     }
 
-    #[Route('/webhook', name: 'app_paiement_webhook', methods:['POST', 'GET'])]
+    #[Route('/webhook', name: 'app_paiement_webhook', methods:['POST'])]
     public function webhook(Request $request, FacturesRepository $facturesRepository, PaiementsRepository $paiementsRepository)
     {
 
 
         // This is your Stripe CLI webhook secret for testing your endpoint locally.
-        $endpoint_secret = 'whsec_a665c62b8bd86288b8f925483780f2b8cb9b54831951e8086d1016792cc7d287';
+        $endpoint_secret = 'sk_test_AEgwPLi1oCP4VrRgPjUoiUWL00bWphQrlb';
 
         $payload = @file_get_contents('php://input');
         $sig_header = $_SERVER['HTTP_STRIPE_SIGNATURE'];
