@@ -10,7 +10,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
-#[Route('/factures')]
+#[Route('/panel/factures')]
 class FacturesController extends AbstractController
 {
     #[Route('/', name: 'app_factures_index', methods: ['GET'])]
