@@ -15,7 +15,6 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(TemoignagesRepository $temoignagesRepository, Request $request, MailerService $mailer): Response
     {
-
         $form = $this->createForm(ContactType::class);
         $contact = $form->handleRequest($request);
         $url = $this->generateUrl('app_home', [

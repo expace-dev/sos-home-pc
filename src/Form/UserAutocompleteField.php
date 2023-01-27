@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Users;
 use App\Repository\UsersRepository;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Validator\Constraints\NotNull;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\Autocomplete\Form\AsEntityAutocompleteField;
 use Symfony\UX\Autocomplete\Form\ParentEntityAutocompleteType;
@@ -18,6 +19,10 @@ class UserAutocompleteField extends AbstractType
             'class' => Users::class,
             'placeholder' => 'Choisissez un client',
             'choice_label' => 'fullName',
+            'constraints' => [
+                new NotNull(['message' => 'Veuillez sélectionner un client'])
+            ],
+            'label' => 'Client',
 
             'query_builder' => function(UsersRepository $usersRepository) {
                 return $usersRepository->createQueryBuilder('users');
