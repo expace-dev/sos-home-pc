@@ -153,7 +153,7 @@
                             })
                             .then(function (response) {
 
-                                window.location.href = "/client/booking/new/confirmation";
+                                window.location.href = "/panel/booking/new/confirmation";
                                 
                             })
                             .catch(function (error) {
@@ -162,10 +162,10 @@
 
                                 if(code == 403) {
 
-                                    window.location.href = "/client/booking/new/erreur/fermeture";
+                                    window.location.href = "/panel/booking/new/erreur/fermeture";
                                 }
                                 else {
-                                    window.location.href = "/client/booking/new/erreur";
+                                    window.location.href = "/panel/booking/new/erreur";
                                 }
 
                                 //

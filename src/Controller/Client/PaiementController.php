@@ -35,7 +35,7 @@ class PaiementController extends AbstractController
 
 
         // This is your Stripe CLI webhook secret for testing your endpoint locally.
-        //$endpoint_secret = 'whsec_a665c62b8bd86288b8f925483780f2b8cb9b54831951e8086d1016792cc7d287';
+        $endpoint_secret = 'whsec_a665c62b8bd86288b8f925483780f2b8cb9b54831951e8086d1016792cc7d287';
 
         $payload = @file_get_contents('php://input');
         $sig_header = $_SERVER['HTTP_STRIPE_SIGNATURE'];
