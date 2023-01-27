@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Form\Users\Client;
+namespace App\Form\Users\Clients;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
