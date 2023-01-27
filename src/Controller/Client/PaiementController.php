@@ -132,8 +132,8 @@ class PaiementController extends AbstractController
                 ]
             ]],
             'mode' => 'payment',
-            'success_url' => 'https://www.sos-home-pc.eu/paiement/success',
-            'cancel_url' => 'https://www.sos-home-pc.eu/paiement/error',
+            'success_url' => 'https://www.sos-home-pc.eu/panel/paiement/success',
+            'cancel_url' => 'https://www.sos-home-pc.eu/panel/paiement/error',
         ]);
 
         $facture->setPaymentIntent($checkout_session->payment_intent);
