@@ -34,7 +34,12 @@
                     <li><a href="{{ path('app_admin_paiement_index') }}">paiements</a></li>  
                 </ul>
             </li>
-            <li><a href="{{ path('app_profil_edit') }}">Modifier mon profil</a></li>
+            <li class="dropdown"><a href="#"><span>Mon profil</span> <i class="bi bi-chevron-right"></i></a>
+                <ul>
+                    <li><a href="{{ path('app_profil_edit') }}">Modifier mon profil</a></li>
+                    <li><a href="{{ path('app_profil_update_password') }}">Modifier le mot de passe</a></li>
+                </ul>
+            </li>
             <li><a href="{{ path('app_logout') }}">Déconnection</a></li>
             {% else %}
             <li><a href="{{ path('app_booking_calendar') }}">Demande d'intervention</a></li>
