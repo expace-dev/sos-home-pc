@@ -23,6 +23,11 @@ services:
     App\EventSubscriber\CalendarSubscriber:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    App\Services\StripeService:
+        arguments:
+            $secretKey: '%env(STRIPE_SECRET_KEY)%'
+            $endpointAbonn: '%env(ENDPOINT_ABONN)%'
+            $urlServer: '%env(URL_SERVER)%'
 doctrine:
     orm:
         dql:

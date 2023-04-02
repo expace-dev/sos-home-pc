@@ -26,7 +26,7 @@ class RegistrationController extends AbstractController
         $this->emailVerifier = $emailVerifier;
     }
 
-    #[Route('/register', name: 'app_register')]
+    #[Route('/inscription', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
         $user = new Users();
@@ -55,6 +55,8 @@ class RegistrationController extends AbstractController
             );
             // do anything else you need here, like send an email
 
+            $this->addFlash('success', '<span class="me-2 fa fa-circle-check fa-1x"></span>Nous venons de vous envoyer un Email afin d\'activer votre compte');
+
             return $this->redirectToRoute('app_login');
         }
 
@@ -64,7 +66,7 @@ class RegistrationController extends AbstractController
         ]);
     }
 
-    #[Route('/verify/email', name: 'app_verify_email')]
+    #[Route('/verifier/email', name: 'app_verify_email')]
     public function verifyUserEmail(Request $request, TranslatorInterface $translator, UsersRepository $usersRepository): Response
     {
         $id = $request->get('id');
@@ -83,13 +85,13 @@ class RegistrationController extends AbstractController
         try {
             $this->emailVerifier->handleEmailConfirmation($request, $user);
         } catch (VerifyEmailExceptionInterface $exception) {
-            $this->addFlash('verify_email_error', $translator->trans($exception->getReason(), [], 'VerifyEmailBundle'));
+            $this->addFlash('danger', '<span class="me-2 fa fa-circle-exclamation fa-1x"></span>' . $translator->trans($exception->getReason(), [], 'VerifyEmailBundle'));
 
             return $this->redirectToRoute('app_register');
         }
 
         // @TODO Change the redirect on success and handle or remove the flash message in your templates
-        $this->addFlash('success', 'Votre compte est bien activé');
+        $this->addFlash('success', '<span class="me-2 fa fa-circle-check fa-1x"></span>Votre compte est bien activé, vous pouvez vous connecter');
 
         return $this->redirectToRoute('app_login');
     }

@@ -1,9 +1,23 @@
 
 <div {{ attributes }}>
-    {{ form_start(form) }}
-        {{ form_row(form.email) }}
-        {{ form_row(form.password) }}
-        {{ form_row(form.agreeTerms) }}
-        <button>Save</button>
+    {{ form_start(form, {attr: {id: 'register'}}) }}
+        <div class="input-field mb-4">
+            {{ form_widget(form.email) }}
+            {{ form_errors(form.email) }}
+        </div>
+        <div class="input-field mb-4">
+            {{ form_widget(form.username) }}
+            {{ form_errors(form.username) }}
+        </div>
+        <div class="input-field mb-4">
+            {{ form_widget(form.plainPassword) }}
+            {{ form_help(form.plainPassword) }}
+            {{ form_errors(form.plainPassword) }}
+        </div>
+        <div class="input-field mb-4">
+            {{ form_widget(form.agreeTerms) }}
+            {{ form_errors(form.agreeTerms) }}
+        </div>
+        <button type="submit" class="btn-primary col-12 mb-3">Créer mon compte</button>
     {{ form_end(form) }}
 </div>

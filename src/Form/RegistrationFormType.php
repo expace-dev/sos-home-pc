@@ -5,16 +5,19 @@ namespace App\Form;
 use App\Entity\Users;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotNull;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Validator\Constraints\Regex;
+use Symfony\Component\Validator\Constraints\NotCompromisedPassword;
 
 class RegistrationFormType extends AbstractType
 {
@@ -25,12 +28,29 @@ class RegistrationFormType extends AbstractType
                 'required' => true,
                 'attr' => [
                     'placeholder' => 'Email'
+                ],
+                'constraints' => [
+                    new NotNull(['message' => 'Veuillez renseigner un E-mail valide']),
+                    new Email(['message' => 'Veuillez renseigner un E-mail valide'])
                 ]
             ])
             ->add('username', TextType::class, [
                 'required' => true,
                 'attr' => [
                     'placeholder' => 'Pseudo'
+                ],
+                'constraints' => [
+                    new NotNull(['message' => 'Entrez un nom d\'utilisateur valide']),
+                    new Regex([
+                        'pattern' => '/^\S*$/',
+                        'message' => 'Les espaces sont interdits'
+                    ]),
+                    new Length([
+                        'min' => 4,
+                        'minMessage' => 'Trop court, minimum {{ limit }} caractères',
+                        'max' => 30,
+                        'maxMessage' => 'Trop long, maximum {{ limit }} caractères'
+                    ]),
                 ]
             ])
             ->add('agreeTerms', CheckboxType::class, [
@@ -43,11 +63,25 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('plainPassword', PasswordType::class, [
+                'always_empty' => false,
                 'constraints' => [
                     new Regex([
-                        'pattern' => '"^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{12,}$"',
-                        'message' => 'Le mot de passe est invalide'
-                    ])
+                        'pattern' => '/[a-z]/',
+                        'message' => 'Au moins une lettre minuscule'
+                    ]),
+                    new Regex([
+                        'pattern' => '/[A-Z]/',
+                        'message' => 'Au moins une lettre majuscule'
+                    ]),
+                    new Regex([
+                        'pattern' => '/[1-9]/',
+                        'message' => 'Au moins un chiffre'
+                    ]),
+                    new Length([
+                        'min' => 14,
+                        'minMessage' => 'Au moins {{ limit }} caractères',
+                    ]),
+                    new NotCompromisedPassword(['message' => 'Ce mot de passe est compromis']),
                 ],
                 'help' => 'Minimum huit caractères, au moins une lettre, un chiffre et un caractère spécial',
                 'attr' => [

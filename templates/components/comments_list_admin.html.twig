@@ -1,0 +1,89 @@
+<div class="row">
+    <!--
+    <div class="col-lg-3">
+        <form action="" class="input-icon my-3 my-lg-0">
+            <div class="gs-container">
+                <input type="text" class="form-control header-search">
+            </div>
+            <div class="input-icon-addon">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+        </form>
+    </div>
+    -->
+</div>
+<div class="table-responsive mt-2">
+    <table class="table card-table table-vcenter table-hover">
+        <thead class="thead-dark form-group-sm">
+            <tr>
+                <th>Article</th>
+                <th>Auteur</th>
+                <th>Créé le</th>
+                <th>Actif</th>
+                <th class="text-end">
+                    <!--
+                    <select name="search_limit" class="search_limit" style="width: 60px;"><option value="5">5</option><option value="15" selected="selected">15</option><option value="25">25</option><option value="50">50</option><option value="100">100</option><option value="999999999">all</option></select>
+                    -->
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if this.allComments %}
+                {% for comment in this.allComments.data %}
+                    <tr>
+                        <td>{{ comment.articles.title }}</td>
+                        <td>{{ comment.auteur.username }}</td>
+                        <td>{{ comment.createdAt ? comment.createdAt|date('d-m-Y') : '' }}</td>
+                        <td>{{ comment.active ? 'Oui' : 'Non' }}</td>
+                        <td class="text-end">
+                            <div class="btn-group">
+                                <a href="{{ path('app_admin_users_edit', {'id': comment.id}) }}" class="btn btn-secondary"><i class="fas fa-pen"></i></a>
+                                <a class="btn btn-danger" href="{{ path('app_admin_users_delete', {'id': comment.id}) }}"><i class="fa-solid fa-trash-can"></i></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <td colspan="5" class="text-center">Aucune donnée dans le tableau</td>
+            {% endif %}
+        </tbody>
+    </table>
+    {% if this.allComments %}
+        <div style="padding-right: 10px;">
+            {{ component('pagination', {
+                'pages': this.allComments.pages,
+                'currentPage': this.allComments.page,
+                'limit': this.allComments.limit,
+                'path': 'app_admin_users_index',
+                'position': 'justify-content-end'
+            }) }}
+        </div>
+    {% endif %}
+</div>
+
+<script>
+    $(document).ready( function () {
+
+        $(".btn-danger").click(function (event) {
+            event.preventDefault();
+
+            url = $(this).attr('href');
+
+            console.log(url);
+
+            Swal.fire({
+                text: "Voulez vous vraiment supprimer ce commentaire ?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'supprimer'
+            }).then((result) => {
+                if(result.isConfirmed) {
+                    document.location.href = url;
+                }
+            })
+        });
+
+    });
+</script>

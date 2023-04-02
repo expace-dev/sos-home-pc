@@ -26,30 +26,10 @@
                             <div class="text-decoration-lines mb-5">
                                 <span class="text-decoration-lines__content">ou</span>
                             </div>
-                            {{ form_start(form, {
-                                attr: 
-                                {
-                                    id: 'register'
-                                }
-                            }) }}
-                                <div class="input-field mb-4">
-                                    {{ form_widget(form.email) }}
-                                    {{ form_errors(form.email) }}
-                                </div>
-                                <div class="input-field mb-4">
-                                    {{ form_widget(form.username) }}
-                                    {{ form_errors(form.username) }}
-                                </div>
-                                <div class="input-field mb-4">
-                                    {{ form_widget(form.plainPassword) }}
-                                    {{ form_errors(form.plainPassword) }}
-                                </div>
-                                <div class="input-field mb-4">
-                                    {{ form_widget(form.agreeTerms) }}
-                                    {{ form_errors(form.agreeTerms) }}
-                                </div>
-                                <button type="submit" class="btn capital col-12 mb-3">Créer mon compte</button>
-                            {{ form_end(form) }}
+                            {{ component('registration_form', {
+                            user: user.id ? user: null,
+                            form: form
+                        }) }}
                             <div class="input-field mb-4 text-center">
                                 <a href="{{ path('app_login') }}">Je dispose d'un compte</a> | <a href="{{ path('app_forgot_password_request') }}">Mot de passe oublié</a>
                             </div>

@@ -6,14 +6,15 @@ use DateTime;
 use App\Entity\Articles;
 use App\Entity\Comments;
 use App\Entity\Categories;
+use App\Form\CategoriesBlogType;
 use App\Form\Blog\Admin\ArticleType;
 use App\Form\Blog\Admin\CommentsType;
-use App\Form\CategoriesBlogType;
 use App\Repository\ArticlesRepository;
 use App\Repository\CommentsRepository;
 use App\Form\Blog\Admin\BlogCreateType;
 use App\Form\Blog\Admin\CategoriesType;
 use App\Repository\CategoriesRepository;
+use App\Services\UploadService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,17 +23,31 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/admin/blog')]
 class BlogController extends AbstractController
 {
-    #[Route('/', name: 'app_admin_blog_index', methods: ['GET'])]
-    public function adminIndex(ArticlesRepository $articlesRepository): Response
+    public function __construct(
+        private UploadService $uploadService
+    )
     {
-        return $this->render('blog/admin/index.html.twig', [
-            'articles' => $articlesRepository->findBy([], ['date' => 'DESC']),
-        ]);
+        
+    }
+    #[Route('/', name: 'app_admin_blog_index', methods: ['GET'])]
+    public function adminIndex(): Response
+    {
+        return $this->render('blog/admin/index.html.twig');
     }
 
     #[Route('/new', name: 'app_admin_blog_new', methods: ['GET', 'POST'])]
     public function new(Request $request, ArticlesRepository $articlesRepository): Response
     {
+        if (!$this->getUser()->getDescription()) {
+    
+                $this->addFlash('danger', '<span class="me-2 fa fa-circle-exclamation fa-1x"></span>Veuillez vous présenter avant de publier un article');
+                return $this->redirectToRoute('app_profil_edit', [], Response::HTTP_SEE_OTHER);
+            }
+            if (!$this->getUser()->getAvatar()) {
+    
+                $this->addFlash('danger', '<span class="me-2 fa fa-circle-exclamation fa-1x"></span>Vous devez ajouter une photo de profil avant de publier un article');
+                return $this->redirectToRoute('app_profil_edit', [], Response::HTTP_SEE_OTHER);
+            }
         $article = new Articles();
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
@@ -42,46 +57,37 @@ class BlogController extends AbstractController
             $article->setDate(new DateTime());
             $article->setAuteur($this->getUser());
 
-            // Ont récupère la photo
-            $fichier = $form->get('img')->getData();
-            //Ont initialise les extensions autorisé
-            $validExt = ['image/png', 'image/jpg', 'image/jpeg'];
-            //Ont initialise le repertoire
-            $directory = 'blog_directory';
-            // Ont initialise le nombre d'erreur à zéro
-            $errorFormat = 0;
+            // Si on réceptionne une image d'illustration
+            if ($form->get('img')->getData()) {
+                // On récupère l'image
+                $fichier = $form->get('img')->getData();
+                // On récupère le dossier de destination
+                $directory = 'blog_directory';
+                /**
+                * On ajoute l'image et l'utilisateur connecté à l'article
+                * et ont upload l'image via UploadService
+                */
+                $article->setImg('/images/blog/' .$this->uploadService->send($fichier, $directory))
+                         ->setAuteur($this->getUser());
 
-            // Ont vérifie que le type de fichier est valide
-            if (!in_array($fichier->getMimetype(), $validExt)) {
-                $errorFormat++;
-            }
 
-            // Si le format de l'image est valide
-            if ($errorFormat === 0) {
-                // Ont crée un nom de fichier unique
-                $nom = md5(uniqid()) . '.' . $fichier->guessExtension();
-                
-                
-                // Ont copie ensuite l'avatar
-                $fichier->move(
-                    $this->getParameter($directory),
-                    $nom
-                );
-
-                // Ont sauvegarde l'avatar en BDD
-                $article->setimg('https://www.sos-home-pc.eu/images/blog/'. $nom);
                 $articlesRepository->save($article, true);
+
+                $this->addFlash('success', '<span class="me-2 fa fa-circle-check"></span>Votre article a été enregistré avec succès');
+
+                return $this->redirectToRoute('app_admin_blog_index', [], Response::HTTP_SEE_OTHER);
+            }
+            else {
+                $this->addFlash('danger', '<span class="me-2 fa fa-circle-exclamation"></span>Veuillez fournir une image d\'illustration');
             }
             
-            $this->addFlash(
-                'success',
-                "Votre article a bien été enregistré"
-            );
-
-            return $this->redirectToRoute('app_admin_blog_index', [], Response::HTTP_SEE_OTHER);
+            if ($form->isSubmitted() && !$form->isValid()) {
+                $this->addFlash('danger', '<span class="me-2 fa fa-circle-exclamation"></span>Des erreurs subsistent veuillez corriger votre saisie');
+            }
+            
         }
 
-        return $this->render('blog/admin/new.html.twig', [
+        return $this->render('blog/admin/edit.html.twig', [
             'article' => $article,
             'form' => $form,
         ]);
@@ -164,11 +170,9 @@ class BlogController extends AbstractController
     }
 
     #[Route('/categories', name: 'app_admin_categories_blog_index', methods: ['GET'])]
-    public function categoriesIndex(CategoriesRepository $categoriesRepository): Response
+    public function categoriesIndex(): Response
     {
-        return $this->render('blog/admin/categories/index.html.twig', [
-            'categories' => $categoriesRepository->findAll(),
-        ]);
+        return $this->render('blog/admin/categories/index.html.twig');
     }
 
     #[Route('/categories/new', name: 'app_admin_categories_blog_new', methods: ['GET', 'POST'])]
@@ -189,8 +193,8 @@ class BlogController extends AbstractController
             return $this->redirectToRoute('app_admin_categories_blog_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('blog/admin/categories/new.html.twig', [
-            'category' => $category,
+        return $this->render('blog/admin/categories/edit.html.twig', [
+            'categorie' => $category,
             'form' => $form,
         ]);
     }
@@ -213,13 +217,13 @@ class BlogController extends AbstractController
         }
 
         return $this->render('blog/admin/categories/edit.html.twig', [
-            'category' => $category,
+            'categorie' => $category,
             'form' => $form,
         ]);
     }
 
     #[Route('/categories/delete/{id}', name: 'app_admin_categories_blog_delete', methods: ['GET'])]
-    public function CategoriesDelete(Request $request, Categories $category, CategoriesRepository $categoriesRepository): Response
+    public function CategoriesDelete(Categories $category, CategoriesRepository $categoriesRepository): Response
     {
         $categoriesRepository->remove($category, true);
 

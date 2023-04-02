@@ -4,14 +4,16 @@ namespace App\Entity;
 
 use Cocur\Slugify\Slugify;
 use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping\Index;
+use Doctrine\ORM\Mapping\Table;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ArticlesRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping\Index;
-use Doctrine\ORM\Mapping\Table;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: ArticlesRepository::class), Table(name: "articles"), Index(columns: ["title", "content"], flags: ["fulltext"])]
+#[UniqueEntity(fields: ['title'], message: 'Cet article existe déjà')]
 #[ORM\HasLifecycleCallbacks]
 class Articles
 {
@@ -45,6 +47,9 @@ class Articles
     #[ORM\ManyToOne(inversedBy: 'articles')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Users $auteur = null;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $introduction = null;
 
     public function __construct()
     {
@@ -180,6 +185,18 @@ class Articles
     public function setAuteur(?Users $auteur): self
     {
         $this->auteur = $auteur;
+
+        return $this;
+    }
+
+    public function getIntroduction(): ?string
+    {
+        return $this->introduction;
+    }
+
+    public function setIntroduction(string $introduction): self
+    {
+        $this->introduction = $introduction;
 
         return $this;
     }

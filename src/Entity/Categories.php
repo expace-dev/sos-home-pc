@@ -7,8 +7,10 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CategoriesRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: CategoriesRepository::class)]
+#[UniqueEntity(fields: ['name'], message: 'Cette catégorie existe déjà')]
 #[ORM\HasLifecycleCallbacks]
 class Categories
 {
@@ -46,10 +48,10 @@ class Categories
     #[ORM\PrePersist]
     #[ORM\PreUpdate]
     public function initializeSlug() {
-        if(empty($this->slug)) {
+        
             $slugify = new Slugify();
             $this->slug = $slugify->slugify($this->name);
-        }
+        
     }
 
     public function getId(): ?int
@@ -62,7 +64,7 @@ class Categories
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
 

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\UsersRepository;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -110,6 +111,30 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $description = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $etat = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $mobile = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $fax = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $web = null;
+
+    #[ORM\OneToOne(mappedBy: 'client', cascade: ['persist', 'remove'])]
+    private ?Abonnements $abonnements = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $customer = null;
+
+    #[ORM\OneToMany(mappedBy: 'auteur', targetEntity: Tickets::class)]
+    private Collection $tickets;
+
+    #[ORM\OneToMany(mappedBy: 'auteur', targetEntity: MessagesTickets::class, orphanRemoval: true)]
+    private Collection $messagesTickets;
+
     public function __construct()
     {
         $this->temoignages = new ArrayCollection();
@@ -118,6 +143,9 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         $this->articles = new ArrayCollection();
         $this->factures = new ArrayCollection();
         $this->paiements = new ArrayCollection();
+        $this->createdAt = new DateTime();
+        $this->tickets = new ArrayCollection();
+        $this->messagesTickets = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -595,6 +623,143 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getEtat(): ?string
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(?string $etat): self
+    {
+        $this->etat = $etat;
+
+        return $this;
+    }
+
+    public function getMobile(): ?string
+    {
+        return $this->mobile;
+    }
+
+    public function setMobile(?string $mobile): self
+    {
+        $this->mobile = $mobile;
+
+        return $this;
+    }
+
+    public function getFax(): ?string
+    {
+        return $this->fax;
+    }
+
+    public function setFax(?string $fax): self
+    {
+        $this->fax = $fax;
+
+        return $this;
+    }
+
+    public function getWeb(): ?string
+    {
+        return $this->web;
+    }
+
+    public function setWeb(?string $web): self
+    {
+        $this->web = $web;
+
+        return $this;
+    }
+
+    public function getAbonnements(): ?Abonnements
+    {
+        return $this->abonnements;
+    }
+
+    public function setAbonnements(Abonnements $abonnements): self
+    {
+        // set the owning side of the relation if necessary
+        if ($abonnements->getClient() !== $this) {
+            $abonnements->setClient($this);
+        }
+
+        $this->abonnements = $abonnements;
+
+        return $this;
+    }
+
+    public function getCustomer(): ?string
+    {
+        return $this->customer;
+    }
+
+    public function setCustomer(?string $customer): self
+    {
+        $this->customer = $customer;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Tickets>
+     */
+    public function getTickets(): Collection
+    {
+        return $this->tickets;
+    }
+
+    public function addTicket(Tickets $ticket): self
+    {
+        if (!$this->tickets->contains($ticket)) {
+            $this->tickets->add($ticket);
+            $ticket->setAuteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTicket(Tickets $ticket): self
+    {
+        if ($this->tickets->removeElement($ticket)) {
+            // set the owning side to null (unless already changed)
+            if ($ticket->getAuteur() === $this) {
+                $ticket->setAuteur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, MessagesTickets>
+     */
+    public function getMessagesTickets(): Collection
+    {
+        return $this->messagesTickets;
+    }
+
+    public function addMessagesTicket(MessagesTickets $messagesTicket): self
+    {
+        if (!$this->messagesTickets->contains($messagesTicket)) {
+            $this->messagesTickets->add($messagesTicket);
+            $messagesTicket->setAuteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessagesTicket(MessagesTickets $messagesTicket): self
+    {
+        if ($this->messagesTickets->removeElement($messagesTicket)) {
+            // set the owning side to null (unless already changed)
+            if ($messagesTicket->getAuteur() === $this) {
+                $messagesTicket->setAuteur(null);
+            }
+        }
 
         return $this;
     }

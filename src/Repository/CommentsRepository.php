@@ -3,8 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Comments;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Comments>
@@ -50,6 +51,37 @@ class CommentsRepository extends ServiceEntityRepository
                     ->getQuery()
                     ->getSingleScalarResult(); 
     
+    }
+
+    public function findComments($page, $limit = 15) {
+        $limit = abs($limit);
+
+        $result = [];
+
+        $query = $this->getEntityManager()->createQueryBuilder()
+            ->select('a')
+            ->from('App\Entity\Comments', 'a')
+            ->setMaxResults($limit)
+            ->setFirstResult(($page * $limit) - $limit);
+
+        $paginator = new Paginator($query);
+        $data = $paginator->getQuery()->getResult();
+        
+        
+        if (empty($data)) {
+            return $result;
+        }
+
+        $pages = ceil($paginator->count() / $limit);
+
+        $result['data'] = $data;
+        $result['pages'] = $pages;
+        $result['page'] = $page;
+        $result['limit'] = $limit;
+        //dd($data);
+
+        return $result;
+
     }
 
 //    /**

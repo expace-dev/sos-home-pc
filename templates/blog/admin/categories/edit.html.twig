@@ -1,32 +1,38 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edition de catégorie{% endblock %}
+{% if app.request.attributes.get('_route') == 'app_admin_categories_blog_edit' %}
+    {% set titre = 'Editer une catégorie' %}
+{% else %}
+    {% set titre = 'Créer une catégorie' %}
+{% endif %}
+
+{% block title %}{{ titre }}{% endblock %}
 
 {% block body %}
 
-    <section class="breadcrumbs-custom">
-        <div class="breadcrumbs-custom__aside bg-image context-dark" style="background-image: url(/images/bg-image-1-1920x238.jpg);">
-            <div class="container">
-                <h2 class="breadcrumbs-custom__title">{{ block('title') }}</h2>
-            </div>
-        </div>
-    </section>
-
+    {{ component('breadcrumbs', {'title': block('title')}) }}
     <section class="auth">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <div class="info-box mb-4">
                         <div class="container mt-3">
-                            <h4 class="mb-5">Modifier une catégorie</h4>
-                            {{ include('blog/admin/categories/_form.html.twig', {'button_label': 'Modifier la catégorie'}) }}
+                            {% for label, messages in app.flashes %}
+                                <div class="alert alert-{{ label }}">
+                                    {% for message in messages %}
+                                        {{ message | raw }}    
+                                    {% endfor %}
+                                </div>
+                            {% endfor %}
+                            {{ component('blog_categories_form_admin', {
+                                categorie: categorie.id ? categorie: null,
+                                form: form
+                            }) }}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
     
-
 {% endblock %}

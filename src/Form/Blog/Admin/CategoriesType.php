@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Validator\Constraints\NotNull;
 
 class CategoriesType extends AbstractType
 {
@@ -18,7 +19,11 @@ class CategoriesType extends AbstractType
                 'label' => 'Catégorie',
                 'attr' => [
                     'placeholder' => 'Catégorie'
-                ]
+                ],
+                'constraints' => [
+                    new NotNull(['message' => 'Veuillez donner un nom'])
+                ],
+                'trim' => false
             ])
             ->add('parent', EntityType::class, [
                 'class' => Categories::class,

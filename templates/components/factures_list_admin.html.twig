@@ -1,0 +1,62 @@
+<div class="row">
+</div>
+<div class="table-responsive mt-2">
+    <table class="table card-table table-vcenter table-hover">
+        <thead class="thead-dark form-group-sm">
+            <tr>
+                <th>Statut</th>
+                <th>Client</th>
+                <th>Date</th>
+                <th>Montant</th>
+                <th class="text-end">
+                    <!--
+                    <select name="search_limit" class="search_limit" style="width: 60px;"><option value="5">5</option><option value="15" selected="selected">15</option><option value="25">25</option><option value="50">50</option><option value="100">100</option><option value="999999999">all</option></select>
+                    -->
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if this.allFactures %}
+                {% for facture in this.allFactures.data %}
+                    <tr>
+                        <td>
+                            {% if facture.statut == "en_attente" %}
+                                <i class="fa-solid fa-circle-exclamation"></i>
+                            {% else %}
+                                <i class="fa-solid fa-circle-check"></i>
+                            {% endif %}
+                        </td>
+                        <td>{{ facture.client.fullName }}</td>
+                        <td>{{ facture.createdAt ? facture.createdAt|date('j F Y') : '' }}</td>
+                        <td>{{ facture.amount }} €</td>
+                        <td class="text-end">
+                            <div class="btn-group">
+                                <a class="btn btn-secondary" target="_blank" href="{{ facture.url }}"><i class="fa-solid fa-download"></i></a>
+                                {% if facture.statut == "en_attente" %}
+                                    <a class="btn btn-secondary" target="_blank" href="{{ facture.pay }}"><i class="fa-solid fa-credit-card"></i></a>
+                                {% else %}
+                                    <a class="btn btn-secondary" target="_blank" href="{{ facture.pay }}"><i class="fas fa-eye"></i></a>
+                                {% endif %}
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <td colspan="5" class="text-center">Aucune donnée dans le tableau</td>
+            {% endif %}
+        </tbody>
+    </table>
+    {% if this.allFactures %}
+        <div style="padding-right: 10px;">
+            {{ component('pagination', {
+                'pages': this.allFactures.pages,
+                'currentPage': this.allFactures.page,
+                'limit': this.allFactures.limit,
+                'path': 'app_admin_factures_index',
+                'position': 'justify-content-end'
+            }) }}
+        </div>
+    {% endif %}
+    
+    
+</div>

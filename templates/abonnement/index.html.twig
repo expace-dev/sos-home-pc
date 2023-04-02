@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos formules{% endblock %}
+
+{% block body %}
+
+{{ component('breadcrumbs', {'title': block('title')}) }}
+
+<section id="pricing" class="pricing">
+  <div class="container">
+  <div class="alert alert-primary" role="alert">
+  <span class="me-2 fa fa-circle-check fa-1x" style="color: #084298;"></span>Veuillez d'abord choisir une offre ci-dessous avant de pouvoir ouvrir un ticket
+</div>
+
+    <div class="row no-gutters">
+      <div class="col-lg-4 box">
+        <h3>Basic</h3>
+        <h4>29 €</h4>
+        <ul>
+          <li><i class="bx bx-check"></i> Valable pour 1 poste</li>
+          <li><i class="bx bx-check"></i> Facturé à l'intervention</li>
+          <li><i class="bx bx-check"></i> Consultation en ligne</li>
+          <li><i class="bx bx-check"></i> Support 24/7 via Discord</li>
+          <li><i class="bx bx-check"></i> <span>Suppression de virus</span></li>
+          <li><i class="bx bx-check"></i> <span>Installation de logiciels</span></li>
+          <li><i class="bx bx-check"></i> <span>Récupération de données</span></li>
+          <li class="na"><i class="bx bx-x"></i> <span>Installation de périphériques</span></li>
+          <li class="na"><i class="bx bx-x"></i> <span>Déplacement à domicile</span></li>
+        </ul>
+        <a href="{{ path('app_client_commande_abonnement', {'slug': 'basic'}) }}" class="buy-btn">Commander maintenant</a>
+      </div>
+      <div class="col-lg-4 box featured">
+        <h3>Simple</h3>
+        <h4>15 €</h4>
+        <ul>
+          <li><i class="bx bx-check"></i> Valable pour 1 poste</li>
+          <li><i class="bx bx-check"></i> Facturation mensuelle</li>
+          <li><i class="bx bx-check"></i> Consultation en ligne</li>
+          <li><i class="bx bx-check"></i> Support 24/7 via Discord</li>
+          <li><i class="bx bx-check"></i> <span>Suppression de virus</span></li>
+          <li><i class="bx bx-check"></i> <span>Installation de logiciels</span></li>
+          <li><i class="bx bx-check"></i> <span>Récupération de données</span></li>
+          <li><i class="bx bx-check"></i> <span>Installation de périphériques</span></li>
+          <li><i class="bx bx-check"></i> <span>Déplacement à domicile</span></li>
+        </ul>
+        <a href="{{ path('app_client_commande_abonnement', {'slug': 'simple'}) }}" class="buy-btn">Commander maintenant</a>
+      </div>
+      <div class="col-lg-4 box">
+        <h3>Avancé</h3>
+        <h4>29 €</h4>
+        <ul>
+          <li><i class="bx bx-check"></i> Jusqu'as 3 postes</li>
+          <li><i class="bx bx-check"></i> Facturation mensuelle</li>
+          <li><i class="bx bx-check"></i> Consultation en ligne</li>
+          <li><i class="bx bx-check"></i> Support 24/7 via Discord</li>
+          <li><i class="bx bx-check"></i> <span>Suppression de virus</span></li>
+          <li><i class="bx bx-check"></i> <span>Installation de logiciels</span></li>
+          <li><i class="bx bx-check"></i> <span>Récupération de données</span></li>
+          <li><i class="bx bx-check"></i> <span>Installation de périphériques</span></li>
+          <li><i class="bx bx-check"></i> <span>Déplacement à domicile</span></li>
+        </ul>
+        <a href="{{ path('app_client_commande_abonnement', {'slug': 'avance'}) }}" class="buy-btn">Commander maintenant</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

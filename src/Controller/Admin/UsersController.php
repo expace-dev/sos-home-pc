@@ -3,14 +3,16 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Users;
-use App\Form\Users\Admin\UsersType;
-use App\Repository\UsersRepository;
+use App\Form\Users\UsersType;
+use App\Form\Users\ProfilType;
 use App\Services\UploadService;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Form\Users\CredentialsType;
+use App\Repository\UsersRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 #[Route('/admin/clients')]
 class UsersController extends AbstractController
@@ -22,11 +24,9 @@ class UsersController extends AbstractController
      * @return Response
      */
     #[Route('/', name: 'app_admin_users_index', methods: ['GET'])]
-    public function index(UsersRepository $usersRepository): Response
+    public function index(): Response
     {
-        return $this->render('profil/admin/index.html.twig', [
-            'users' => $usersRepository->findAll(),
-        ]);
+        return $this->render('profil/admin/index.html.twig');
     }
 
     /**
@@ -46,22 +46,19 @@ class UsersController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            // Ont initialise un mot de passe unique
-            $password = md5(uniqid());
             // Ont crypte le mot de passe
-            $user->setPassword($encoder->hashPassword($user, $password));
+            $user->setPassword($encoder->hashPassword($user, $form->get('plainPassword')->getData()));
             // Ont ajoute le mot de passe à l'user
+            
             $usersRepository->save($user, true);
 
-            $this->addFlash(
-                'success',
-                "Fiche client ajouté avec succès"
-            );
+            $this->addFlash('success', '<span class="me-2 fa fa-circle-check fa-1x"></span>Compte client ajouté avec succès');
+
 
             return $this->redirectToRoute('app_admin_users_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('profil/admin/new.html.twig', [
+        return $this->render('users/new.html.twig', [
             'user' => $user,
             'form' => $form,
         ]);
@@ -71,80 +68,46 @@ class UsersController extends AbstractController
     /**
      * Fonction permettant de modifier un client
      */
-    #[Route('/{id}/edit', name: 'app_admin_users_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/editer', name: 'app_admin_users_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Users $user, UsersRepository $usersRepository, UploadService $upload): Response
     {
-        $form = $this->createForm(UsersType::class, $user);
-        $form->handleRequest($request);
+        $profilForm = $this->createForm(ProfilType::class, $user);
+        $profilForm->handleRequest($request);
 
+        if ($profilForm->isSubmitted() && $profilForm->isValid()) {
+            $usersRepository->save($user, true);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+            $this->addFlash('success', '<span class="me-2 fa fa-circle-check fa-1x"></span>Compte client enregistré avec succès');
 
-            // Ont récupère la photo de profil
-            $fichier = $form->get('avatar')->getData();
-            //Ont initialise les extensions autorisé
-            $valideExt = ['image/png', 'image/jpg', 'image/jpeg'];
-            //Ont initialise le repertoire
-            $directory = 'avatar_directory';
+            return $this->redirectToRoute('app_admin_users_index', [], Response::HTTP_SEE_OTHER);
+        }
 
-            // Si nous avons des fichiers
-            if ($fichier) {
-                // Ont appel le service d'upload
-                if ($upload->sendAvatar($fichier, $valideExt, $directory, $user)['statut'] === 'success') {
+        $credentialsForm = $this->createForm(CredentialsType::class, $user);
+        $credentialsForm->handleRequest($request);
 
-                    /**
-                     * Si nous avons un statut success
-                     * Ont initialise un message flash success
-                     */
-                    $this->addFlash(
-                        'success',
-                        "Fiche client modifié avec succès"
-                    );
+        if ($credentialsForm->isSubmitted() && $credentialsForm->isValid()) {
+            $usersRepository->save($user, true);
 
-                }
-                /**
-                 * Si l'extension n'est pas autorisé
-                 * Ont initialise un message flash danger
-                 */
-                else {
-                    $this->addFlash(
-                        'danger',
-                        "Seul les images sont autorisés"
-                    );
-                }
-            }
-            /**
-             * Si nous n'avons pas d'image
-             * Ont fait un update de l'user
-             */
-            else {
-                $usersRepository->save($user, true);
-
-                $this->addFlash(
-                    'success',
-                    "Fiche client modifié avec succès"
-                );
-            }
+            $this->addFlash('success', '<span class="me-2 fa fa-circle-check fa-1x"></span>Compte client enregistré avec succès');
 
             return $this->redirectToRoute('app_admin_users_index', [], Response::HTTP_SEE_OTHER);
         }
 
 
-        return $this->render('profil/admin/edit.html.twig', [
+        return $this->render('users/edit.html.twig', [
             'user' => $user,
-            'form' => $form,
+            'credentialsForm' => $credentialsForm,
+            'profilForm' => $profilForm
         ]);
         
     }
 
-    #[Route('/delete/{id}', name: 'app_admin_users_delete', methods: ['GET'])]
+    #[Route('/suppression/{id}', name: 'app_admin_users_delete', methods: ['GET'])]
     public function delete(Request $request, Users $user, UsersRepository $usersRepository): Response
     {
 
-        $this->addFlash(
-            'warning',
-            "Le client a bien été supprimé"
-        );
+        $this->addFlash('success', '<span class="me-2 fa fa-circle-check fa-1x"></span>Compte client supprimé avec succès');
+
             
         $usersRepository->remove($user, true);
 

@@ -1,0 +1,20 @@
+<div {{ attributes }}>
+    <div id="ajout-commentaire" class="reply-form">
+        <h4 class="mb-5">Laisser un message</h4>
+        {% for label, messages in app.flashes %}
+            <div class="alert alert-{{ label }}">
+                {% for message in messages %}
+                    <i class="fa-solid fa-circle-info"></i> {{ message | raw }}    
+                {% endfor %}
+            </div>
+        {% endfor %}
+        {{ form_start(form) }}
+            <div class="row">
+                <div class="col form-group">
+                    {{ form_widget(form.content) }}
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Publier votre message</button>
+        {{ form_end(form) }}
+    </div>
+</div>

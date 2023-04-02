@@ -48,8 +48,8 @@ class BlogController extends AbstractController
     /**
      * Permet d'afficher un article en particulier
      */
-    #[Route('/details/{id}', name: 'app_blog_show', methods: ['GET', 'POST'])]
-    public function show($id, CategoriesRepository $categoriesRepository, ArticlesRepository $articlesRepository, Request $request, Articles $article, EntityManagerInterface $manager): Response
+    #[Route('/details/{slug}', name: 'app_blog_show', methods: ['GET', 'POST'])]
+    public function show(Request $request, Articles $article, EntityManagerInterface $manager): Response
     {
 
         

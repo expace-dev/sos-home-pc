@@ -76,7 +76,7 @@ class ArticlesRepository extends ServiceEntityRepository
         //return $query->getQuery()->getResult();
     }
 
-    public function findArticles($page, $limit = 6) {
+    public function findArticles($page, $limit = 15) {
         $limit = abs($limit);
 
         $result = [];

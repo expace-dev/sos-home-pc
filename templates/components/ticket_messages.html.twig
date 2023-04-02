@@ -1,0 +1,59 @@
+{% set messages = this.messages %}
+<div class="blog-comments">
+    <h4 class="comments-count">{{ messages|length }} Réponses</h4>
+
+    {% for message in messages %}
+        <div id="comment-{{ message.id }}" class="comment">
+            {% if message.parent == null %}
+                <div class="d-flex">
+                    {% if message.auteur.avatar %}
+                        <div class="comment-img"><img src="{{ message.auteur.avatar }}" alt=""></div>
+                    {% else %}
+                        <div class="comment-img"><img src="/images/no-avatar.png" alt=""></div>
+                    {% endif %}
+                    <div>
+                        <h5>
+                            <a href="#ajout-commentaire" data-reply data-id="{{message.id}}">{{ message.auteur.nom }} {{ message.auteur.prenom }}</a> 
+                            <a href="#ajout-commentaire" data-reply data-id="{{message.id}}" class="reply"><i class="bi bi-reply-fill"></i> Répondre</a> 
+                        </h5>
+                        <time datetime="{{ message.createdAt|format_datetime(locale='fr',pattern="dd MMMM YYYY") }}">{{ message.createdAt|format_datetime(locale='fr',pattern="dd MMMM YYYY") }}</time>
+                        <p>{{ message.content }}</p>
+                    </div>
+                </div>
+                {% for reply in message.replies %}        
+                    <div id="comment-{{ message.id }}" class="comment comment-reply">
+                        <div class="d-flex">
+                            {% if reply.auteur.avatar %}
+                                <div class="comment-img"><img src="{{ reply.auteur.avatar }}" alt=""></div>
+                            {% else %}
+                                <div class="comment-img"><img src="/images/no-avatar.png" alt=""></div>
+                            {% endif %}
+                            <div>
+                                <h5>
+                                    <a href="#">{{ reply.auteur.nom }} {{ reply.auteur.prenom }}</a>
+                                </h5>
+                                <time datetime="{{ reply.createdAt|format_datetime(locale='fr',pattern="dd MMMM YYYY") }}">{{ reply.createdAt|format_datetime(locale='fr',pattern="dd MMMM YYYY") }}</time>
+                                <p>{{ reply.content }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div><!-- End comment #2-->
+    {% endfor %}
+    
+    {{ component('ticket_messages_form') }}
+    
+</div>
+
+<script>
+	window.onload = () => {
+	    // On met un écouteur d'évènements sur tous les boutons répondre
+		document.querySelectorAll("[data-reply]").forEach(element => {
+		    element.addEventListener("click", function(){
+			    document.querySelector("#messages_parentid").value = this.dataset.id;
+			});
+		});
+	}
+
+</script>

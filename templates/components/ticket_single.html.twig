@@ -1,0 +1,24 @@
+{% set ticket = this.ticket %}
+<article class="entry">
+    <h2 class="entry-title">
+        <a href="">{{ ticket.titre }}</a>
+    </h2>
+    <div class="entry-meta">
+        <ul>
+            <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="">{{ ticket.auteur.nom }} {{ ticket.auteur.prenom }}</a></li>
+            <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href=""><time datetime="2020-01-01">{{ ticket.createdAt|format_datetime(locale='fr',pattern="dd MMMM YYYY") }}</time></a></li>
+            <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="">{{ ticket.messagesTickets|length }} Messages</a></li>
+        </ul>
+    </div>
+    <div class="entry-content">
+        <p>{{ ticket.contenu|raw }}</p>
+    </div>
+    <div class="col-lg-4">
+        <div class="social-links mt-5">
+            <a href="https://discord.gg/pNegV9Q"><i class="fa-brands fa-discord"></i></a>
+            <a href="#"><i class="fa-solid fa-envelope" style="color: #fff" aria-hidden="true"></i></a>
+            <a href="tel:+33754270777"><i class="fa-solid fa-phone" style="color: #fff" aria-hidden="true"></i></a>
+            <a href="https://api.whatsapp.com/send?phone=%2B33754270777&text&app_absent=0" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+    </div>
+</article>

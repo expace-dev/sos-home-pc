@@ -14,33 +14,9 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class FacturesController extends AbstractController
 {
     #[Route('/', name: 'app_factures_index', methods: ['GET'])]
-    #[IsGranted('ROLE_USER')]
-    public function index(FacturesRepository $facturesRepository): Response
+    public function index(): Response
     {
-        $factures = $facturesRepository->findBy(['client' => $this->getUser()], ['date' => 'DESC']);
-        
-        return $this->render('factures/index.html.twig', [
-            'factures' => $factures,
-        ]);
+        return $this->render('factures/index.html.twig');
     }
-
-
-    #[Route('/{slug}', name: 'app_factures_show', methods: ['GET'])]
-    #[IsGranted('ROLE_USER')]
-    public function show(Factures $facture)
-    {
-
-        $mime = "application/pdf";
-        $fichier = $facture->getUrl();
-
-        if ($facture->getClient() === $this->getUser()) {
-            header('Content-type: ' . $mime);
-            readfile($fichier);
-        }
-        else {
-            throw new AccessDeniedException("Vous n'avez pas l'autorisation d'accéder à cette page");
-        }
-    }
-
 
 }

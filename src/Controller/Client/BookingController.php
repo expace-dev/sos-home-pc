@@ -35,6 +35,12 @@ class BookingController extends AbstractController
             return $this->redirectToRoute('app_profil_edit');
         }
 
+        if (!$user->getAbonnements()) {
+
+            
+            return $this->redirectToRoute('app_profil_edit', ['_fragment' => 'abonnement'], Response::HTTP_SEE_OTHER);
+        }
+
         $this->addFlash(
             'info', 
             '<h3><i class="fa-solid fa-circle-info"></i> Fonctionnement du calendrier</h3>

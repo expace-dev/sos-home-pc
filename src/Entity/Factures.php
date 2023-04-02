@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\FacturesRepository;
+use DateTime;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -23,9 +24,6 @@ class Factures
     #[ORM\Column]
     private ?int $createdAt = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $date = null;
-
     #[ORM\Column(length: 255)]
     private ?string $amount = null;
 
@@ -34,19 +32,18 @@ class Factures
     private ?Users $client = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $title = null;
-
-    #[ORM\Column(type: Types::TEXT)]
-    private ?string $content = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $payment_intent = null;
-
-    #[ORM\OneToOne(mappedBy: 'facture', cascade: ['persist', 'remove'])]
-    private ?Paiements $paiements = null;
+    private ?string $numero = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $slug = null;
+    private ?string $pay = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $date = null;
+
+    public function __construct()
+    {
+        $this->date = new DateTime();
+    }
 
     public function getId(): ?int
     {
@@ -89,18 +86,6 @@ class Factures
         return $this;
     }
 
-    public function getDate(): ?\DateTimeInterface
-    {
-        return $this->date;
-    }
-
-    public function setDate(\DateTimeInterface $date): self
-    {
-        $this->date = $date;
-
-        return $this;
-    }
-
     public function getAmount(): ?string
     {
         return $this->amount;
@@ -125,68 +110,40 @@ class Factures
         return $this;
     }
 
-    public function getTitle(): ?string
+    public function getNumero(): ?string
     {
-        return $this->title;
+        return $this->numero;
     }
 
-    public function setTitle(string $title): self
+    public function setNumero(string $numero): self
     {
-        $this->title = $title;
+        $this->numero = $numero;
 
         return $this;
     }
 
-    public function getContent(): ?string
+    public function getPay(): ?string
     {
-        return $this->content;
+        return $this->pay;
     }
 
-    public function setContent(string $content): self
+    public function setPay(string $pay): self
     {
-        $this->content = $content;
+        $this->pay = $pay;
 
         return $this;
     }
 
-    public function getPaymentIntent(): ?string
+    public function getDate(): ?\DateTimeInterface
     {
-        return $this->payment_intent;
+        return $this->date;
     }
 
-    public function setPaymentIntent(?string $payment_intent): self
+    public function setDate(\DateTimeInterface $date): self
     {
-        $this->payment_intent = $payment_intent;
+        $this->date = $date;
 
         return $this;
     }
 
-    public function getPaiements(): ?Paiements
-    {
-        return $this->paiements;
-    }
-
-    public function setPaiements(Paiements $paiements): self
-    {
-        // set the owning side of the relation if necessary
-        if ($paiements->getFacture() !== $this) {
-            $paiements->setFacture($this);
-        }
-
-        $this->paiements = $paiements;
-
-        return $this;
-    }
-
-    public function getSlug(): ?string
-    {
-        return $this->slug;
-    }
-
-    public function setSlug(string $slug): self
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
 }

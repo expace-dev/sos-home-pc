@@ -29,4 +29,3 @@
             menuMobile.style.display = "block";
         }
     };
-
